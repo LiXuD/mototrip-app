@@ -25,6 +25,9 @@ describe('Trip Store', () => {
       expect(store.page).toBe(1);
       expect(store.pageSize).toBe(10);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({
+        status: undefined,
+      });
     });
   });
 
@@ -57,8 +60,9 @@ describe('Trip Store', () => {
 
     it('should append trips for subsequent pages', async () => {
       const existingTrips = [generateMockTrip({ id: 1 })];
-      store.trips= [...existingTrips];
-      store.page= 2;
+      store.trips = [...existingTrips];
+      store.page = 2;
+      store.currentQuery = { status: 'completed' };
 
       const newTrips = [generateMockTrip({ id: 2 })];
       const mockResponse: PaginatedResponse<ReturnType<typeof generateMockTrip>> = {
@@ -79,6 +83,7 @@ describe('Trip Store', () => {
       expect(store.trips).toHaveLength(2);
       expect(store.trips[1].id).toBe(2);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({ status: 'completed' });
     });
 
     it('should set loading state correctly', async () => {
@@ -97,16 +102,14 @@ describe('Trip Store', () => {
 
       const fetchPromise = store.fetchTrips();
       
-      // Loading should be true during fetch
       expect(store.loading).toBe(true);
       
       await fetchPromise;
       
-      // Loading should be false after fetch
       expect(store.loading).toBe(false);
     });
 
-    it('should pass params to API', async () => {
+    it('should pass params to API and persist query on first page', async () => {
       const mockResponse: PaginatedResponse<ReturnType<typeof generateMockTrip>> = {
         list: [],
         total: 0,
@@ -128,6 +131,7 @@ describe('Trip Store', () => {
         pageSize: 10,
         status: 'completed',
       });
+      expect(store.currentQuery).toEqual({ status: 'completed' });
     });
   });
 
@@ -166,23 +170,26 @@ describe('Trip Store', () => {
 
   describe('resetList', () => {
     it('should reset list state', () => {
-      store.trips= [generateMockTrip({ id: 1 })];
-      store.page= 5;
-      store.hasMore= false;
+      store.trips = [generateMockTrip({ id: 1 })];
+      store.page = 5;
+      store.hasMore = false;
+      store.currentQuery = { status: 'completed' };
 
       store.resetList();
 
       expect(store.page).toBe(1);
       expect(store.trips).toEqual([]);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({ status: 'completed' });
     });
   });
 
   describe('loadMore', () => {
-    it('should load more when has more data', async () => {
+    it('should load more with persisted query when has more data', async () => {
       store.hasMore = true;
       store.loading = false;
       store.page = 1;
+      store.currentQuery = { status: 'completed' };
 
       const mockResponse: PaginatedResponse<ReturnType<typeof generateMockTrip>> = {
         list: [generateMockTrip({ id: 2 })],
@@ -193,31 +200,37 @@ describe('Trip Store', () => {
       };
 
       const tripApi = await import('@/services/api');
+      const listSpy = vi.fn().mockResolvedValue(mockResponse);
       vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
-        list: vi.fn().mockResolvedValue(mockResponse),
+        list: listSpy,
       });
 
       await store.loadMore();
 
       expect(store.page).toBe(2);
+      expect(listSpy).toHaveBeenCalledWith({
+        page: 2,
+        pageSize: 10,
+        status: 'completed',
+      });
     });
 
-    it('should not load more when already loading', () => {
-      store.hasMore= true;
-      store.loading= true;
-      store.page= 1;
+    it('should not load more when already loading', async () => {
+      store.hasMore = true;
+      store.loading = true;
+      store.page = 1;
 
-      store.loadMore();
+      await store.loadMore();
 
       expect(store.page).toBe(1);
     });
 
-    it('should not load more when no more data', () => {
-      store.hasMore= false;
-      store.loading= false;
-      store.page= 1;
+    it('should not load more when no more data', async () => {
+      store.hasMore = false;
+      store.loading = false;
+      store.page = 1;
 
-      store.loadMore();
+      await store.loadMore();
 
       expect(store.page).toBe(1);
     });

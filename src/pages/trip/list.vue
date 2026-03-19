@@ -98,7 +98,7 @@
 import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { useTripStore } from '@/store'
-import type { Trip } from '@/types'
+import type { Trip, TripListParams } from '@/types'
 
 const tripStore = useTripStore()
 const currentStatus = ref('all')
@@ -109,36 +109,53 @@ const hasMore = ref(true)
 const hasInitialized = ref(false)
 const hasFetched = ref(false)
 
+function buildQuery(): TripListParams {
+  return {
+    status: currentStatus.value === 'all' ? undefined : currentStatus.value,
+  }
+}
+
+function syncListState() {
+  trips.value = tripStore.trips
+  hasMore.value = tripStore.hasMore
+}
+
+function prepareFreshState() {
+  tripStore.resetList()
+  trips.value = []
+  hasMore.value = true
+}
+
+async function refreshList() {
+  prepareFreshState()
+  await fetchTrips()
+}
+
+onShow(() => {
+  void refreshList()
+})
+
 async function fetchTrips() {
   loading.value = true
   try {
-    await tripStore.fetchTrips({ status: currentStatus.value === 'all' ? undefined : currentStatus.value })
-    trips.value = tripStore.trips
-    hasMore.value = tripStore.hasMore
+    await tripStore.fetchTrips(buildQuery())
+    syncListState()
   } finally {
     hasFetched.value = true
     loading.value = false
   }
 }
 
-onShow(() => {
-  // 首次展示页面时自动拉取，后续返回页面复用实例时不重复请求，由用户操作触发刷新。
-  if (hasInitialized.value) return
-  hasInitialized.value = true
-  fetchTrips()
-})
-
-function setStatus(status: string) {
+async function setStatus(status: string) {
   currentStatus.value = status
   tripStore.resetList()
-  fetchTrips()
+  await fetchTrips()
 }
 
-function loadMore() {
+async function loadMore() {
   if (hasMore.value && !loading.value) {
-    tripStore.loadMore()
-    trips.value = tripStore.trips
-    hasMore.value = tripStore.hasMore
+    await tripStore.loadMore()
+    syncListState()
   }
 }
 

@@ -1,6 +1,9 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
 import { useUserStore } from './user';
+import { useRouteStore } from './route';
+import { useTripStore } from './trip';
+import { useDiaryStore } from './diary';
 import { generateMockUser, generateMockUserMode, createUniMock } from '../test/utils/test-helpers';
 
 // Mock uni API
@@ -199,12 +202,27 @@ describe('User Store', () => {
   });
 
   describe('logout', () => {
-    it('should clear all user data on logout', () => {
+    it('should clear all user and list store data on logout', () => {
       const store = useUserStore();
+      const routeStore = useRouteStore();
+      const tripStore = useTripStore();
+      const diaryStore = useDiaryStore();
       
       // Setup state
       store.setToken('test-token');
       store.setUserInfo(generateMockUser());
+      routeStore.routes = [{ id: 1 } as any];
+      routeStore.currentQuery = { keyword: 'mountain', difficulty: 'hard', sort: 'asc' };
+      routeStore.hasMore = false;
+      routeStore.page = 3;
+      tripStore.trips = [{ id: 2 } as any];
+      tripStore.currentQuery = { status: 'completed' };
+      tripStore.hasMore = false;
+      tripStore.page = 2;
+      diaryStore.diaries = [{ id: 3 } as any];
+      diaryStore.currentQuery = { tripId: 1, userId: 2, tag: 'repair' };
+      diaryStore.hasMore = false;
+      diaryStore.page = 4;
       
       store.logout();
       
@@ -212,6 +230,18 @@ describe('User Store', () => {
       expect(store.userInfo).toBeNull();
       expect(store.userMode).toBeNull();
       expect(store.isLoggedIn).toBe(false);
+      expect(routeStore.routes).toEqual([]);
+      expect(routeStore.currentQuery).toEqual({ keyword: undefined, difficulty: undefined, sort: 'desc' });
+      expect(routeStore.hasMore).toBe(true);
+      expect(routeStore.page).toBe(1);
+      expect(tripStore.trips).toEqual([]);
+      expect(tripStore.currentQuery).toEqual({ status: undefined });
+      expect(tripStore.hasMore).toBe(true);
+      expect(tripStore.page).toBe(1);
+      expect(diaryStore.diaries).toEqual([]);
+      expect(diaryStore.currentQuery).toEqual({ tripId: undefined, userId: undefined, tag: undefined });
+      expect(diaryStore.hasMore).toBe(true);
+      expect(diaryStore.page).toBe(1);
       expect(uni.removeStorageSync).toHaveBeenCalledWith('token');
     });
   });

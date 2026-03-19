@@ -24,6 +24,11 @@ describe('Route Store', () => {
       expect(store.page).toBe(1);
       expect(store.pageSize).toBe(10);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({
+        keyword: undefined,
+        difficulty: undefined,
+        sort: 'desc',
+      });
     });
   });
 
@@ -56,8 +61,13 @@ describe('Route Store', () => {
 
     it('should append routes for subsequent pages', async () => {
       const existingRoutes = [generateMockRoute({ id: 1 })];
-      store.routes= [...existingRoutes];
-      store.page= 2;
+      store.routes = [...existingRoutes];
+      store.page = 2;
+      store.currentQuery = {
+        keyword: 'mountain',
+        difficulty: 'hard',
+        sort: 'asc',
+      };
 
       const newRoutes = [generateMockRoute({ id: 2 })];
       const mockResponse = {
@@ -78,6 +88,11 @@ describe('Route Store', () => {
       expect(store.routes).toHaveLength(2);
       expect(store.routes[1].id).toBe(2);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({
+        keyword: 'mountain',
+        difficulty: 'hard',
+        sort: 'asc',
+      });
     });
 
     it('should set loading state correctly', async () => {
@@ -103,7 +118,7 @@ describe('Route Store', () => {
       expect(store.loading).toBe(false);
     });
 
-    it('should pass search params to API', async () => {
+    it('should pass search params to API and persist query on first page', async () => {
       const mockResponse = {
         list: [],
         total: 0,
@@ -118,13 +133,19 @@ describe('Route Store', () => {
         list: listSpy,
       });
 
-      await store.fetchRoutes({ keyword: 'mountain', difficulty: 'hard' });
+      await store.fetchRoutes({ keyword: 'mountain', difficulty: 'hard', sort: 'asc' });
 
       expect(listSpy).toHaveBeenCalledWith({
         page: 1,
         pageSize: 10,
         keyword: 'mountain',
         difficulty: 'hard',
+        sort: 'asc',
+      });
+      expect(store.currentQuery).toEqual({
+        keyword: 'mountain',
+        difficulty: 'hard',
+        sort: 'asc',
       });
     });
   });
@@ -164,23 +185,38 @@ describe('Route Store', () => {
 
   describe('resetList', () => {
     it('should reset list state', () => {
-      store.routes= [generateMockRoute({ id: 1 })];
-      store.page= 5;
-      store.hasMore= false;
+      store.routes = [generateMockRoute({ id: 1 })];
+      store.page = 5;
+      store.hasMore = false;
+      store.currentQuery = {
+        keyword: 'mountain',
+        difficulty: 'hard',
+        sort: 'asc',
+      };
 
       store.resetList();
 
       expect(store.page).toBe(1);
       expect(store.routes).toEqual([]);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({
+        keyword: 'mountain',
+        difficulty: 'hard',
+        sort: 'asc',
+      });
     });
   });
 
   describe('loadMore', () => {
-    it('should load more when has more data', async () => {
-      store.hasMore= true;
-      store.loading= false;
-      store.page= 1;
+    it('should load more with persisted query when has more data', async () => {
+      store.hasMore = true;
+      store.loading = false;
+      store.page = 1;
+      store.currentQuery = {
+        keyword: 'mountain',
+        difficulty: 'hard',
+        sort: 'asc',
+      };
 
       const mockResponse = {
         list: [generateMockRoute({ id: 2 })],
@@ -191,32 +227,41 @@ describe('Route Store', () => {
       };
 
       const routeApi = await import('@/services/api');
+      const listSpy = vi.fn().mockResolvedValue(mockResponse);
       vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
-        list: vi.fn().mockResolvedValue(mockResponse),
+        list: listSpy,
       });
 
       await store.loadMore();
 
       expect(store.page).toBe(2);
+      expect(listSpy).toHaveBeenCalledWith({
+        page: 2,
+        pageSize: 10,
+        keyword: 'mountain',
+        difficulty: 'hard',
+        sort: 'asc',
+      });
     });
 
-    it('should not load more when already loading', () => {
-      store.hasMore= true;
-      store.loading= true;
-      store.page= 1;
+    it('should not load more when already loading', async () => {
+      store.hasMore = true;
+      store.loading = true;
+      store.page = 1;
 
-      store.loadMore();
+      await store.loadMore();
 
       expect(store.page).toBe(1);
     });
 
-    it('should not load more when no more data', () => {
+    it('should not load more when no more data', async () => {
       store.hasMore = false;
       store.loading = false;
       store.page = 1;
 
-      store.loadMore();
-  });
-});
+      await store.loadMore();
 
+      expect(store.page).toBe(1);
+    });
+  });
 });

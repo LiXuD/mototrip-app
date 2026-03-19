@@ -125,7 +125,7 @@
 import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { useDiaryStore } from '@/store'
-import type { Diary } from '@/types'
+import type { Diary, DiaryListParams } from '@/types'
 
 const diaryStore = useDiaryStore()
 const currentTag = ref('all')
@@ -136,37 +136,53 @@ const hasMore = ref(true)
 const hasInitialized = ref(false)
 const hasFetched = ref(false)
 
+function buildQuery(): DiaryListParams {
+  return {
+    tag: currentTag.value === 'all' ? undefined : currentTag.value,
+  }
+}
+
+function syncListState() {
+  diaries.value = diaryStore.diaries
+  hasMore.value = diaryStore.hasMore
+}
+
+function prepareFreshState() {
+  diaryStore.resetList()
+  diaries.value = []
+  hasMore.value = true
+}
+
+async function refreshList() {
+  prepareFreshState()
+  await fetchDiaries()
+}
+
+onShow(() => {
+  void refreshList()
+})
+
 async function fetchDiaries() {
   loading.value = true
   try {
-    const tag = currentTag.value === 'all' ? undefined : currentTag.value
-    await diaryStore.fetchDiaries({ tag } as any)
-    diaries.value = diaryStore.diaries
-    hasMore.value = diaryStore.hasMore
+    await diaryStore.fetchDiaries(buildQuery())
+    syncListState()
   } finally {
     hasFetched.value = true
     loading.value = false
   }
 }
 
-onShow(() => {
-  // 首次展示页面时自动拉取，后续返回页面复用实例时不重复请求，由用户操作触发刷新。
-  if (hasInitialized.value) return
-  hasInitialized.value = true
-  fetchDiaries()
-})
-
-function setTag(tag: string) {
+async function setTag(tag: string) {
   currentTag.value = tag
   diaryStore.resetList()
-  fetchDiaries()
+  await fetchDiaries()
 }
 
-function loadMore() {
+async function loadMore() {
   if (hasMore.value && !loading.value) {
-    diaryStore.loadMore()
-    diaries.value = diaryStore.diaries
-    hasMore.value = diaryStore.hasMore
+    await diaryStore.loadMore()
+    syncListState()
   }
 }
 
