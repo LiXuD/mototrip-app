@@ -107,7 +107,7 @@
       <view class="no-more" v-if="!hasMore && diaries.length > 0">
         <text>— 已经到底了 —</text>
       </view>
-      <view class="empty" v-if="!loading && diaries.length === 0">
+      <view class="empty" v-if="hasFetched && !loading && diaries.length === 0">
         <text class="empty-icon">📖</text>
         <text class="empty-text">还没有日记</text>
         <text class="empty-hint">记录你的摩旅故事</text>
@@ -123,6 +123,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { useDiaryStore } from '@/store'
 import type { Diary } from '@/types'
 
@@ -132,6 +133,8 @@ const currentTag = ref('all')
 const diaries = ref<Diary[]>([])
 const loading = ref(false)
 const hasMore = ref(true)
+const hasInitialized = ref(false)
+const hasFetched = ref(false)
 
 async function fetchDiaries() {
   loading.value = true
@@ -141,9 +144,17 @@ async function fetchDiaries() {
     diaries.value = diaryStore.diaries
     hasMore.value = diaryStore.hasMore
   } finally {
+    hasFetched.value = true
     loading.value = false
   }
 }
+
+onShow(() => {
+  // 首次展示页面时自动拉取，后续返回页面复用实例时不重复请求，由用户操作触发刷新。
+  if (hasInitialized.value) return
+  hasInitialized.value = true
+  fetchDiaries()
+})
 
 function setTag(tag: string) {
   currentTag.value = tag
