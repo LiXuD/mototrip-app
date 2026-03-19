@@ -1,7 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Trip, PaginatedResponse } from '@/types'
+import type { Trip, PaginatedResponse, TripListParams } from '@/types'
 import { tripApi } from '@/services/api'
+
+const defaultTripQuery: TripListParams = {
+  status: undefined,
+}
 
 export const useTripStore = defineStore('trip', () => {
   const trips = ref<Trip[]>([])
@@ -11,11 +15,20 @@ export const useTripStore = defineStore('trip', () => {
   const page = ref(1)
   const pageSize = ref(10)
   const hasMore = ref(true)
+  const currentQuery = ref<TripListParams>({ ...defaultTripQuery })
 
-  async function fetchTrips(params?: { status?: string }) {
+  async function fetchTrips(params?: TripListParams) {
+    if (page.value === 1) {
+      currentQuery.value = { ...defaultTripQuery, ...params }
+    }
+
     loading.value = true
     try {
-      const res = await tripApi.list({ page: page.value, pageSize: pageSize.value, ...params }) as PaginatedResponse<Trip>
+      const res = await tripApi.list({
+        page: page.value,
+        pageSize: pageSize.value,
+        ...currentQuery.value,
+      }) as PaginatedResponse<Trip>
       if (page.value === 1) {
         trips.value = res.list
       } else {
@@ -43,10 +56,26 @@ export const useTripStore = defineStore('trip', () => {
     hasMore.value = true
   }
 
-  function loadMore() {
-    if (hasMore.value && !loading.value) {
-      page.value++
-      fetchTrips()
+  function resetStore() {
+    trips.value = []
+    currentTrip.value = null
+    loading.value = false
+    total.value = 0
+    page.value = 1
+    pageSize.value = 10
+    hasMore.value = true
+    currentQuery.value = { ...defaultTripQuery }
+  }
+
+  async function loadMore() {
+    if (!hasMore.value || loading.value) return
+
+    page.value += 1
+    try {
+      await fetchTrips()
+    } catch (error) {
+      page.value -= 1
+      throw error
     }
   }
 
@@ -58,9 +87,11 @@ export const useTripStore = defineStore('trip', () => {
     page,
     pageSize,
     hasMore,
+    currentQuery,
     fetchTrips,
     fetchTripDetail,
     resetList,
+    resetStore,
     loadMore,
   }
 })

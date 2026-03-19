@@ -132,7 +132,7 @@
 import { ref, computed } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { useRouteStore } from '@/store'
-import type { Route } from '@/types'
+import type { Route, RouteListParams } from '@/types'
 
 const routeStore = useRouteStore()
 const currentFilter = ref('all')
@@ -148,16 +148,39 @@ const routes = ref<Route[]>([])
 
 const sortText = computed(() => sortOrder.value === 'desc' ? '最新' : '最早')
 
+function buildQuery(): RouteListParams {
+  return {
+    difficulty: currentFilter.value === 'all' ? undefined : currentFilter.value,
+    keyword: searchKeyword.value || undefined,
+    sort: sortOrder.value,
+  }
+}
+
+function syncListState() {
+  routes.value = routeStore.routes
+  hasMore.value = routeStore.hasMore
+}
+
+function prepareFreshState() {
+  routeStore.resetList()
+  routes.value = []
+  hasMore.value = true
+}
+
+async function refreshList() {
+  prepareFreshState()
+  await fetchRoutes()
+}
+
+onShow(() => {
+  void refreshList()
+})
+
 async function fetchRoutes() {
   loading.value = true
   try {
-    await routeStore.fetchRoutes({ 
-      difficulty: currentFilter.value === 'all' ? undefined : currentFilter.value,
-      keyword: searchKeyword.value || undefined,
-      sort: sortOrder.value
-    })
-    routes.value = routeStore.routes
-    hasMore.value = routeStore.hasMore
+    await routeStore.fetchRoutes(buildQuery())
+    syncListState()
   } finally {
     hasFetched.value = true
     loading.value = false
@@ -165,48 +188,39 @@ async function fetchRoutes() {
   }
 }
 
-onShow(() => {
-  // 首次展示页面时自动拉取，后续返回页面复用实例时不重复请求，由用户操作触发刷新。
-  if (hasInitialized.value) return
-  hasInitialized.value = true
-  fetchRoutes()
-})
-
-function setFilter(filter: string) {
+async function setFilter(filter: string) {
   currentFilter.value = filter
   routeStore.resetList()
-  fetchRoutes()
+  await fetchRoutes()
 }
 
-function toggleSort() {
+async function toggleSort() {
   sortOrder.value = sortOrder.value === 'desc' ? 'asc' : 'desc'
   routeStore.resetList()
-  fetchRoutes()
+  await fetchRoutes()
 }
 
-function doSearch() {
+async function doSearch() {
   routeStore.resetList()
-  fetchRoutes()
+  await fetchRoutes()
 }
 
-function clearSearch() {
+async function clearSearch() {
   searchKeyword.value = ''
   routeStore.resetList()
-  fetchRoutes()
+  await fetchRoutes()
 }
 
-function loadMore() {
+async function loadMore() {
   if (hasMore.value && !loading.value) {
-    routeStore.loadMore()
-    routes.value = routeStore.routes
-    hasMore.value = routeStore.hasMore
+    await routeStore.loadMore()
+    syncListState()
   }
 }
 
-function onRefresh() {
+async function onRefresh() {
   refreshing.value = true
-  routeStore.resetList()
-  fetchRoutes()
+  await refreshList()
 }
 
 function goDetail(id: number) {

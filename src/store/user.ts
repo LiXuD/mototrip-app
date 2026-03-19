@@ -2,6 +2,9 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { User, UserModeSettings, UserMode } from '@/types'
 import { userModeApi } from '@/services/api'
+import { useRouteStore } from './route'
+import { useTripStore } from './trip'
+import { useDiaryStore } from './diary'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref<string>(uni.getStorageSync('token') || '')
@@ -72,6 +75,11 @@ export const useUserStore = defineStore('user', () => {
     token.value = ''
     userInfo.value = null
     userMode.value = null
+
+    useRouteStore().resetStore()
+    useTripStore().resetStore()
+    useDiaryStore().resetStore()
+
     uni.removeStorageSync('token')
   }
 
