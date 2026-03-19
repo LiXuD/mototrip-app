@@ -79,7 +79,7 @@
       <view class="no-more" v-if="!hasMore && trips.length > 0">
         <text>— 已经到底了 —</text>
       </view>
-      <view class="empty" v-if="!loading && trips.length === 0">
+      <view class="empty" v-if="hasFetched && !loading && trips.length === 0">
         <text class="empty-icon">🏍️</text>
         <text class="empty-text">暂无行程</text>
         <text class="empty-hint">开始规划你的第一次摩旅吧！</text>
@@ -106,6 +106,8 @@ const currentStatus = ref('all')
 const trips = ref<Trip[]>([])
 const loading = ref(false)
 const hasMore = ref(true)
+const hasInitialized = ref(false)
+const hasFetched = ref(false)
 
 function buildQuery(): TripListParams {
   return {
@@ -139,6 +141,7 @@ async function fetchTrips() {
     await tripStore.fetchTrips(buildQuery())
     syncListState()
   } finally {
+    hasFetched.value = true
     loading.value = false
   }
 }

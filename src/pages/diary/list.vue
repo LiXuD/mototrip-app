@@ -107,7 +107,7 @@
       <view class="no-more" v-if="!hasMore && diaries.length > 0">
         <text>— 已经到底了 —</text>
       </view>
-      <view class="empty" v-if="!loading && diaries.length === 0">
+      <view class="empty" v-if="hasFetched && !loading && diaries.length === 0">
         <text class="empty-icon">📖</text>
         <text class="empty-text">还没有日记</text>
         <text class="empty-hint">记录你的摩旅故事</text>
@@ -133,6 +133,8 @@ const currentTag = ref('all')
 const diaries = ref<Diary[]>([])
 const loading = ref(false)
 const hasMore = ref(true)
+const hasInitialized = ref(false)
+const hasFetched = ref(false)
 
 function buildQuery(): DiaryListParams {
   return {
@@ -166,6 +168,7 @@ async function fetchDiaries() {
     await diaryStore.fetchDiaries(buildQuery())
     syncListState()
   } finally {
+    hasFetched.value = true
     loading.value = false
   }
 }

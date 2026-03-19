@@ -114,7 +114,7 @@
       <view class="no-more" v-if="!hasMore && routes.length > 0">
         <text>— 已经到底了 —</text>
       </view>
-      <view class="empty" v-if="!loading && routes.length === 0">
+      <view class="empty" v-if="hasFetched && !loading && routes.length === 0">
         <text class="empty-icon">🛣️</text>
         <text class="empty-text">暂无路线</text>
         <text class="empty-hint">快来创建第一条路线吧</text>
@@ -141,6 +141,8 @@ const sortOrder = ref<'desc' | 'asc'>('desc')
 const loading = ref(false)
 const hasMore = ref(true)
 const refreshing = ref(false)
+const hasInitialized = ref(false)
+const hasFetched = ref(false)
 
 const routes = ref<Route[]>([])
 
@@ -180,6 +182,7 @@ async function fetchRoutes() {
     await routeStore.fetchRoutes(buildQuery())
     syncListState()
   } finally {
+    hasFetched.value = true
     loading.value = false
     refreshing.value = false
   }
