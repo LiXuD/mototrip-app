@@ -118,7 +118,7 @@ export const userApi = {
 }
 
 export const routeApi = {
-  list: (params?: { page?: number; pageSize?: number; keyword?: string; difficulty?: string }) =>
+  list: (params?: { page?: number; pageSize?: number; keyword?: string; difficulty?: string; sort?: 'desc' | 'asc' }) =>
     request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
       url: '/routes',
       method: 'GET',
@@ -208,7 +208,7 @@ export const tripApi = {
 }
 
 export const diaryApi = {
-  list: (params?: { page?: number; pageSize?: number; tripId?: number; userId?: number }) =>
+  list: (params?: { page?: number; pageSize?: number; tripId?: number; userId?: number; tag?: string }) =>
     request<unknown>({
       url: '/diaries',
       method: 'GET',
