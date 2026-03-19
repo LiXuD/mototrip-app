@@ -138,6 +138,78 @@
       "style": {
         "navigationBarTitleText": "模式设置"
       }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/route/create",
+      "style": {
+        "navigationBarTitleText": "创建路线"
+      }
+    },
+    {
+      "path": "pages/route/my",
+      "style": {
+        "navigationBarTitleText": "我的路线"
+      }
+    },
+    {
+      "path": "pages/trip/create",
+      "style": {
+        "navigationBarTitleText": "创建行程"
+      }
+    },
+    {
+      "path": "pages/trip/detail",
+      "style": {
+        "navigationBarTitleText": "行程详情"
+      }
+    },
+    {
+      "path": "pages/diary/create",
+      "style": {
+        "navigationBarTitleText": "写日记"
+      }
+    },
+    {
+      "path": "pages/social/publish",
+      "style": {
+        "navigationBarTitleText": "发布动态"
+      }
+    },
+    {
+      "path": "pages/favorites/index",
+      "style": {
+        "navigationBarTitleText": "我的收藏"
+      }
+    },
+    {
+      "path": "pages/settings/index",
+      "style": {
+        "navigationBarTitleText": "设置"
+      }
+    },
+    {
+      "path": "pages/about/index",
+      "style": {
+        "navigationBarTitleText": "关于"
+      }
+    },
+    {
+      "path": "pages/help/index",
+      "style": {
+        "navigationBarTitleText": "帮助与反馈"
+      }
+    },
+    {
+      "path": "pages/profile/edit",
+      "style": {
+        "navigationBarTitleText": "编辑资料"
+      }
     }
   ],
   "globalStyle": {
