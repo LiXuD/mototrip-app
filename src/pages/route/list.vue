@@ -114,7 +114,7 @@
       <view class="no-more" v-if="!hasMore && routes.length > 0">
         <text>— 已经到底了 —</text>
       </view>
-      <view class="empty" v-if="!loading && routes.length === 0">
+      <view class="empty" v-if="hasFetched && !loading && routes.length === 0">
         <text class="empty-icon">🛣️</text>
         <text class="empty-text">暂无路线</text>
         <text class="empty-hint">快来创建第一条路线吧</text>
@@ -130,6 +130,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { useRouteStore } from '@/store'
 import type { Route } from '@/types'
 
@@ -140,6 +141,8 @@ const sortOrder = ref<'desc' | 'asc'>('desc')
 const loading = ref(false)
 const hasMore = ref(true)
 const refreshing = ref(false)
+const hasInitialized = ref(false)
+const hasFetched = ref(false)
 
 const routes = ref<Route[]>([])
 
@@ -156,10 +159,18 @@ async function fetchRoutes() {
     routes.value = routeStore.routes
     hasMore.value = routeStore.hasMore
   } finally {
+    hasFetched.value = true
     loading.value = false
     refreshing.value = false
   }
 }
+
+onShow(() => {
+  // 首次展示页面时自动拉取，后续返回页面复用实例时不重复请求，由用户操作触发刷新。
+  if (hasInitialized.value) return
+  hasInitialized.value = true
+  fetchRoutes()
+})
 
 function setFilter(filter: string) {
   currentFilter.value = filter

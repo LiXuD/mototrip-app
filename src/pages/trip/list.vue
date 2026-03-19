@@ -79,7 +79,7 @@
       <view class="no-more" v-if="!hasMore && trips.length > 0">
         <text>— 已经到底了 —</text>
       </view>
-      <view class="empty" v-if="!loading && trips.length === 0">
+      <view class="empty" v-if="hasFetched && !loading && trips.length === 0">
         <text class="empty-icon">🏍️</text>
         <text class="empty-text">暂无行程</text>
         <text class="empty-hint">开始规划你的第一次摩旅吧！</text>
@@ -96,6 +96,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { useTripStore } from '@/store'
 import type { Trip } from '@/types'
 
@@ -105,6 +106,8 @@ const currentStatus = ref('all')
 const trips = ref<Trip[]>([])
 const loading = ref(false)
 const hasMore = ref(true)
+const hasInitialized = ref(false)
+const hasFetched = ref(false)
 
 async function fetchTrips() {
   loading.value = true
@@ -113,9 +116,17 @@ async function fetchTrips() {
     trips.value = tripStore.trips
     hasMore.value = tripStore.hasMore
   } finally {
+    hasFetched.value = true
     loading.value = false
   }
 }
+
+onShow(() => {
+  // 首次展示页面时自动拉取，后续返回页面复用实例时不重复请求，由用户操作触发刷新。
+  if (hasInitialized.value) return
+  hasInitialized.value = true
+  fetchTrips()
+})
 
 function setStatus(status: string) {
   currentStatus.value = status
