@@ -57,6 +57,17 @@ export const useDiaryStore = defineStore('diary', () => {
     hasMore.value = true
   }
 
+  function resetStore() {
+    diaries.value = []
+    currentDiary.value = null
+    loading.value = false
+    total.value = 0
+    page.value = 1
+    pageSize.value = 10
+    hasMore.value = true
+    currentQuery.value = { ...defaultDiaryQuery }
+  }
+
   async function loadMore() {
     if (!hasMore.value || loading.value) return
 
@@ -81,6 +92,7 @@ export const useDiaryStore = defineStore('diary', () => {
     fetchDiaries,
     likeDiary,
     resetList,
+    resetStore,
     loadMore,
   }
 })

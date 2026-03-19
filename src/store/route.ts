@@ -58,6 +58,17 @@ export const useRouteStore = defineStore('route', () => {
     hasMore.value = true
   }
 
+  function resetStore() {
+    routes.value = []
+    currentRoute.value = null
+    loading.value = false
+    total.value = 0
+    page.value = 1
+    pageSize.value = 10
+    hasMore.value = true
+    currentQuery.value = { ...defaultRouteQuery }
+  }
+
   async function loadMore() {
     if (!hasMore.value || loading.value) return
 
@@ -82,6 +93,7 @@ export const useRouteStore = defineStore('route', () => {
     fetchRoutes,
     fetchRouteDetail,
     resetList,
+    resetStore,
     loadMore,
   }
 })

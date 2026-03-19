@@ -130,18 +130,19 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { useRouteStore } from '@/store'
 import type { Route, RouteListParams } from '@/types'
 
 const routeStore = useRouteStore()
-const currentFilter = ref(routeStore.currentQuery.difficulty ?? 'all')
-const searchKeyword = ref(routeStore.currentQuery.keyword ?? '')
-const sortOrder = ref<'desc' | 'asc'>(routeStore.currentQuery.sort ?? 'desc')
+const currentFilter = ref('all')
+const searchKeyword = ref('')
+const sortOrder = ref<'desc' | 'asc'>('desc')
 const loading = ref(false)
-const hasMore = ref(routeStore.hasMore)
+const hasMore = ref(true)
 const refreshing = ref(false)
 
-const routes = ref<Route[]>(routeStore.routes)
+const routes = ref<Route[]>([])
 
 const sortText = computed(() => sortOrder.value === 'desc' ? '最新' : '最早')
 
@@ -157,6 +158,21 @@ function syncListState() {
   routes.value = routeStore.routes
   hasMore.value = routeStore.hasMore
 }
+
+function prepareFreshState() {
+  routeStore.resetList()
+  routes.value = []
+  hasMore.value = true
+}
+
+async function refreshList() {
+  prepareFreshState()
+  await fetchRoutes()
+}
+
+onShow(() => {
+  void refreshList()
+})
 
 async function fetchRoutes() {
   loading.value = true
@@ -201,8 +217,7 @@ async function loadMore() {
 
 async function onRefresh() {
   refreshing.value = true
-  routeStore.resetList()
-  await fetchRoutes()
+  await refreshList()
 }
 
 function goDetail(id: number) {
