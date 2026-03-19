@@ -85,10 +85,12 @@ export function useLocation() {
   async function getLocation() {
     loading.value = true
     try {
-      const res = await uni.getLocation({ type: 'wgs84' })
-      location.value = {
-        latitude: res.latitude,
-        longitude: res.longitude,
+      const res = await uni.getLocation({ type: 'wgs84' }) as any
+      if (res) {
+        location.value = {
+          latitude: res.latitude,
+          longitude: res.longitude,
+        }
       }
       return location.value
     } catch (e) {
@@ -100,7 +102,7 @@ export function useLocation() {
   }
 
   async function chooseLocation() {
-    const res = await uni.chooseLocation()
+    const res = await uni.chooseLocation() as any
     if (res && res.latitude) {
       location.value = {
         latitude: res.latitude,
@@ -127,8 +129,8 @@ export function useUpload() {
   async function uploadImage(sourceType: ('album' | 'camera')[] = ['album', 'camera']) {
     const res = await uni.chooseImage({
       count: 9,
-      sourceType,
-    }) as UniApp.ChooseImageSuccessCallbackResult
+      sourceType: sourceType as any,
+    }) as any
     return res.tempFilePaths
   }
 
@@ -142,7 +144,7 @@ export function useUpload() {
           url: 'http://localhost:3000/api/upload',
           filePath: path,
           name: 'file',
-        })
+        }) as any
         if (result.statusCode === 200) {
           const data = JSON.parse(result.data)
           urls.push(data.url)

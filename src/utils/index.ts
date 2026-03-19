@@ -120,7 +120,7 @@ export function validateEmail(email: string): boolean {
  */
 export function copyToClipboard(text: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    uni.setClipboardData({
+    (uni as any).setClipboardData({
       data: text,
       success: () => {
         uni.showToast({ title: '已复制' })
@@ -135,7 +135,7 @@ export function copyToClipboard(text: string): Promise<void> {
  * 预览图片
  */
 export function previewImage(urls: string[], current?: number): void {
-  uni.previewImage({
+  (uni as any).previewImage({
     urls,
     current,
   })
@@ -145,7 +145,7 @@ export function previewImage(urls: string[], current?: number): void {
  * 拨打电话
  */
 export function makePhoneCall(phoneNumber: string): void {
-  uni.makePhoneCall({
+  (uni as any).makePhoneCall({
     phoneNumber,
   })
 }
@@ -154,7 +154,7 @@ export function makePhoneCall(phoneNumber: string): void {
  * 打开地图定位
  */
 export function openLocation(latitude: number, longitude: number, name?: string): void {
-  uni.openLocation({
+  (uni as any).openLocation({
     latitude,
     longitude,
     name,

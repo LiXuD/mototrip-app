@@ -37,6 +37,7 @@ export interface Route {
   coverImage?: string
   distance: number
   duration: number
+  elevation?: number
   difficulty: 'easy' | 'medium' | 'hard'
   startPoint: GeoPoint
   endPoint: GeoPoint
@@ -88,6 +89,7 @@ export interface Trip {
   route?: Route
   waypoints: Waypoint[]
   totalDistance: number
+  progress?: number
   notes?: string
   userId: number
   user?: User
@@ -119,6 +121,7 @@ export interface Diary {
   likes: number
   comments: number
   isLiked?: boolean
+  tag?: string
   createdAt: string
   updatedAt: string
 }
