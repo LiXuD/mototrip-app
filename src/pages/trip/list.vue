@@ -97,37 +97,46 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useTripStore } from '@/store'
-import type { Trip } from '@/types'
+import type { Trip, TripListParams } from '@/types'
 
 const tripStore = useTripStore()
-const currentStatus = ref('all')
+const currentStatus = ref(tripStore.currentQuery.status ?? 'all')
 
-const trips = ref<Trip[]>([])
+const trips = ref<Trip[]>(tripStore.trips)
 const loading = ref(false)
-const hasMore = ref(true)
+const hasMore = ref(tripStore.hasMore)
+
+function buildQuery(): TripListParams {
+  return {
+    status: currentStatus.value === 'all' ? undefined : currentStatus.value,
+  }
+}
+
+function syncListState() {
+  trips.value = tripStore.trips
+  hasMore.value = tripStore.hasMore
+}
 
 async function fetchTrips() {
   loading.value = true
   try {
-    await tripStore.fetchTrips({ status: currentStatus.value === 'all' ? undefined : currentStatus.value })
-    trips.value = tripStore.trips
-    hasMore.value = tripStore.hasMore
+    await tripStore.fetchTrips(buildQuery())
+    syncListState()
   } finally {
     loading.value = false
   }
 }
 
-function setStatus(status: string) {
+async function setStatus(status: string) {
   currentStatus.value = status
   tripStore.resetList()
-  fetchTrips()
+  await fetchTrips()
 }
 
-function loadMore() {
+async function loadMore() {
   if (hasMore.value && !loading.value) {
-    tripStore.loadMore()
-    trips.value = tripStore.trips
-    hasMore.value = tripStore.hasMore
+    await tripStore.loadMore()
+    syncListState()
   }
 }
 

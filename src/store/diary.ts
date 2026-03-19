@@ -1,7 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Diary, PaginatedResponse } from '@/types'
+import type { Diary, PaginatedResponse, DiaryListParams } from '@/types'
 import { diaryApi } from '@/services/api'
+
+const defaultDiaryQuery: DiaryListParams = {
+  tripId: undefined,
+  userId: undefined,
+  tag: undefined,
+}
 
 export const useDiaryStore = defineStore('diary', () => {
   const diaries = ref<Diary[]>([])
@@ -11,11 +17,20 @@ export const useDiaryStore = defineStore('diary', () => {
   const page = ref(1)
   const pageSize = ref(10)
   const hasMore = ref(true)
+  const currentQuery = ref<DiaryListParams>({ ...defaultDiaryQuery })
 
-  async function fetchDiaries(params?: { tripId?: number; userId?: number }) {
+  async function fetchDiaries(params?: DiaryListParams) {
+    if (page.value === 1) {
+      currentQuery.value = { ...defaultDiaryQuery, ...params }
+    }
+
     loading.value = true
     try {
-      const res = await diaryApi.list({ page: page.value, pageSize: pageSize.value, ...params }) as PaginatedResponse<Diary>
+      const res = await diaryApi.list({
+        page: page.value,
+        pageSize: pageSize.value,
+        ...currentQuery.value,
+      }) as PaginatedResponse<Diary>
       if (page.value === 1) {
         diaries.value = res.list
       } else {
@@ -42,10 +57,15 @@ export const useDiaryStore = defineStore('diary', () => {
     hasMore.value = true
   }
 
-  function loadMore() {
-    if (hasMore.value && !loading.value) {
-      page.value++
-      fetchDiaries()
+  async function loadMore() {
+    if (!hasMore.value || loading.value) return
+
+    page.value += 1
+    try {
+      await fetchDiaries()
+    } catch (error) {
+      page.value -= 1
+      throw error
     }
   }
 
@@ -57,6 +77,7 @@ export const useDiaryStore = defineStore('diary', () => {
     page,
     pageSize,
     hasMore,
+    currentQuery,
     fetchDiaries,
     likeDiary,
     resetList,

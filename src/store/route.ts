@@ -1,7 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Route } from '@/types'
+import type { Route, RouteListParams, PaginatedResponse } from '@/types'
 import { routeApi } from '@/services/api'
+
+const defaultRouteQuery: RouteListParams = {
+  keyword: undefined,
+  difficulty: undefined,
+  sort: 'desc',
+}
 
 export const useRouteStore = defineStore('route', () => {
   const routes = ref<Route[]>([])
@@ -11,15 +17,24 @@ export const useRouteStore = defineStore('route', () => {
   const page = ref(1)
   const pageSize = ref(10)
   const hasMore = ref(true)
+  const currentQuery = ref<RouteListParams>({ ...defaultRouteQuery })
 
-  async function fetchRoutes(params?: { keyword?: string; difficulty?: string }) {
+  async function fetchRoutes(params?: RouteListParams) {
+    if (page.value === 1) {
+      currentQuery.value = { ...defaultRouteQuery, ...params }
+    }
+
     loading.value = true
     try {
-      const res = await routeApi.list({ page: page.value, pageSize: pageSize.value, ...params })
+      const res = await routeApi.list({
+        page: page.value,
+        pageSize: pageSize.value,
+        ...currentQuery.value,
+      }) as PaginatedResponse<Route>
       if (page.value === 1) {
-        routes.value = res.list as Route[]
+        routes.value = res.list
       } else {
-        routes.value = [...routes.value, ...(res.list as Route[])]
+        routes.value = [...routes.value, ...res.list]
       }
       total.value = res.total
       hasMore.value = res.hasMore
@@ -43,10 +58,15 @@ export const useRouteStore = defineStore('route', () => {
     hasMore.value = true
   }
 
-  function loadMore() {
-    if (hasMore.value && !loading.value) {
-      page.value++
-      fetchRoutes()
+  async function loadMore() {
+    if (!hasMore.value || loading.value) return
+
+    page.value += 1
+    try {
+      await fetchRoutes()
+    } catch (error) {
+      page.value -= 1
+      throw error
     }
   }
 
@@ -58,6 +78,7 @@ export const useRouteStore = defineStore('route', () => {
     page,
     pageSize,
     hasMore,
+    currentQuery,
     fetchRoutes,
     fetchRouteDetail,
     resetList,
