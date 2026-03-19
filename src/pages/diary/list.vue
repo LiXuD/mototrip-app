@@ -123,15 +123,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { useDiaryStore } from '@/store'
 import type { Diary, DiaryListParams } from '@/types'
 
 const diaryStore = useDiaryStore()
-const currentTag = ref(diaryStore.currentQuery.tag ?? 'all')
+const currentTag = ref('all')
 
-const diaries = ref<Diary[]>(diaryStore.diaries)
+const diaries = ref<Diary[]>([])
 const loading = ref(false)
-const hasMore = ref(diaryStore.hasMore)
+const hasMore = ref(true)
 
 function buildQuery(): DiaryListParams {
   return {
@@ -143,6 +144,21 @@ function syncListState() {
   diaries.value = diaryStore.diaries
   hasMore.value = diaryStore.hasMore
 }
+
+function prepareFreshState() {
+  diaryStore.resetList()
+  diaries.value = []
+  hasMore.value = true
+}
+
+async function refreshList() {
+  prepareFreshState()
+  await fetchDiaries()
+}
+
+onShow(() => {
+  void refreshList()
+})
 
 async function fetchDiaries() {
   loading.value = true

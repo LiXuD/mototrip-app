@@ -96,15 +96,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { useTripStore } from '@/store'
 import type { Trip, TripListParams } from '@/types'
 
 const tripStore = useTripStore()
-const currentStatus = ref(tripStore.currentQuery.status ?? 'all')
+const currentStatus = ref('all')
 
-const trips = ref<Trip[]>(tripStore.trips)
+const trips = ref<Trip[]>([])
 const loading = ref(false)
-const hasMore = ref(tripStore.hasMore)
+const hasMore = ref(true)
 
 function buildQuery(): TripListParams {
   return {
@@ -116,6 +117,21 @@ function syncListState() {
   trips.value = tripStore.trips
   hasMore.value = tripStore.hasMore
 }
+
+function prepareFreshState() {
+  tripStore.resetList()
+  trips.value = []
+  hasMore.value = true
+}
+
+async function refreshList() {
+  prepareFreshState()
+  await fetchTrips()
+}
+
+onShow(() => {
+  void refreshList()
+})
 
 async function fetchTrips() {
   loading.value = true

@@ -56,6 +56,17 @@ export const useTripStore = defineStore('trip', () => {
     hasMore.value = true
   }
 
+  function resetStore() {
+    trips.value = []
+    currentTrip.value = null
+    loading.value = false
+    total.value = 0
+    page.value = 1
+    pageSize.value = 10
+    hasMore.value = true
+    currentQuery.value = { ...defaultTripQuery }
+  }
+
   async function loadMore() {
     if (!hasMore.value || loading.value) return
 
@@ -80,6 +91,7 @@ export const useTripStore = defineStore('trip', () => {
     fetchTrips,
     fetchTripDetail,
     resetList,
+    resetStore,
     loadMore,
   }
 })
