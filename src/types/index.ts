@@ -55,6 +55,7 @@ export interface RouteListParams {
   pageSize?: number
   difficulty?: string
   keyword?: string
+  sort?: 'desc' | 'asc'
 }
 
 // 途点相关类型
@@ -127,6 +128,7 @@ export interface DiaryListParams {
   pageSize?: number
   tripId?: number
   userId?: number
+  tag?: string
 }
 
 // 社交相关类型

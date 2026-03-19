@@ -25,6 +25,11 @@ describe('Diary Store', () => {
       expect(store.page).toBe(1);
       expect(store.pageSize).toBe(10);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({
+        tripId: undefined,
+        userId: undefined,
+        tag: undefined,
+      });
     });
   });
 
@@ -59,6 +64,7 @@ describe('Diary Store', () => {
       const existingDiaries = [generateMockDiary({ id: 1 })];
       store.diaries = [...existingDiaries];
       store.page = 2;
+      store.currentQuery = { tripId: undefined, userId: undefined, tag: 'repair' };
 
       const newDiaries = [generateMockDiary({ id: 2 })];
       const mockResponse: PaginatedResponse<ReturnType<typeof generateMockDiary>> = {
@@ -79,6 +85,7 @@ describe('Diary Store', () => {
       expect(store.diaries).toHaveLength(2);
       expect(store.diaries[1].id).toBe(2);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({ tripId: undefined, userId: undefined, tag: 'repair' });
     });
 
     it('should set loading state correctly', async () => {
@@ -104,7 +111,7 @@ describe('Diary Store', () => {
       expect(store.loading).toBe(false);
     });
 
-    it('should pass params to API', async () => {
+    it('should pass params to API and persist query on first page', async () => {
       const mockResponse: PaginatedResponse<ReturnType<typeof generateMockDiary>> = {
         list: [],
         total: 0,
@@ -119,13 +126,19 @@ describe('Diary Store', () => {
         list: listSpy,
       });
 
-      await store.fetchDiaries({ tripId: 1, userId: 2 });
+      await store.fetchDiaries({ tripId: 1, userId: 2, tag: 'repair' });
 
       expect(listSpy).toHaveBeenCalledWith({
         page: 1,
         pageSize: 10,
         tripId: 1,
         userId: 2,
+        tag: 'repair',
+      });
+      expect(store.currentQuery).toEqual({
+        tripId: 1,
+        userId: 2,
+        tag: 'repair',
       });
     });
   });
@@ -133,7 +146,7 @@ describe('Diary Store', () => {
   describe('likeDiary', () => {
     it('should call like API and update likes count', async () => {
       const mockDiary = generateMockDiary({ id: 1, likes: 10 });
-      store.diaries= [mockDiary];
+      store.diaries = [mockDiary];
 
       const diaryApi = await import('@/services/api');
       vi.spyOn(diaryApi, 'diaryApi', 'get').mockReturnValue({
@@ -147,37 +160,39 @@ describe('Diary Store', () => {
 
     it('should not throw if diary not found', async () => {
       const mockDiary = generateMockDiary({ id: 1 });
-      store.diaries= [mockDiary];
+      store.diaries = [mockDiary];
 
       const diaryApi = await import('@/services/api');
       vi.spyOn(diaryApi, 'diaryApi', 'get').mockReturnValue({
         like: vi.fn().mockResolvedValue({}),
       });
 
-      // Should not throw
       await store.likeDiary(999);
     });
   });
 
   describe('resetList', () => {
     it('should reset list state', () => {
-      store.diaries= [generateMockDiary({ id: 1 })];
-      store.page= 5;
-      store.hasMore= false;
+      store.diaries = [generateMockDiary({ id: 1 })];
+      store.page = 5;
+      store.hasMore = false;
+      store.currentQuery = { tripId: undefined, userId: 2, tag: 'repair' };
 
       store.resetList();
 
       expect(store.page).toBe(1);
       expect(store.diaries).toEqual([]);
       expect(store.hasMore).toBe(true);
+      expect(store.currentQuery).toEqual({ tripId: undefined, userId: 2, tag: 'repair' });
     });
   });
 
   describe('loadMore', () => {
-    it('should load more when has more data', async () => {
-      store.hasMore= true;
-      store.loading= false;
-      store.page= 1;
+    it('should load more with persisted query when has more data', async () => {
+      store.hasMore = true;
+      store.loading = false;
+      store.page = 1;
+      store.currentQuery = { tripId: undefined, userId: undefined, tag: 'repair' };
 
       const mockResponse: PaginatedResponse<ReturnType<typeof generateMockDiary>> = {
         list: [generateMockDiary({ id: 2 })],
@@ -188,34 +203,41 @@ describe('Diary Store', () => {
       };
 
       const diaryApi = await import('@/services/api');
+      const listSpy = vi.fn().mockResolvedValue(mockResponse);
       vi.spyOn(diaryApi, 'diaryApi', 'get').mockReturnValue({
-        list: vi.fn().mockResolvedValue(mockResponse),
+        list: listSpy,
       });
 
       await store.loadMore();
 
       expect(store.page).toBe(2);
+      expect(listSpy).toHaveBeenCalledWith({
+        page: 2,
+        pageSize: 10,
+        tripId: undefined,
+        userId: undefined,
+        tag: 'repair',
+      });
     });
 
-    it('should not load more when already loading', () => {
-      store.hasMore= true;
-      store.loading= true;
-      store.page= 1;
+    it('should not load more when already loading', async () => {
+      store.hasMore = true;
+      store.loading = true;
+      store.page = 1;
 
-      store.loadMore();
+      await store.loadMore();
 
       expect(store.page).toBe(1);
     });
 
-    it('should not load more when no more data', () => {
-      store.hasMore= false;
-      store.loading= false;
-      store.page= 1;
+    it('should not load more when no more data', async () => {
+      store.hasMore = false;
+      store.loading = false;
+      store.page = 1;
 
-      store.loadMore();
+      await store.loadMore();
 
       expect(store.page).toBe(1);
     });
-});
-
+  });
 });
