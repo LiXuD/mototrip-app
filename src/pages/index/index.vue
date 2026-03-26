@@ -15,11 +15,28 @@
 
     <!-- 轮播图 -->
     <view class="banner-wrapper">
-      <swiper class="banner" indicator-dots indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#FFFFFF" autoplay circular>
+      <swiper 
+        class="banner" 
+        indicator-dots 
+        indicator-color="rgba(255,255,255,0.3)" 
+        indicator-active-color="#FFFFFF" 
+        autoplay 
+        :interval="4000" 
+        :duration="600"
+        circular
+        previous-margin="32rpx"
+        next-margin="32rpx"
+        @change="onBannerChange"
+      >
         <swiper-item v-for="(item, index) in banners" :key="index">
-          <view class="banner-item">
-            <image class="banner-image" :src="item.image || '/static/banner1.png'" mode="aspectFill" />
+          <view class="banner-item" :class="{ 'banner-active': currentBanner === index }">
+            <image class="banner-image" :src="item.image" mode="aspectFill" />
             <view class="banner-overlay"></view>
+            <view class="banner-content">
+              <text class="banner-tag">{{ item.tag }}</text>
+              <text class="banner-title">{{ item.title }}</text>
+              <text class="banner-subtitle" v-if="item.subtitle">{{ item.subtitle }}</text>
+            </view>
           </view>
         </swiper-item>
       </swiper>
@@ -163,6 +180,9 @@ import { routeApi, diaryApi } from '@/services/api'
 interface Banner {
   image: string
   link?: string
+  title: string
+  subtitle?: string
+  tag: string
 }
 
 interface HotRoute {
@@ -188,9 +208,27 @@ interface LatestDiary {
 }
 
 const banners = ref<Banner[]>([
-  { image: '/static/banner1.png' },
-  { image: '/static/banner2.png' },
+  {
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    title: '自由骑行，感受风的温度',
+    subtitle: '开启你的摩旅之旅',
+    tag: '摩旅推荐',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?w=800&q=80',
+    title: '山川湖海，皆在轮下',
+    subtitle: '探索未知，发现更美的风景',
+    tag: '路线精选',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=800&q=80',
+    title: '安全出行，平安归来',
+    subtitle: '组队出行，让旅途更安心',
+    tag: '安全出行',
+  },
 ])
+
+const currentBanner = ref(0)
 
 const hotRoutes = ref<HotRoute[]>([])
 const latestDiaries = ref<LatestDiary[]>([])
@@ -245,6 +283,10 @@ function formatTime(dateStr: string) {
   const minutes = Math.floor(diff / (1000 * 60))
   return `${minutes}分钟前`
 }
+
+function onBannerChange(e: { detail: { current: number } }) {
+  currentBanner.value = e.detail.current
+}
 </script>
 
 <style lang="scss" scoped>
@@ -289,11 +331,11 @@ function formatTime(dateStr: string) {
 
 /* 轮播图 */
 .banner-wrapper {
-  padding: 0 32rpx;
+  padding: 0 20rpx;
 }
 
 .banner {
-  height: 320rpx;
+  height: 380rpx;
   border-radius: 24rpx;
   overflow: hidden;
 }
@@ -302,6 +344,13 @@ function formatTime(dateStr: string) {
   position: relative;
   width: 100%;
   height: 100%;
+  border-radius: 24rpx;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  
+  &.banner-active {
+    transform: scale(1);
+  }
 }
 
 .banner-image {
@@ -311,11 +360,52 @@ function formatTime(dateStr: string) {
 
 .banner-overlay {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
-  height: 120rpx;
-  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.2) 30%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+.banner-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 32rpx 28rpx;
+}
+
+.banner-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  color: #FFFFFF;
+  font-size: 22rpx;
+  font-weight: 600;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  margin-bottom: 12rpx;
+}
+
+.banner-title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.3;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+  margin-bottom: 8rpx;
+}
+
+.banner-subtitle {
+  display: block;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.2);
 }
 
 /* 功能导航 */
