@@ -24,8 +24,6 @@
         :interval="4000" 
         :duration="600"
         circular
-        previous-margin="32rpx"
-        next-margin="32rpx"
         @change="onBannerChange"
       >
         <swiper-item v-for="(item, index) in banners" :key="index">
