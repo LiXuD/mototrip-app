@@ -1,0 +1,41 @@
+=== Baseline Verification ===
+Date: Mon Mar 30 17:37:19 CST 2026
+
+--- TypeScript Compilation ---
+
+[41m                                                                               [0m
+[41m[37m                This is not the tsc command you are looking for                [0m
+[41m                                                                               [0m
+
+To get access to the TypeScript compiler, [34mtsc[0m, from the command line either:
+
+- Use [1mnpm install typescript[0m to first add TypeScript to your project [1mbefore[0m using npx
+- Use [1myarn[0m to avoid accidentally running code from un-installed packages
+Total TypeScript errors: 0
+0
+
+--- Test Results ---
+Test script found in package.json
+
+--- Code Quality Metrics ---
+console.log count: 0
+as any count: 0
+unknown type count: 54
+
+--- Store File Statistics ---
+Store files in src/store:
+  diary.spec.ts: 243 lines
+  diary.ts: 68 lines
+  index.ts: 5 lines
+  preparation.spec.ts: 274 lines
+  preparation.ts: 69 lines
+  route.spec.ts: 267 lines
+  route.ts: 63 lines
+  trip.spec.ts: 238 lines
+  trip.ts: 61 lines
+  usePaginatedList.ts: 109 lines
+  user.spec.ts: 248 lines
+  user.ts: 102 lines
+Total store lines: 1747
+
+=== Baseline Complete ===
