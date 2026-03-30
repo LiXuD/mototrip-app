@@ -108,7 +108,7 @@ function showAddModal() {
           category: 'other',
           isEssential: false,
           isPacked: false,
-        } as any)
+        })
         uni.showToast({ title: '添加成功', icon: 'success' })
       }
     },

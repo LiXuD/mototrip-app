@@ -192,7 +192,7 @@ onMounted(async () => {
 })
 
 async function toggleSetting(key: keyof UserModeSettings, value: boolean | number | string) {
-  (settings.value as any)[key] = value
+  (settings.value as Record<string, boolean | number | string>)[key] = value
   await updateSettings()
 }
 
