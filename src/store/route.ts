@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Route, RouteListParams, PaginatedResponse } from '@/types'
+import { usePaginatedList } from './usePaginatedList'
+import type { Route, RouteListParams } from '@/types'
 import { routeApi } from '@/services/api'
 
 const defaultRouteQuery: RouteListParams = {
@@ -10,37 +11,24 @@ const defaultRouteQuery: RouteListParams = {
 }
 
 export const useRouteStore = defineStore('route', () => {
-  const routes = ref<Route[]>([])
+  const { 
+    items: routes, 
+    loading, 
+    total, 
+    page, 
+    pageSize, 
+    hasMore, 
+    currentQuery,
+    fetchItems,
+    resetList,
+    resetStore: resetStoreFn,
+    loadMore 
+  } = usePaginatedList<Route, RouteListParams>()
+
   const currentRoute = ref<Route | null>(null)
-  const loading = ref(false)
-  const total = ref(0)
-  const page = ref(1)
-  const pageSize = ref(10)
-  const hasMore = ref(true)
-  const currentQuery = ref<RouteListParams>({ ...defaultRouteQuery })
 
   async function fetchRoutes(params?: RouteListParams) {
-    if (page.value === 1) {
-      currentQuery.value = { ...defaultRouteQuery, ...params }
-    }
-
-    loading.value = true
-    try {
-      const res = await routeApi.list({
-        page: page.value,
-        pageSize: pageSize.value,
-        ...currentQuery.value,
-      }) as PaginatedResponse<Route>
-      if (page.value === 1) {
-        routes.value = res.list
-      } else {
-        routes.value = [...routes.value, ...res.list]
-      }
-      total.value = res.total
-      hasMore.value = res.hasMore
-    } finally {
-      loading.value = false
-    }
+    await fetchItems(routeApi.list, defaultRouteQuery, params)
   }
 
   async function fetchRouteDetail(id: number) {
@@ -52,33 +40,9 @@ export const useRouteStore = defineStore('route', () => {
     }
   }
 
-  function resetList() {
-    page.value = 1
-    routes.value = []
-    hasMore.value = true
-  }
-
   function resetStore() {
-    routes.value = []
+    resetStoreFn(defaultRouteQuery)
     currentRoute.value = null
-    loading.value = false
-    total.value = 0
-    page.value = 1
-    pageSize.value = 10
-    hasMore.value = true
-    currentQuery.value = { ...defaultRouteQuery }
-  }
-
-  async function loadMore() {
-    if (!hasMore.value || loading.value) return
-
-    page.value += 1
-    try {
-      await fetchRoutes()
-    } catch (error) {
-      page.value -= 1
-      throw error
-    }
   }
 
   return {

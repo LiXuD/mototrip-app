@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Trip, PaginatedResponse, TripListParams } from '@/types'
+import { usePaginatedList } from './usePaginatedList'
+import type { Trip, TripListParams } from '@/types'
 import { tripApi } from '@/services/api'
 
 const defaultTripQuery: TripListParams = {
@@ -8,37 +9,24 @@ const defaultTripQuery: TripListParams = {
 }
 
 export const useTripStore = defineStore('trip', () => {
-  const trips = ref<Trip[]>([])
+  const {
+    items: trips,
+    loading,
+    total,
+    page,
+    pageSize,
+    hasMore,
+    currentQuery,
+    fetchItems,
+    resetList,
+    resetStore: resetStoreFn,
+    loadMore,
+  } = usePaginatedList<Trip, TripListParams>()
+
   const currentTrip = ref<Trip | null>(null)
-  const loading = ref(false)
-  const total = ref(0)
-  const page = ref(1)
-  const pageSize = ref(10)
-  const hasMore = ref(true)
-  const currentQuery = ref<TripListParams>({ ...defaultTripQuery })
 
   async function fetchTrips(params?: TripListParams) {
-    if (page.value === 1) {
-      currentQuery.value = { ...defaultTripQuery, ...params }
-    }
-
-    loading.value = true
-    try {
-      const res = await tripApi.list({
-        page: page.value,
-        pageSize: pageSize.value,
-        ...currentQuery.value,
-      }) as PaginatedResponse<Trip>
-      if (page.value === 1) {
-        trips.value = res.list
-      } else {
-        trips.value = [...trips.value, ...res.list]
-      }
-      total.value = res.total
-      hasMore.value = res.hasMore
-    } finally {
-      loading.value = false
-    }
+    await fetchItems(tripApi.list, defaultTripQuery, params)
   }
 
   async function fetchTripDetail(id: number) {
@@ -50,33 +38,9 @@ export const useTripStore = defineStore('trip', () => {
     }
   }
 
-  function resetList() {
-    page.value = 1
-    trips.value = []
-    hasMore.value = true
-  }
-
   function resetStore() {
-    trips.value = []
+    resetStoreFn(defaultTripQuery)
     currentTrip.value = null
-    loading.value = false
-    total.value = 0
-    page.value = 1
-    pageSize.value = 10
-    hasMore.value = true
-    currentQuery.value = { ...defaultTripQuery }
-  }
-
-  async function loadMore() {
-    if (!hasMore.value || loading.value) return
-
-    page.value += 1
-    try {
-      await fetchTrips()
-    } catch (error) {
-      page.value -= 1
-      throw error
-    }
   }
 
   return {
