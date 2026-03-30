@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { onPullDownRefresh } from '@dcloudio/uni-app'
+import { UPLOAD_URL } from '@/utils/env'
 
 /**
  * 使用下拉刷新
@@ -85,7 +86,7 @@ export function useLocation() {
   async function getLocation() {
     loading.value = true
     try {
-      const res = await uni.getLocation({ type: 'wgs84' }) as any
+      const res = await uni.getLocation<UniApp.GetLocationSuccess>({ type: 'wgs84' })
       if (res) {
         location.value = {
           latitude: res.latitude,
@@ -102,7 +103,7 @@ export function useLocation() {
   }
 
   async function chooseLocation() {
-    const res = await uni.chooseLocation() as any
+    const res = await uni.chooseLocation<UniApp.ChooseLocationSuccess>()
     if (res && res.latitude) {
       location.value = {
         latitude: res.latitude,
@@ -126,11 +127,11 @@ export function useLocation() {
 export function useUpload() {
   const uploading = ref(false)
 
-  async function uploadImage(sourceType: ('album' | 'camera')[] = ['album', 'camera']) {
-    const res = await uni.chooseImage({
+  async function uploadImage(sourceType: Array<'album' | 'camera'> = ['album', 'camera']) {
+    const res = await uni.chooseImage<UniApp.ChooseImageSuccess>({
       count: 9,
-      sourceType: sourceType as any,
-    }) as any
+      sourceType,
+    })
     return res.tempFilePaths
   }
 
@@ -140,11 +141,11 @@ export function useUpload() {
 
     try {
       for (const path of filePaths) {
-        const result = await uni.uploadFile({
-          url: 'http://localhost:3000/api/upload',
+        const result = await uni.uploadFile<UniApp.UploadFileSuccess>({
+          url: UPLOAD_URL,
           filePath: path,
           name: 'file',
-        }) as any
+        })
         if (result.statusCode === 200) {
           const data = JSON.parse(result.data)
           urls.push(data.url)

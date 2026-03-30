@@ -1,3 +1,5 @@
+import type { UniApp } from '@dcloudio/uni-app'
+
 /**
  * 格式化日期
  */
@@ -120,14 +122,14 @@ export function validateEmail(email: string): boolean {
  */
 export function copyToClipboard(text: string): Promise<void> {
   return new Promise((resolve, reject) => {
-    (uni as any).setClipboardData({
+    uni.setClipboardData({
       data: text,
       success: () => {
         uni.showToast({ title: '已复制' })
         resolve()
       },
       fail: reject,
-    })
+    } as UniApp.SetClipboardDataOptions)
   })
 }
 
@@ -135,28 +137,28 @@ export function copyToClipboard(text: string): Promise<void> {
  * 预览图片
  */
 export function previewImage(urls: string[], current?: number): void {
-  (uni as any).previewImage({
+  uni.previewImage({
     urls,
     current,
-  })
+  } as UniApp.PreviewImageOptions)
 }
 
 /**
  * 拨打电话
  */
 export function makePhoneCall(phoneNumber: string): void {
-  (uni as any).makePhoneCall({
+  uni.makePhoneCall({
     phoneNumber,
-  })
+  } as UniApp.MakePhoneCallOptions)
 }
 
 /**
  * 打开地图定位
  */
 export function openLocation(latitude: number, longitude: number, name?: string): void {
-  (uni as any).openLocation({
+  uni.openLocation({
     latitude,
     longitude,
     name,
-  })
+  } as UniApp.OpenLocationOptions)
 }
