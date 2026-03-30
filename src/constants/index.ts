@@ -1,6 +1,3 @@
-// API 基础URL
-export const API_BASE_URL = 'http://localhost:3000/api'
-
 // 存储键名
 export const STORAGE_KEYS = {
   TOKEN: 'token',
