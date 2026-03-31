@@ -86,7 +86,7 @@ export function useLocation() {
   async function getLocation() {
     loading.value = true
     try {
-      const res = await uni.getLocation<UniApp.GetLocationSuccess>({ type: 'wgs84' })
+      const res = (await uni.getLocation({ type: 'wgs84' })) as unknown as UniApp.GetLocationSuccess
       if (res) {
         location.value = {
           latitude: res.latitude,
@@ -103,7 +103,7 @@ export function useLocation() {
   }
 
   async function chooseLocation() {
-    const res = await uni.chooseLocation<UniApp.ChooseLocationSuccess>()
+    const res = (await uni.chooseLocation()) as unknown as UniApp.ChooseLocationSuccess
     if (res && res.latitude) {
       location.value = {
         latitude: res.latitude,
@@ -128,10 +128,10 @@ export function useUpload() {
   const uploading = ref(false)
 
   async function uploadImage(sourceType: Array<'album' | 'camera'> = ['album', 'camera']) {
-    const res = await uni.chooseImage<UniApp.ChooseImageSuccess>({
+    const res = (await uni.chooseImage({
       count: 9,
       sourceType,
-    })
+    })) as unknown as { tempFilePaths: string[] }
     return res.tempFilePaths
   }
 
@@ -141,11 +141,11 @@ export function useUpload() {
 
     try {
       for (const path of filePaths) {
-        const result = await uni.uploadFile<UniApp.UploadFileSuccess>({
+        const result = (await uni.uploadFile({
           url: UPLOAD_URL,
           filePath: path,
           name: 'file',
-        })
+        })) as unknown as { statusCode: number; data: string }
         if (result.statusCode === 200) {
           const data = JSON.parse(result.data)
           urls.push(data.url)

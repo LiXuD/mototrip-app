@@ -1,4 +1,4 @@
-import type { Route, Trip, Diary, Preparation, User, Waypoint, Post, Review, OfflineMap, DangerZone, NoParkingZone, UserModeSettings, PaginatedResponse } from './index'
+import type { Route, Trip, Diary, Preparation, User, Waypoint, Post, Review, OfflineMap, DangerZone, NoParkingZone, UserModeSettings, PaginatedResponse, Weather, NightWarning, DangerWarning, NoParkingWarning, WarningResult, DangerZoneReport, NoParkingZoneReport } from './index'
 
 // ============ API 响应类型定义 ============
 
@@ -46,3 +46,14 @@ export type NoParkingZoneNearbyResponse = NoParkingZone[]
 // UserMode
 export type UserModeResponse = UserModeSettings
 export type UserModeSwitchResponse = UserModeSettings
+
+// Weather
+export type WeatherResponse = Weather
+
+// Warning
+export type NightCheckResponse = NightWarning
+export type WarningResponse = WarningResult
+
+// Generic response types
+export type SuccessResponse = { success: boolean }
+export type MessageResponse = { message: string }

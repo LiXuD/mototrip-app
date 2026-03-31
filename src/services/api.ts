@@ -79,26 +79,39 @@ async function request<T>(options: RequestOptions): Promise<T> {
   })
 }
 
+// API 类型
+import type {
+  RouteListResponse, RouteDetailResponse, TripListResponse, TripDetailResponse, DiaryListResponse,
+  WaypointListResponse, PostListResponse, PreparationListResponse, ReviewListResponse,
+  OfflineMapListResponse, DangerZoneListResponse, DangerZoneNearbyResponse,
+  NoParkingZoneListResponse, NoParkingZoneNearbyResponse, SuccessResponse,
+  WeatherResponse, NightCheckResponse, WarningResponse
+} from '@/types/api'
+import type {
+  Route, Trip, Diary, User, Waypoint, Post, Preparation, Review, OfflineMap,
+  DangerZone, DangerZoneReport, NoParkingZone, NoParkingZoneReport, Weather
+} from '@/types'
+
 // API 方法
 export const authApi = {
   login: (data: { username: string; password: string }) =>
-    request<{ token: string; user: unknown }>({
+    request<{ token: string; user: User }>({
       url: '/auth/login',
       method: 'POST',
       data,
     }),
   register: (data: { username: string; password: string; nickname: string }) =>
-    request<{ token: string; user: unknown }>({
+    request<{ token: string; user: User }>({
       url: '/auth/register',
       method: 'POST',
       data,
     }),
   getCurrentUser: () =>
-    request<unknown>({
+    request<User>({
       url: '/auth/current',
     }),
   logout: () =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: '/auth/logout',
       method: 'POST',
     }),
@@ -106,11 +119,11 @@ export const authApi = {
 
 export const userApi = {
   getProfile: (id: number) =>
-    request<unknown>({
+    request<User>({
       url: `/users/${id}`,
     }),
-  updateProfile: (data: unknown) =>
-    request<unknown>({
+  updateProfile: (data: Partial<User>) =>
+    request<User>({
       url: '/users/profile',
       method: 'PUT',
       data,
@@ -119,29 +132,29 @@ export const userApi = {
 
 export const routeApi = {
   list: (params?: { page?: number; pageSize?: number; keyword?: string; difficulty?: string; sort?: 'desc' | 'asc' }) =>
-    request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
+    request<RouteListResponse>({
       url: '/routes',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
-    request<unknown>({
+    request<RouteDetailResponse>({
       url: `/routes/${id}`,
     }),
-  create: (data: unknown) =>
-    request<unknown>({
+  create: (data: Omit<Route, 'id' | 'createdAt' | 'updatedAt' | 'creator' | 'creatorId' | 'likes' | 'views'>) =>
+    request<RouteDetailResponse>({
       url: '/routes',
       method: 'POST',
       data,
     }),
-  update: (id: number, data: unknown) =>
-    request<unknown>({
+  update: (id: number, data: Partial<Omit<Route, 'id' | 'createdAt' | 'updatedAt' | 'creator' | 'creatorId' | 'likes' | 'views'>>) =>
+    request<RouteDetailResponse>({
       url: `/routes/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/routes/${id}`,
       method: 'DELETE',
     }),
@@ -149,29 +162,29 @@ export const routeApi = {
 
 export const waypointApi = {
   list: (params?: { routeId?: number; tripId?: number; type?: string }) =>
-    request<unknown>({
+    request<WaypointListResponse>({
       url: '/waypoints',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
-    request<unknown>({
+    request<Waypoint>({
       url: `/waypoints/${id}`,
     }),
-  create: (data: unknown) =>
-    request<unknown>({
+  create: (data: Omit<Waypoint, 'id' | 'createdAt' | 'updatedAt'>) =>
+    request<Waypoint>({
       url: '/waypoints',
       method: 'POST',
       data,
     }),
-  update: (id: number, data: unknown) =>
-    request<unknown>({
+  update: (id: number, data: Partial<Waypoint>) =>
+    request<Waypoint>({
       url: `/waypoints/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/waypoints/${id}`,
       method: 'DELETE',
     }),
@@ -179,29 +192,29 @@ export const waypointApi = {
 
 export const tripApi = {
   list: (params?: { page?: number; pageSize?: number; status?: string }) =>
-    request<unknown>({
+    request<TripListResponse>({
       url: '/trips',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
-    request<unknown>({
+    request<TripDetailResponse>({
       url: `/trips/${id}`,
     }),
-  create: (data: unknown) =>
-    request<unknown>({
+  create: (data: Omit<Trip, 'id' | 'createdAt' | 'updatedAt' | 'user' | 'userId' | 'route'>) =>
+    request<TripDetailResponse>({
       url: '/trips',
       method: 'POST',
       data,
     }),
-  update: (id: number, data: unknown) =>
-    request<unknown>({
+  update: (id: number, data: Partial<Omit<Trip, 'id' | 'createdAt' | 'updatedAt' | 'user' | 'userId' | 'route'>>) =>
+    request<TripDetailResponse>({
       url: `/trips/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/trips/${id}`,
       method: 'DELETE',
     }),
@@ -209,34 +222,34 @@ export const tripApi = {
 
 export const diaryApi = {
   list: (params?: { page?: number; pageSize?: number; tripId?: number; userId?: number; tag?: string }) =>
-    request<unknown>({
+    request<DiaryListResponse>({
       url: '/diaries',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
-    request<unknown>({
+    request<Diary>({
       url: `/diaries/${id}`,
     }),
-  create: (data: unknown) =>
-    request<unknown>({
+  create: (data: Omit<Diary, 'id' | 'createdAt' | 'updatedAt' | 'user' | 'userId'>) =>
+    request<Diary>({
       url: '/diaries',
       method: 'POST',
       data,
     }),
-  update: (id: number, data: unknown) =>
-    request<unknown>({
+  update: (id: number, data: Partial<Omit<Diary, 'id' | 'createdAt' | 'updatedAt' | 'user' | 'userId'>>) =>
+    request<Diary>({
       url: `/diaries/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/diaries/${id}`,
       method: 'DELETE',
     }),
   like: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/diaries/${id}/like`,
       method: 'POST',
     }),
@@ -244,24 +257,24 @@ export const diaryApi = {
 
 export const postApi = {
   list: (params?: { page?: number; pageSize?: number }) =>
-    request<unknown>({
+    request<PostListResponse>({
       url: '/posts',
       method: 'GET',
       data: params,
     }),
-  create: (data: unknown) =>
-    request<unknown>({
+  create: (data: { content: string; images?: string[]; location?: { lat: number; lng: number } }) =>
+    request<Post>({
       url: '/posts',
       method: 'POST',
       data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/posts/${id}`,
       method: 'DELETE',
     }),
   like: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/posts/${id}/like`,
       method: 'POST',
     }),
@@ -269,28 +282,28 @@ export const postApi = {
 
 export const preparationApi = {
   list: () =>
-    request<unknown>({
+    request<PreparationListResponse>({
       url: '/preparations',
     }),
-  create: (data: unknown) =>
-    request<unknown>({
+  create: (data: Omit<Preparation, 'id' | 'createdAt' | 'updatedAt' | 'userId' | 'isPacked'>) =>
+    request<Preparation>({
       url: '/preparations',
       method: 'POST',
       data,
     }),
-  update: (id: number, data: unknown) =>
-    request<unknown>({
+  update: (id: number, data: Partial<Preparation>) =>
+    request<Preparation>({
       url: `/preparations/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/preparations/${id}`,
       method: 'DELETE',
     }),
   togglePacked: (id: number) =>
-    request<unknown>({
+    request<Preparation>({
       url: `/preparations/${id}/toggle`,
       method: 'POST',
     }),
@@ -298,7 +311,7 @@ export const preparationApi = {
 
 export const weatherApi = {
   getCurrent: (location: string) =>
-    request<unknown>({
+    request<WeatherResponse>({
       url: `/weather/current`,
       method: 'GET',
       data: { location },
@@ -307,29 +320,29 @@ export const weatherApi = {
 
 export const reviewApi = {
   create: (data: { routeId: number; rating: number; content?: string }) =>
-    request<unknown>({
+    request<Review>({
       url: '/reviews',
       method: 'POST',
       data,
     }),
   listByRoute: (routeId: number, params?: { page?: number; pageSize?: number }) =>
-    request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
+    request<ReviewListResponse>({
       url: `/reviews/route/${routeId}`,
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
-    request<unknown>({
+    request<Review>({
       url: `/reviews/${id}`,
     }),
   update: (id: number, data: { rating?: number; content?: string }) =>
-    request<unknown>({
+    request<Review>({
       url: `/reviews/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/reviews/${id}`,
       method: 'DELETE',
     }),
@@ -337,12 +350,12 @@ export const reviewApi = {
 
 export const mapApi = {
   list: () =>
-    request<unknown[]>({
+    request<OfflineMapListResponse>({
       url: '/maps',
       method: 'GET',
     }),
   getDetail: (id: number) =>
-    request<unknown>({
+    request<OfflineMap>({
       url: `/maps/${id}`,
     }),
   create: (data: {
@@ -356,13 +369,13 @@ export const mapApi = {
     maxZoom?: number;
     mapProvider?: string;
   }) =>
-    request<unknown>({
+    request<OfflineMap>({
       url: '/maps',
       method: 'POST',
       data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/maps/${id}`,
       method: 'DELETE',
     }),
@@ -381,49 +394,49 @@ export const mapApi = {
 // 危险路段 API
 export const dangerZoneApi = {
   list: (params?: { page?: number; pageSize?: number; type?: string; severity?: string }) =>
-    request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
+    request<DangerZoneListResponse>({
       url: '/danger-zones',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
-    request<unknown>({
+    request<DangerZone>({
       url: `/danger-zones/${id}`,
     }),
   getNearby: (lat: number, lng: number, radius?: number) =>
-    request<unknown[]>({
+    request<DangerZoneNearbyResponse>({
       url: '/danger-zones/nearby',
       method: 'GET',
       data: { lat, lng, radius },
     }),
   getStatistics: () =>
-    request<unknown>({
+    request<{ total: number; active: number; resolved: number; ignored: number }>({
       url: '/danger-zones/statistics',
     }),
-  create: (data: unknown) =>
-    request<unknown>({
+  create: (data: DangerZoneReport) =>
+    request<DangerZone>({
       url: '/danger-zones',
       method: 'POST',
       data,
     }),
-  update: (id: number, data: unknown) =>
-    request<unknown>({
+  update: (id: number, data: Partial<DangerZoneReport>) =>
+    request<DangerZone>({
       url: `/danger-zones/${id}`,
       method: 'PUT',
       data,
     }),
   resolve: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/danger-zones/${id}/resolve`,
       method: 'POST',
     }),
   ignore: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/danger-zones/${id}/ignore`,
       method: 'POST',
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/danger-zones/${id}`,
       method: 'DELETE',
     }),
@@ -432,35 +445,35 @@ export const dangerZoneApi = {
 // 禁停区域 API
 export const noParkingZoneApi = {
   list: (params?: { page?: number; pageSize?: number }) =>
-    request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
+    request<NoParkingZoneListResponse>({
       url: '/no-parking-zones',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
-    request<unknown>({
+    request<NoParkingZone>({
       url: `/no-parking-zones/${id}`,
     }),
   getNearby: (lat: number, lng: number, radius?: number) =>
-    request<unknown[]>({
+    request<NoParkingZoneNearbyResponse>({
       url: '/no-parking-zones/nearby',
       method: 'GET',
       data: { lat, lng, radius },
     }),
-  create: (data: import('@/types').NoParkingZoneReport) =>
-    request<unknown>({
+  create: (data: NoParkingZoneReport) =>
+    request<NoParkingZone>({
       url: '/no-parking-zones',
       method: 'POST',
-      data: data as unknown as Record<string, unknown>,
+      data,
     }),
-  update: (id: number, data: import('@/types').NoParkingZoneReport) =>
-    request<unknown>({
+  update: (id: number, data: Partial<NoParkingZoneReport>) =>
+    request<NoParkingZone>({
       url: `/no-parking-zones/${id}`,
       method: 'PUT',
-      data: data as unknown as Record<string, unknown>,
+      data,
     }),
   delete: (id: number) =>
-    request<unknown>({
+    request<SuccessResponse>({
       url: `/no-parking-zones/${id}`,
       method: 'DELETE',
     }),
@@ -469,13 +482,13 @@ export const noParkingZoneApi = {
 // 警告 API
 export const warningApi = {
   checkNightRiding: (lat: number, lng: number) =>
-    request<unknown>({
+    request<NightCheckResponse>({
       url: '/warnings/night-check',
       method: 'GET',
       data: { lat, lng },
     }),
   getWarnings: (lat: number, lng: number, radius?: number) =>
-    request<unknown>({
+    request<WarningResponse>({
       url: '/warnings',
       method: 'GET',
       data: { lat, lng, radius },
