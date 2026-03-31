@@ -146,6 +146,17 @@ describe('User Store', () => {
       expect(store.userMode).toEqual(mockUserMode);
       expect(result).toEqual(mockUserMode);
     });
+
+    it('should handle switch mode failure', async () => {
+      const store = useUserStore();
+      
+      const userModeApi = await import('@/services/api');
+      vi.spyOn(userModeApi, 'userModeApi', 'get').mockReturnValue({
+        switchMode: vi.fn().mockRejectedValue(new Error('Switch failed')),
+      });
+      
+      await expect(store.switchUserMode('passenger')).rejects.toThrow('Switch failed');
+    });
   });
 
   describe('computed properties', () => {
@@ -243,6 +254,42 @@ describe('User Store', () => {
       expect(diaryStore.hasMore).toBe(true);
       expect(diaryStore.page).toBe(1);
       expect(uni.removeStorageSync).toHaveBeenCalledWith('token');
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should handle empty token string', () => {
+      const store = useUserStore();
+      store.setToken('');
+      expect(store.isLoggedIn).toBe(false);
+    });
+
+    it('should handle setUserInfo with null', () => {
+      const store = useUserStore();
+      store.setUserInfo(null as any);
+      expect(store.userInfo).toBeNull();
+    });
+
+    it('should handle loadUserMode with null response', async () => {
+      const store = useUserStore();
+      
+      const userModeApi = await import('@/services/api');
+      vi.spyOn(userModeApi, 'userModeApi', 'get').mockReturnValue({
+        get: vi.fn().mockResolvedValue(null),
+      });
+      
+      const result = await store.loadUserMode();
+      
+      expect(result).toBeNull();
+      expect(store.userMode).toBeNull();
+    });
+
+    it('should handle computed properties when userMode is null', () => {
+      const store = useUserStore();
+      expect(store.currentMode).toBeNull();
+      expect(store.isNewbie).toBe(false);
+      expect(store.isExperienced).toBe(false);
+      expect(store.isPassenger).toBe(false);
     });
   });
 });

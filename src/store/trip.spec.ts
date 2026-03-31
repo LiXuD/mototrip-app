@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
 import { useTripStore } from './trip';
 import { generateMockTrip, createUniMock } from '../test/utils/test-helpers';
-import type { PaginatedResponse } from '../types';
+import type { Trip, PaginatedResponse } from '../types';
 
 // Mock uni API
 vi.stubGlobal('uni', createUniMock());
@@ -48,7 +48,11 @@ describe('Trip Store', () => {
       const tripApi = await import('@/services/api');
       vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
         list: vi.fn().mockResolvedValue(mockResponse),
-      });
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
 
       await store.fetchTrips();
 
@@ -65,7 +69,7 @@ describe('Trip Store', () => {
       store.currentQuery = { status: 'completed' };
 
       const newTrips = [generateMockTrip({ id: 2 })];
-      const mockResponse: PaginatedResponse<ReturnType<typeof generateMockTrip>> = {
+      const mockResponse: PaginatedResponse<Trip> = {
         list: newTrips,
         total: 3,
         page: 2,
@@ -76,7 +80,11 @@ describe('Trip Store', () => {
       const tripApi = await import('@/services/api');
       vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
         list: vi.fn().mockResolvedValue(mockResponse),
-      });
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
 
       await store.fetchTrips();
 
@@ -87,7 +95,7 @@ describe('Trip Store', () => {
     });
 
     it('should set loading state correctly', async () => {
-      const mockResponse: PaginatedResponse<ReturnType<typeof generateMockTrip>> = {
+      const mockResponse: PaginatedResponse<Trip> = {
         list: [],
         total: 0,
         page: 1,
@@ -98,7 +106,11 @@ describe('Trip Store', () => {
       const tripApi = await import('@/services/api');
       vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
         list: vi.fn().mockResolvedValue(mockResponse),
-      });
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
 
       const fetchPromise = store.fetchTrips();
       
@@ -110,7 +122,7 @@ describe('Trip Store', () => {
     });
 
     it('should pass params to API and persist query on first page', async () => {
-      const mockResponse: PaginatedResponse<ReturnType<typeof generateMockTrip>> = {
+      const mockResponse: PaginatedResponse<Trip> = {
         list: [],
         total: 0,
         page: 1,
@@ -122,7 +134,11 @@ describe('Trip Store', () => {
       const listSpy = vi.fn().mockResolvedValue(mockResponse);
       vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
         list: listSpy,
-      });
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
 
       await store.fetchTrips({ status: 'completed' });
 
@@ -133,6 +149,32 @@ describe('Trip Store', () => {
       });
       expect(store.currentQuery).toEqual({ status: 'completed' });
     });
+
+    it('should handle API call failure', async () => {
+      const tripApi = await import('@/services/api');
+      vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
+        list: vi.fn().mockRejectedValue(new Error('API Error')),
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
+
+      await expect(store.fetchTrips()).rejects.toThrow('API Error');
+    });
+
+    it('should handle network timeout', async () => {
+      const tripApi = await import('@/services/api');
+      vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
+        list: vi.fn().mockRejectedValue(new Error('Request timeout')),
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
+
+      await expect(store.fetchTrips()).rejects.toThrow('Request timeout');
+    });
   });
 
   describe('fetchTripDetail', () => {
@@ -141,8 +183,12 @@ describe('Trip Store', () => {
 
       const tripApi = await import('@/services/api');
       vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
+        list: vi.fn(),
         getDetail: vi.fn().mockResolvedValue(mockTrip),
-      });
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
 
       await store.fetchTripDetail(123);
 
@@ -155,8 +201,12 @@ describe('Trip Store', () => {
 
       const tripApi = await import('@/services/api');
       vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
+        list: vi.fn(),
         getDetail: vi.fn().mockResolvedValue(mockTrip),
-      });
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
 
       const fetchPromise = store.fetchTripDetail(123);
       
@@ -165,6 +215,19 @@ describe('Trip Store', () => {
       await fetchPromise;
       
       expect(store.loading).toBe(false);
+    });
+
+    it('should handle API call failure', async () => {
+      const tripApi = await import('@/services/api');
+      vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
+        list: vi.fn(),
+        getDetail: vi.fn().mockRejectedValue(new Error('API Error')),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
+
+      await expect(store.fetchTripDetail(123)).rejects.toThrow('API Error');
     });
   });
 
@@ -191,7 +254,7 @@ describe('Trip Store', () => {
       store.page = 1;
       store.currentQuery = { status: 'completed' };
 
-      const mockResponse: PaginatedResponse<ReturnType<typeof generateMockTrip>> = {
+      const mockResponse: PaginatedResponse<Trip> = {
         list: [generateMockTrip({ id: 2 })],
         total: 5,
         page: 2,
@@ -203,9 +266,14 @@ describe('Trip Store', () => {
       const listSpy = vi.fn().mockResolvedValue(mockResponse);
       vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
         list: listSpy,
-      });
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
 
       await store.loadMore();
+      await store.fetchTrips();
 
       expect(store.page).toBe(2);
       expect(listSpy).toHaveBeenCalledWith({
@@ -233,6 +301,103 @@ describe('Trip Store', () => {
       await store.loadMore();
 
       expect(store.page).toBe(1);
+    });
+  });
+
+  describe('resetStore', () => {
+    it('should reset all store state', () => {
+      store.trips = [generateMockTrip({ id: 1 }), generateMockTrip({ id: 2 })];
+      store.currentTrip = generateMockTrip({ id: 1 });
+      store.page = 5;
+      store.hasMore = false;
+      store.total = 100;
+      store.currentQuery = { status: 'completed' };
+
+      store.resetStore();
+
+      expect(store.trips).toEqual([]);
+      expect(store.currentTrip).toBeNull();
+      expect(store.page).toBe(1);
+      expect(store.hasMore).toBe(true);
+      expect(store.total).toBe(0);
+      expect(store.currentQuery).toEqual({ status: undefined });
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should handle empty data response', async () => {
+      const mockResponse: PaginatedResponse<Trip> = {
+        list: [],
+        total: 0,
+        page: 1,
+        pageSize: 10,
+        hasMore: false,
+      };
+
+      const tripApi = await import('@/services/api');
+      vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue(mockResponse),
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
+
+      await store.fetchTrips();
+
+      expect(store.trips).toEqual([]);
+      expect(store.total).toBe(0);
+      expect(store.hasMore).toBe(false);
+    });
+
+    it('should handle pagination at last page', async () => {
+      const mockTrips = Array.from({ length: 10 }, (_, i) => generateMockTrip({ id: i + 1 }));
+      const mockResponse: PaginatedResponse<Trip> = {
+        list: mockTrips,
+        total: 10,
+        page: 1,
+        pageSize: 10,
+        hasMore: false,
+      };
+
+      const tripApi = await import('@/services/api');
+      vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue(mockResponse),
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
+
+      await store.fetchTrips();
+
+      expect(store.hasMore).toBe(false);
+      expect(store.page).toBe(1);
+    });
+
+    it('should handle single item response', async () => {
+      const mockTrips = [generateMockTrip({ id: 1 })];
+      const mockResponse: PaginatedResponse<Trip> = {
+        list: mockTrips,
+        total: 1,
+        page: 1,
+        pageSize: 10,
+        hasMore: false,
+      };
+
+      const tripApi = await import('@/services/api');
+      vi.spyOn(tripApi, 'tripApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue(mockResponse),
+        getDetail: vi.fn(),
+        create: vi.fn(),
+        update: vi.fn(),
+        delete: vi.fn(),
+      } as unknown as typeof tripApi.tripApi);
+
+      await store.fetchTrips();
+
+      expect(store.trips).toHaveLength(1);
+      expect(store.total).toBe(1);
     });
   });
 });

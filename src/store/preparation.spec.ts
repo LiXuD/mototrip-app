@@ -84,6 +84,24 @@ describe('Preparation Store', () => {
       expect(store.packedCount).toBe(2);
       expect(store.progress).toBe(50);
     });
+
+    it('should handle API call failure', async () => {
+      const preparationApiModule = await import('@/services/api');
+      vi.spyOn(preparationApiModule, 'preparationApi', 'get').mockReturnValue({
+        list: vi.fn().mockRejectedValue(new Error('API Error')),
+      });
+
+      await expect(store.fetchPreparations()).rejects.toThrow('API Error');
+    });
+
+    it('should handle network timeout', async () => {
+      const preparationApiModule = await import('@/services/api');
+      vi.spyOn(preparationApiModule, 'preparationApi', 'get').mockReturnValue({
+        list: vi.fn().mockRejectedValue(new Error('Request timeout')),
+      });
+
+      await expect(store.fetchPreparations()).rejects.toThrow('Request timeout');
+    });
   });
 
   describe('togglePacked', () => {
@@ -269,6 +287,57 @@ describe('Preparation Store', () => {
       ];
 
       expect(store.progress).toBe(33); // 1/3 = 33.33... -> 33
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should handle empty data response', async () => {
+      const preparationApiModule = await import('@/services/api');
+      vi.spyOn(preparationApiModule, 'preparationApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue([]),
+      } as any);
+
+      await store.fetchPreparations();
+
+      expect(store.items).toEqual([]);
+      expect(store.totalCount).toBe(0);
+      expect(store.packedCount).toBe(0);
+      expect(store.progress).toBe(0);
+    });
+
+    it('should handle single item', async () => {
+      const mockPreparation = generateMockPreparation({ id: 1, isPacked: false });
+
+      const preparationApiModule = await import('@/services/api');
+      vi.spyOn(preparationApiModule, 'preparationApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue([mockPreparation]),
+      } as any);
+
+      await store.fetchPreparations();
+
+      expect(store.items).toHaveLength(1);
+      expect(store.totalCount).toBe(1);
+      expect(store.packedCount).toBe(0);
+      expect(store.progress).toBe(0);
+    });
+
+    it('should handle all items already packed', async () => {
+      const mockPreparations = [
+        generateMockPreparation({ id: 1, isPacked: true }),
+        generateMockPreparation({ id: 2, isPacked: true }),
+        generateMockPreparation({ id: 3, isPacked: true }),
+      ];
+
+      const preparationApiModule = await import('@/services/api');
+      vi.spyOn(preparationApiModule, 'preparationApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue(mockPreparations),
+      } as any);
+
+      await store.fetchPreparations();
+
+      expect(store.packedCount).toBe(3);
+      expect(store.totalCount).toBe(3);
+      expect(store.progress).toBe(100);
     });
   });
 });

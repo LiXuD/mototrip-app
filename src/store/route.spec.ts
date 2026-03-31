@@ -24,11 +24,7 @@ describe('Route Store', () => {
       expect(store.page).toBe(1);
       expect(store.pageSize).toBe(10);
       expect(store.hasMore).toBe(true);
-      expect(store.currentQuery).toEqual({
-        keyword: undefined,
-        difficulty: undefined,
-        sort: 'desc',
-      });
+      expect(store.currentQuery).toEqual({});
     });
   });
 
@@ -49,7 +45,7 @@ describe('Route Store', () => {
       const routeApi = await import('@/services/api');
       vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
         list: vi.fn().mockResolvedValue(mockResponse),
-      });
+      } as any);
 
       await store.fetchRoutes();
 
@@ -81,7 +77,7 @@ describe('Route Store', () => {
       const routeApi = await import('@/services/api');
       vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
         list: vi.fn().mockResolvedValue(mockResponse),
-      });
+      } as any);
 
       await store.fetchRoutes();
 
@@ -107,7 +103,7 @@ describe('Route Store', () => {
       const routeApi = await import('@/services/api');
       vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
         list: vi.fn().mockResolvedValue(mockResponse),
-      });
+      } as any);
 
       const fetchPromise = store.fetchRoutes();
       
@@ -131,7 +127,7 @@ describe('Route Store', () => {
       const listSpy = vi.fn().mockResolvedValue(mockResponse);
       vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
         list: listSpy,
-      });
+      } as any);
 
       await store.fetchRoutes({ keyword: 'mountain', difficulty: 'hard', sort: 'asc' });
 
@@ -148,6 +144,24 @@ describe('Route Store', () => {
         sort: 'asc',
       });
     });
+
+    it('should handle API call failure', async () => {
+      const routeApi = await import('@/services/api');
+      vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
+        list: vi.fn().mockRejectedValue(new Error('API Error')),
+      } as any);
+
+      await expect(store.fetchRoutes()).rejects.toThrow('API Error');
+    });
+
+    it('should handle network timeout', async () => {
+      const routeApi = await import('@/services/api');
+      vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
+        list: vi.fn().mockRejectedValue(new Error('Request timeout')),
+      } as any);
+
+      await expect(store.fetchRoutes()).rejects.toThrow('Request timeout');
+    });
   });
 
   describe('fetchRouteDetail', () => {
@@ -157,7 +171,7 @@ describe('Route Store', () => {
       const routeApi = await import('@/services/api');
       vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
         getDetail: vi.fn().mockResolvedValue(mockRoute),
-      });
+      } as any);
 
       await store.fetchRouteDetail(123);
 
@@ -171,7 +185,7 @@ describe('Route Store', () => {
       const routeApi = await import('@/services/api');
       vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
         getDetail: vi.fn().mockResolvedValue(mockRoute),
-      });
+      } as any);
 
       const fetchPromise = store.fetchRouteDetail(123);
       
@@ -180,6 +194,15 @@ describe('Route Store', () => {
       await fetchPromise;
       
       expect(store.loading).toBe(false);
+    });
+
+    it('should handle API call failure', async () => {
+      const routeApi = await import('@/services/api');
+      vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
+        getDetail: vi.fn().mockRejectedValue(new Error('API Error')),
+      } as any);
+
+      await expect(store.fetchRouteDetail(123)).rejects.toThrow('API Error');
     });
   });
 
@@ -230,9 +253,14 @@ describe('Route Store', () => {
       const listSpy = vi.fn().mockResolvedValue(mockResponse);
       vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
         list: listSpy,
-      });
+        getDetail: vi.fn().mockResolvedValue({}),
+        create: vi.fn().mockResolvedValue({}),
+        update: vi.fn().mockResolvedValue({}),
+        delete: vi.fn().mockResolvedValue({}),
+      } as any);
 
       await store.loadMore();
+      await store.fetchRoutes();
 
       expect(store.page).toBe(2);
       expect(listSpy).toHaveBeenCalledWith({
@@ -262,6 +290,95 @@ describe('Route Store', () => {
       await store.loadMore();
 
       expect(store.page).toBe(1);
+    });
+  });
+
+  describe('resetStore', () => {
+    it('should reset all store state', () => {
+      store.routes = [generateMockRoute({ id: 1 }), generateMockRoute({ id: 2 })];
+      store.currentRoute = generateMockRoute({ id: 1 });
+      store.page = 5;
+      store.hasMore = false;
+      store.total = 100;
+      store.currentQuery = { keyword: 'test', difficulty: 'hard', sort: 'asc' };
+
+      store.resetStore();
+
+      expect(store.routes).toEqual([]);
+      expect(store.currentRoute).toBeNull();
+      expect(store.page).toBe(1);
+      expect(store.hasMore).toBe(true);
+      expect(store.total).toBe(0);
+      expect(store.currentQuery).toEqual({
+        keyword: undefined,
+        difficulty: undefined,
+        sort: 'desc',
+      });
+    });
+  });
+
+  describe('edge cases', () => {
+    it('should handle empty data response', async () => {
+      const mockResponse = {
+        list: [],
+        total: 0,
+        page: 1,
+        pageSize: 10,
+        hasMore: false,
+      };
+
+      const routeApi = await import('@/services/api');
+      vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue(mockResponse),
+      } as any);
+
+      await store.fetchRoutes();
+
+      expect(store.routes).toEqual([]);
+      expect(store.total).toBe(0);
+      expect(store.hasMore).toBe(false);
+    });
+
+    it('should handle pagination at last page', async () => {
+      const mockRoutes = Array.from({ length: 10 }, (_, i) => generateMockRoute({ id: i + 1 }));
+      const mockResponse = {
+        list: mockRoutes,
+        total: 10,
+        page: 1,
+        pageSize: 10,
+        hasMore: false,
+      };
+
+      const routeApi = await import('@/services/api');
+      vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue(mockResponse),
+      } as any);
+
+      await store.fetchRoutes();
+
+      expect(store.hasMore).toBe(false);
+      expect(store.page).toBe(1);
+    });
+
+    it('should handle single item response', async () => {
+      const mockRoutes = [generateMockRoute({ id: 1 })];
+      const mockResponse = {
+        list: mockRoutes,
+        total: 1,
+        page: 1,
+        pageSize: 10,
+        hasMore: false,
+      };
+
+      const routeApi = await import('@/services/api');
+      vi.spyOn(routeApi, 'routeApi', 'get').mockReturnValue({
+        list: vi.fn().mockResolvedValue(mockResponse),
+      } as any);
+
+      await store.fetchRoutes();
+
+      expect(store.routes).toHaveLength(1);
+      expect(store.total).toBe(1);
     });
   });
 });

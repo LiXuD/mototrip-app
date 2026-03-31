@@ -77,18 +77,17 @@ export const generateMockUser = (overrides = {}) => ({
  */
 export const generateMockTrip = (overrides = {}) => ({
   id: generateRandomNumber(),
-  userId: generateRandomNumber(),
-  title: `Trip ${generateRandomString(10)}`,
+  name: `Trip ${generateRandomString(10)}`,
   description: 'Test trip description',
   coverImage: `https://example.com/trip/${generateRandomNumber(1, 50)}.jpg`,
-  status: 'planning',
-  startDate: generateRandomDate(),
-  endDate: generateRandomDate(),
-  distance: generateRandomNumber(100, 5000),
-  estimatedDays: generateRandomNumber(3, 30),
-  routePoints: [],
+  startDate: generateRandomDate().toISOString(),
+  endDate: generateRandomDate().toISOString(),
+  status: 'planning' as const,
   waypoints: [],
-  createdAt: generateRandomDate(),
+  totalDistance: generateRandomNumber(100, 5000),
+  userId: generateRandomNumber(),
+  createdAt: generateRandomDate().toISOString(),
+  updatedAt: generateRandomDate().toISOString(),
   ...overrides,
 });
 
@@ -118,20 +117,26 @@ export const generateMockWaypoint = (overrides = {}) => {
  */
 export const generateMockDiary = (overrides = {}) => {
   const coord = generateRandomCoordinate();
+  const moods: Array<'happy' | 'excited' | 'calm' | 'tired' | 'neutral'> = ['happy', 'excited', 'calm', 'tired', 'neutral'];
+  const tags: string[] = ['风景', '美食', '维修', '安全', '技巧'];
   return {
     id: generateRandomNumber(),
     userId: generateRandomNumber(),
     tripId: generateRandomNumber(),
     title: `Diary ${generateRandomString(10)}`,
     content: 'Test diary content',
-    location: `Location ${generateRandomString(6)}`,
-    latitude: coord.latitude,
-    longitude: coord.longitude,
-    mood: randomPick(['happy', 'excited', 'tired', 'peaceful', 'adventurous']),
-    likesCount: generateRandomNumber(0, 100),
-    commentsCount: generateRandomNumber(0, 50),
+    location: { lat: coord.latitude, lng: coord.longitude },
+    locationName: `Location ${generateRandomString(6)}`,
+    weather: randomPick(['sunny', 'cloudy', 'rainy', 'windy']),
+    temperature: generateRandomNumber(-10, 40),
+    mood: randomPick(moods),
+    likes: generateRandomNumber(0, 100),
+    comments: generateRandomNumber(0, 50),
+    isLiked: generateRandomBoolean(),
+    tag: randomPick(tags),
     images: [],
-    createdAt: generateRandomDate(),
+    createdAt: generateRandomDate().toISOString(),
+    updatedAt: generateRandomDate().toISOString(),
     ...overrides,
   };
 };
