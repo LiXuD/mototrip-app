@@ -185,7 +185,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 2. 提取 usePaginatedList mixin
+- [x] 2. 提取 usePaginatedList mixin
 
   **What to do**:
   - 创建 `src/store/usePaginatedList.ts`
@@ -253,7 +253,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 3. 统一 API URL 配置
+- [x] 3. 统一 API URL 配置
 
   **What to do**:
   - 修改 `src/utils/env.ts` 添加完整的环境配置
@@ -306,7 +306,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ### Wave 2: Core Fixes (After Wave 1)
 
-- [ ] 4. 修复 diary.ts 点赞逻辑 Bug
+- [x] 4. 修复 diary.ts 点赞逻辑 Bug
 
   **What to do**:
   - 修改 `src/store/diary.ts` 的 `likeDiary` 方法
@@ -356,7 +356,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 5. 重构 route.ts 使用 mixin
+- [x] 5. 重构 route.ts 使用 mixin
 
   **What to do**:
   - 修改 `src/store/route.ts` 使用 `usePaginatedList`
@@ -404,7 +404,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 6. 重构 trip.ts 使用 mixin
+- [x] 6. 重构 trip.ts 使用 mixin
 
   **What to do**:
   - 修改 `src/store/trip.ts` 使用 `usePaginatedList`
@@ -452,7 +452,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 7. 重构 diary.ts 使用 mixin
+- [x] 7. 重构 diary.ts 使用 mixin
 
   **What to do**:
   - 修改 `src/store/diary.ts` 使用 `usePaginatedList`
@@ -502,7 +502,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 8. 定义 API 类型声明
+- [x] 8. 定义 API 类型声明
 
   **What to do**:
   - 创建 `src/types/api.ts` 为 API 响应定义类型
@@ -549,7 +549,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ### Wave 3: Type Safety (After Wave 2)
 
-- [ ] 9. 修复 routeApi 类型
+- [x] 9. 修复 routeApi 类型
 
   **What to do**:
   - 修改 `src/services/api.ts` 中的 `routeApi`
@@ -597,7 +597,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 10. 修复 tripApi 类型
+- [x] 10. 修复 tripApi 类型
 
   **What to do**:
   - 修改 `src/services/api.ts` 中的 `tripApi`
@@ -638,7 +638,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 11. 修复 diaryApi 类型
+- [x] 11. 修复 diaryApi 类型
 
   **What to do**:
   - 修改 `src/services/api.ts` 中的 `diaryApi`
@@ -679,7 +679,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 12. 修复其他 API 类型
+- [x] 12. 修复其他 API 类型
 
   **What to do**:
   - 修改 `src/services/api.ts` 中其他 API 模块
@@ -725,7 +725,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 13. 移除 as any
+- [x] 13. 移除 as any
 
   **What to do**:
   - 搜索所有 `as any` 并替换为正确类型
@@ -776,7 +776,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ### Wave 4: Cleanup (After Wave 3)
 
-- [ ] 14. 移除 console.log 残留
+- [x] 14. 移除 console.log 残留
 
   **What to do**:
   - 移除 `src/App.vue` 中的 3 个 `console.log`
@@ -819,7 +819,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 15. 抽取魔法值为常量
+- [x] 15. 抽取魔法值为常量
 
   **What to do**:
   - 修改 `src/constants/index.ts` 添加常量定义
@@ -872,7 +872,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 16. 补充测试（错误处理）
+- [x] 16. 补充测试（错误处理）
 
   **What to do**:
   - 修改 `src/store/*.spec.ts` 添加错误处理测试
@@ -917,7 +917,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 17. 补充测试（边界条件）
+- [x] 17. 补充测试（边界条件）
 
   **What to do**:
   - 修改 `src/store/*.spec.ts` 添加边界条件测试
@@ -964,7 +964,7 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ---
 
-- [ ] 18. 最终验证
+- [x] 18. 最终验证
 
   **What to do**:
   - 运行完整的验证套件
@@ -1008,17 +1008,17 @@ T1 → T2 → T4 → T5/T6/T7 → T8 → T9/T10/T11/T12 → T13 → T14 → T15 
 
 ## Final Verification Wave (MANDATORY)
 
-- [ ] F1. **TypeScript 编译验证**
+- [x] F1. **TypeScript 编译验证**
   - 执行 `tsc --noEmit`
   - 确认零错误
   - Output: `VERDICT: PASS/FAIL`
 
-- [ ] F2. **测试套件验证**
+- [x] F2. **测试套件验证**
   - 执行 `npm test`
   - 确认所有测试通过
   - Output: `Tests [N pass/N fail] | VERDICT: PASS/FAIL`
 
-- [ ] F3. **代码规范验证**
+- [x] F3. **代码规范验证**
   - `grep -r "console.log" src/ --include="*.ts" --include="*.vue"` 返回 0 结果 (业务代码)
   - `grep -r "as any" src/ --include="*.ts" --include="*.vue" | grep -v "\.spec\.ts"` 返回 0 结果 (排除测试文件)
   - Output: `console.log [0 results] | as any [0 results] | VERDICT: PASS/FAIL`
