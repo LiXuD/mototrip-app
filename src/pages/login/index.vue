@@ -58,14 +58,80 @@ async function handleSubmit() {
 </script>
 
 <style lang="scss" scoped>
-.login-page { min-height: 100vh; background: linear-gradient(180deg, #fff3ec, #f2f2f7 35%); padding: 40rpx 24rpx; }
-.hero { padding: 120rpx 16rpx 40rpx; }
-.hero-title { display: block; font-size: 52rpx; font-weight: 700; color: #1a1a2e; margin-bottom: 16rpx; }
-.hero-subtitle { display: block; font-size: 28rpx; color: #666; line-height: 1.7; }
-.form-card { background: #fff; border-radius: 28rpx; padding: 32rpx; box-shadow: 0 12rpx 32rpx rgba(0,0,0,0.06); }
-.field { margin-bottom: 24rpx; }
-.field-label { display: block; font-size: 26rpx; color: #8e8e93; margin-bottom: 12rpx; }
-.field-input { width: 100%; height: 88rpx; background: #f7f8fa; border-radius: 20rpx; padding: 0 24rpx; font-size: 28rpx; box-sizing: border-box; }
-.submit-btn { margin-top: 12rpx; background: #ff6b35; color: #fff; border-radius: 20rpx; font-size: 30rpx; }
-.hint { display: block; margin-top: 20rpx; color: #8e8e93; font-size: 24rpx; text-align: center; }
+.login-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0A0A1A 0%, #1A1020 35%);
+  padding: 40rpx 24rpx;
+}
+.hero {
+  padding: 120rpx 16rpx 40rpx;
+}
+.hero-title {
+  display: block;
+  font-size: 52rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 16rpx;
+  letter-spacing: 2rpx;
+}
+.hero-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #8888AA;
+  line-height: 1.7;
+}
+.form-card {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 28rpx;
+  padding: 32rpx;
+  box-shadow: 0 12rpx 32rpx rgba(0, 0, 0, 0.3);
+}
+.field {
+  margin-bottom: 24rpx;
+}
+.field-label {
+  display: block;
+  font-size: 26rpx;
+  color: #8888AA;
+  margin-bottom: 12rpx;
+}
+.field-input {
+  width: 100%;
+  height: 88rpx;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
+  border-radius: 20rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #555577;
+  }
+}
+.submit-btn {
+  margin-top: 12rpx;
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
+  color: #FFFFFF;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  letter-spacing: 1rpx;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+.hint {
+  display: block;
+  margin-top: 20rpx;
+  color: #555577;
+  font-size: 24rpx;
+  text-align: center;
+}
 </style>

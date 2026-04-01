@@ -59,12 +59,64 @@ async function save() {
 </script>
 
 <style lang="scss" scoped>
-.edit-page { min-height: 100vh; background: #f2f2f7; }
-.card { margin: 24rpx; background: #fff; border-radius: 24rpx; padding: 28rpx; }
-.title { display: block; font-size: 40rpx; font-weight: 700; color: #1a1a2e; margin-bottom: 24rpx; }
-.field { margin-bottom: 24rpx; }
-.label { display: block; font-size: 26rpx; color: #666; margin-bottom: 10rpx; }
-.input,.textarea { width: 100%; box-sizing: border-box; background: #f7f8fa; border-radius: 18rpx; padding: 22rpx 20rpx; font-size: 28rpx; }
-.textarea { min-height: 220rpx; }
-.submit-btn { background: #ff6b35; color: #fff; border-radius: 20rpx; font-size: 30rpx; }
+.edit-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+}
+.card {
+  margin: 24rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
+  padding: 28rpx;
+}
+.title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 2rpx;
+  margin-bottom: 24rpx;
+}
+.field {
+  margin-bottom: 24rpx;
+}
+.label {
+  display: block;
+  font-size: 26rpx;
+  color: #8888AA;
+  margin-bottom: 10rpx;
+}
+.input, .textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
+  border-radius: 18rpx;
+  padding: 22rpx 20rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #555577;
+  }
+}
+.textarea {
+  min-height: 220rpx;
+}
+.submit-btn {
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
+  color: #FFFFFF;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  letter-spacing: 1rpx;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
 </style>

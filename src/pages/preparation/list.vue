@@ -119,14 +119,17 @@ function showAddModal() {
 <style lang="scss" scoped>
 .preparation-list-page {
   min-height: 100vh;
-  background: #F2F2F7;
+  background: #0A0A1A;
 }
 
 /* 进度条区域 */
 .progress-section {
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   padding: 32rpx;
-  margin-bottom: 24rpx;
+  margin: 24rpx;
+  border-radius: 24rpx;
 }
 
 .progress-header {
@@ -149,7 +152,8 @@ function showAddModal() {
 .progress-title {
   font-size: 32rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
 }
 
 .progress-status {
@@ -165,22 +169,23 @@ function showAddModal() {
 
 .progress-percent {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
   margin-left: 8rpx;
 }
 
 .progress-bar {
   height: 20rpx;
-  background: #F2F2F7;
+  background: rgba(42, 42, 74, 0.6);
   border-radius: 10rpx;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #FF6B35, #FF8A5C);
+  background: linear-gradient(90deg, #FF6B35, #FFD600);
   border-radius: 10rpx;
   transition: width 0.3s ease;
+  box-shadow: 0 0 12rpx rgba(255, 107, 53, 0.4);
 }
 
 /* 清单列表 */
@@ -190,11 +195,12 @@ function showAddModal() {
 }
 
 .category {
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 24rpx;
   margin-bottom: 20rpx;
   overflow: hidden;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
 }
 
 .category-header {
@@ -202,7 +208,7 @@ function showAddModal() {
   justify-content: space-between;
   align-items: center;
   padding: 24rpx;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
 }
 
 .category-title-wrapper {
@@ -219,6 +225,7 @@ function showAddModal() {
   font-size: 28rpx;
   font-weight: 700;
   color: #FFFFFF;
+  letter-spacing: 1rpx;
 }
 
 .category-progress {
@@ -235,20 +242,20 @@ function showAddModal() {
   display: flex;
   align-items: center;
   padding: 24rpx;
-  border-bottom: 1rpx solid #F2F2F7;
-  transition: background 0.2s;
-  
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.4);
+  transition: all 0.3s ease;
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &:active {
-    background: #F8F8F8;
+    background: rgba(42, 42, 74, 0.3);
   }
-  
+
   &.packed {
     .item-name {
-      color: #8E8E93;
+      color: #3A3A5A;
       text-decoration: line-through;
     }
   }
@@ -257,20 +264,21 @@ function showAddModal() {
 .checkbox {
   width: 48rpx;
   height: 48rpx;
-  border: 3rpx solid #E5E5EA;
+  border: 3rpx solid rgba(42, 42, 74, 0.8);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 20rpx;
-  transition: all 0.2s;
-  
+  transition: all 0.3s ease;
+
   &.checked {
-    background: linear-gradient(135deg, #FF6B35, #FF8A5C);
-    border-color: #FF6B35;
+    background: linear-gradient(135deg, #FF6B35, #FF2D78);
+    border-color: transparent;
     color: #FFFFFF;
     font-size: 28rpx;
     font-weight: 700;
+    box-shadow: 0 0 12rpx rgba(255, 107, 53, 0.4);
   }
 }
 
@@ -280,14 +288,14 @@ function showAddModal() {
 
 .item-name {
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
-  transition: color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .item-desc {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
   display: block;
   margin-top: 6rpx;
 }
@@ -295,10 +303,11 @@ function showAddModal() {
 .essential-tag {
   font-size: 22rpx;
   padding: 6rpx 16rpx;
-  background: rgba(255, 59, 48, 0.12);
-  color: #FF3B30;
+  background: rgba(255, 45, 120, 0.15);
+  color: #FF2D78;
   border-radius: 16rpx;
   font-weight: 600;
+  border: 1rpx solid rgba(255, 45, 120, 0.3);
 }
 
 /* 空状态 */
@@ -318,13 +327,13 @@ function showAddModal() {
 .empty-text {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #FFFFFF;
   margin-bottom: 12rpx;
 }
 
 .empty-hint {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 /* 悬浮按钮 */
@@ -334,16 +343,22 @@ function showAddModal() {
   bottom: 60rpx;
   width: 112rpx;
   height: 112rpx;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
-  
+  animation: fabPulse 2s infinite;
+
   &:active {
-    transform: scale(0.95);
+    transform: scale(0.96);
   }
+}
+
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4); }
+  50% { box-shadow: 0 8rpx 40rpx rgba(255, 107, 53, 0.7); }
 }
 
 .fab-icon {

@@ -81,11 +81,13 @@ defineExpose({
 .night-warning {
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: linear-gradient(135deg, #0A0A1A 0%, #1A1020 100%);
   border-radius: 16rpx;
   padding: 24rpx;
   margin: 20rpx;
-  border: 1px solid rgba(255, 193, 7, 0.3);
+  border: 1rpx solid rgba(255, 214, 0, 0.4);
+  box-shadow: 0 0 16rpx rgba(255, 214, 0, 0.15);
+  transition: all 0.3s ease;
 }
 
 .warning-icon {
@@ -101,28 +103,34 @@ defineExpose({
   display: block;
   font-size: 28rpx;
   font-weight: bold;
-  color: #ffc107;
+  color: #FFD600;
   margin-bottom: 8rpx;
+  letter-spacing: 1rpx;
 }
 
 .warning-message {
   display: block;
   font-size: 24rpx;
-  color: #e0e0e0;
+  color: #C0C0D0;
   line-height: 1.4;
 }
 
 .warning-time {
   display: block;
   font-size: 22rpx;
-  color: #9e9e9e;
+  color: #8888AA;
   margin-top: 8rpx;
 }
 
 .close-btn {
   font-size: 40rpx;
-  color: #666;
+  color: #8888AA;
   padding: 10rpx;
   line-height: 1;
+  transition: all 0.3s ease;
+
+  &:active {
+    color: #FFFFFF;
+  }
 }
 </style>

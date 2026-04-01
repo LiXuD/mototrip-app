@@ -61,23 +61,124 @@ function formatTime(dateStr: string) { const date = new Date(dateStr); return `$
 </script>
 
 <style lang="scss" scoped>
-.poster-page { min-height: 100vh; background: #f5f5f5; }
-.poster-preview { position: relative; height: 600rpx; overflow: hidden; }
-.poster-bg { width: 100%; height: 100%; }
-.poster-content { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); padding: 40rpx; color: #fff; }
-.poster-title { font-size: 36rpx; font-weight: bold; display: block; }
-.poster-summary { font-size: 26rpx; display: block; margin-top: 10rpx; opacity: 0.9; }
-.poster-stats { display: flex; justify-content: space-around; margin-top: 30rpx; }
-.stat { text-align: center; }
-.stat-num { font-size: 40rpx; font-weight: bold; display: block; }
-.stat-label { font-size: 24rpx; opacity: 0.8; }
-.poster-footer { text-align: center; margin-top: 30rpx; font-size: 24rpx; opacity: 0.7; }
-.actions { display: flex; padding: 30rpx; gap: 20rpx; background: #fff; }
-.btn { flex: 1; padding: 20rpx; border-radius: 8rpx; background: #f5f5f5; text-align: center; }
-.btn.primary { background: #007AFF; color: #fff; }
-.history-section { background: #fff; padding: 30rpx; margin-top: 20rpx; }
-.section-title { font-size: 30rpx; font-weight: bold; display: block; margin-bottom: 20rpx; }
-.share-item { display: flex; justify-content: space-between; padding: 20rpx; border-bottom: 1rpx solid #eee; }
-.share-title { font-size: 28rpx; }
-.share-time { font-size: 24rpx; color: #999; }
+.poster-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+}
+.poster-preview {
+  position: relative;
+  height: 600rpx;
+  overflow: hidden;
+}
+.poster-bg {
+  width: 100%;
+  height: 100%;
+}
+.poster-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(10, 10, 26, 0.9));
+  padding: 40rpx;
+  color: #FFFFFF;
+}
+.poster-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+  letter-spacing: 1rpx;
+}
+.poster-summary {
+  font-size: 26rpx;
+  display: block;
+  margin-top: 10rpx;
+  opacity: 0.9;
+  color: #FFFFFF;
+}
+.poster-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30rpx;
+}
+.stat {
+  text-align: center;
+}
+.stat-num {
+  font-size: 40rpx;
+  font-weight: bold;
+  display: block;
+  color: #FFFFFF;
+}
+.stat-label {
+  font-size: 24rpx;
+  opacity: 0.8;
+  color: #FFFFFF;
+}
+.poster-footer {
+  text-align: center;
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  opacity: 0.7;
+  color: #FFFFFF;
+}
+.actions {
+  display: flex;
+  padding: 30rpx;
+  gap: 20rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+}
+.btn {
+  flex: 1;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  background: rgba(28, 28, 54, 0.8);
+  color: #8888AA;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+.btn.primary {
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(0, 212, 255, 0.3);
+}
+.history-section {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  padding: 30rpx;
+  margin-top: 20rpx;
+}
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 20rpx;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
+}
+.share-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.4);
+  transition: all 0.3s ease;
+}
+.share-item:last-child {
+  border-bottom: none;
+}
+.share-title {
+  font-size: 28rpx;
+  color: #FFFFFF;
+}
+.share-time {
+  font-size: 24rpx;
+  color: #8888AA;
+}
 </style>

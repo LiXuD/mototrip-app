@@ -35,16 +35,75 @@ function getProgress(achievement: any) {
 </script>
 
 <style lang="scss" scoped>
-.achievements-page { min-height: 100vh; background: #f5f5f5; }
-.achievement-list { padding: 20rpx; }
-.achievement-card { display: flex; align-items: center; background: #fff; border-radius: 12rpx; padding: 24rpx; margin-bottom: 20rpx; }
-.achievement-card.unlocked { border: 2rpx solid #34C759; }
-.achievement-icon { font-size: 60rpx; margin-right: 20rpx; }
-.achievement-info { flex: 1; }
-.achievement-name { font-size: 28rpx; font-weight: bold; display: block; }
-.achievement-desc { font-size: 24rpx; color: #666; display: block; margin-top: 8rpx; }
-.progress-bar { height: 8rpx; background: #eee; border-radius: 4rpx; margin-top: 12rpx; }
-.progress { height: 100%; background: #007AFF; border-radius: 4rpx; }
-.progress-text { font-size: 20rpx; color: #999; margin-top: 8rpx; display: block; }
-.unlocked-badge { width: 40rpx; height: 40rpx; background: #34C759; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24rpx; }
+.achievements-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+}
+.achievement-list {
+  padding: 20rpx;
+}
+.achievement-card {
+  display: flex;
+  align-items: center;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  transition: all 0.3s ease;
+}
+.achievement-card.unlocked {
+  border: 2rpx solid rgba(0, 255, 136, 0.5);
+  box-shadow: 0 0 16rpx rgba(0, 255, 136, 0.2);
+}
+.achievement-icon {
+  font-size: 60rpx;
+  margin-right: 20rpx;
+}
+.achievement-info {
+  flex: 1;
+}
+.achievement-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+  color: #FFFFFF;
+}
+.achievement-desc {
+  font-size: 24rpx;
+  color: #8888AA;
+  display: block;
+  margin-top: 8rpx;
+}
+.progress-bar {
+  height: 8rpx;
+  background: rgba(42, 42, 74, 0.6);
+  border-radius: 4rpx;
+  margin-top: 12rpx;
+}
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #00FF88, #00D4FF);
+  border-radius: 4rpx;
+  transition: all 0.3s ease;
+}
+.progress-text {
+  font-size: 20rpx;
+  color: #8888AA;
+  margin-top: 8rpx;
+  display: block;
+}
+.unlocked-badge {
+  width: 40rpx;
+  height: 40rpx;
+  background: #00FF88;
+  border-radius: 50%;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  box-shadow: 0 0 12rpx rgba(0, 255, 136, 0.5);
+}
 </style>

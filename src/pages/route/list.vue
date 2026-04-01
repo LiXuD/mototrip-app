@@ -242,24 +242,31 @@ function getDifficultyText(difficulty: string) {
 </script>
 
 <style lang="scss" scoped>
+/* ========== 潮流运动风 暗黑主题 ========== */
+
 .route-list-page {
   min-height: 100vh;
-  background: #F2F2F7;
+  background: #0A0A1A;
 }
 
 /* 搜索栏 */
 .search-bar {
   padding: 24rpx 32rpx;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.4);
 }
 
 .search-box {
   display: flex;
   align-items: center;
-  background: #F2F2F7;
+  background: rgba(28, 28, 54, 0.6);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 28rpx;
   padding: 16rpx 24rpx;
   height: 80rpx;
+  transition: all 0.3s ease;
 }
 
 .search-icon {
@@ -270,27 +277,35 @@ function getDifficultyText(difficulty: string) {
 .search-input {
   flex: 1;
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
 }
 
 .search-placeholder {
-  color: #C7C7CC;
+  color: #555577;
 }
 
 .search-clear {
   font-size: 28rpx;
-  color: #C7C7CC;
+  color: #8888AA;
   padding: 8rpx;
+  transition: color 0.3s ease;
+
+  &:active {
+    color: #FF6B35;
+  }
 }
 
 /* 筛选栏 */
 .filter-bar {
   display: flex;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 20rpx 32rpx;
   gap: 16rpx;
   align-items: center;
-  border-bottom: 1rpx solid #F2F2F7;
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.4);
 }
 
 .filter-item {
@@ -299,16 +314,22 @@ function getDifficultyText(difficulty: string) {
   padding: 12rpx 24rpx;
   font-size: 26rpx;
   border-radius: 24rpx;
-  background: #F2F2F7;
-  color: #8E8E93;
+  background: rgba(28, 28, 54, 0.6);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  color: #8888AA;
   white-space: nowrap;
-  
+  letter-spacing: 1rpx;
+  transition: all 0.3s ease;
+
   &.active {
-    background: #FF6B35;
+    background: linear-gradient(135deg, #FF6B35, #FF2D78);
     color: #FFFFFF;
-    
+    border-color: transparent;
+    box-shadow: 0 4rpx 20rpx rgba(255, 107, 53, 0.4), 0 0 30rpx rgba(255, 45, 120, 0.2);
+
     .filter-dot {
       background: #FFFFFF;
+      box-shadow: 0 0 8rpx rgba(255, 255, 255, 0.6);
     }
   }
 }
@@ -318,9 +339,10 @@ function getDifficultyText(difficulty: string) {
   height: 12rpx;
   border-radius: 50%;
   margin-right: 8rpx;
-  
-  &.easy { background: #34C759; }
-  &.medium { background: #FF9500; }
+  transition: all 0.3s ease;
+
+  &.easy { background: #00FF88; }
+  &.medium { background: #FFD600; }
   &.hard { background: #FF3B30; }
 }
 
@@ -329,12 +351,19 @@ function getDifficultyText(difficulty: string) {
   display: flex;
   align-items: center;
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
   padding: 12rpx 20rpx;
+  letter-spacing: 1rpx;
+  transition: color 0.3s ease;
+
+  &:active {
+    color: #00D4FF;
+  }
 }
 
 .sort-icon {
   margin-left: 8rpx;
+  color: #00D4FF;
 }
 
 /* 路线列表 */
@@ -344,11 +373,20 @@ function getDifficultyText(difficulty: string) {
 }
 
 .route-card {
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 24rpx;
   overflow: hidden;
   margin-bottom: 24rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+
+  &:active {
+    box-shadow: 0 4rpx 24rpx rgba(0, 0, 0, 0.3), 0 0 40rpx rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.3);
+  }
 }
 
 .route-cover-wrapper {
@@ -373,18 +411,26 @@ function getDifficultyText(difficulty: string) {
   border-radius: 20rpx;
   font-size: 24rpx;
   font-weight: 600;
-  
+  letter-spacing: 2rpx;
+  transition: all 0.3s ease;
+
   &.difficulty-easy {
-    background: rgba(52, 199, 89, 0.9);
-    color: #FFFFFF;
+    background: rgba(0, 255, 136, 0.12);
+    color: #00FF88;
+    border: 1rpx solid rgba(0, 255, 136, 0.5);
+    box-shadow: 0 0 12rpx rgba(0, 255, 136, 0.2);
   }
   &.difficulty-medium {
-    background: rgba(255, 149, 0, 0.9);
-    color: #FFFFFF;
+    background: rgba(255, 214, 0, 0.12);
+    color: #FFD600;
+    border: 1rpx solid rgba(255, 214, 0, 0.5);
+    box-shadow: 0 0 12rpx rgba(255, 214, 0, 0.2);
   }
   &.difficulty-hard {
-    background: rgba(255, 59, 48, 0.9);
-    color: #FFFFFF;
+    background: rgba(255, 59, 48, 0.12);
+    color: #FF3B30;
+    border: 1rpx solid rgba(255, 59, 48, 0.5);
+    box-shadow: 0 0 12rpx rgba(255, 59, 48, 0.2);
   }
 }
 
@@ -392,11 +438,14 @@ function getDifficultyText(difficulty: string) {
   position: absolute;
   bottom: 16rpx;
   right: 16rpx;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(10, 10, 26, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #FFFFFF;
   padding: 8rpx 16rpx;
   border-radius: 16rpx;
   font-size: 22rpx;
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .route-content {
@@ -406,10 +455,11 @@ function getDifficultyText(difficulty: string) {
 .route-name {
   font-size: 32rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 8rpx;
   line-height: 1.4;
+  letter-spacing: 2rpx;
 }
 
 .route-desc-wrapper {
@@ -418,9 +468,10 @@ function getDifficultyText(difficulty: string) {
 
 .route-desc {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
   display: block;
   line-height: 1.5;
+  letter-spacing: 1rpx;
 }
 
 .route-meta {
@@ -441,7 +492,8 @@ function getDifficultyText(difficulty: string) {
 
 .meta-text {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
+  letter-spacing: 1rpx;
 }
 
 .route-footer {
@@ -449,7 +501,7 @@ function getDifficultyText(difficulty: string) {
   justify-content: space-between;
   align-items: center;
   padding-top: 16rpx;
-  border-top: 1rpx solid #F2F2F7;
+  border-top: 1rpx solid rgba(42, 42, 74, 0.4);
 }
 
 .creator {
@@ -462,16 +514,19 @@ function getDifficultyText(difficulty: string) {
   height: 48rpx;
   border-radius: 50%;
   margin-right: 12rpx;
+  border: 2rpx solid rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 12rpx rgba(0, 212, 255, 0.15);
 }
 
 .creator-name {
   font-size: 26rpx;
-  color: #666666;
+  color: #8888AA;
+  letter-spacing: 1rpx;
 }
 
 .views {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #555577;
 }
 
 /* 加载状态 */
@@ -480,9 +535,10 @@ function getDifficultyText(difficulty: string) {
   align-items: center;
   justify-content: center;
   padding: 32rpx;
-  color: #8E8E93;
+  color: #8888AA;
   font-size: 26rpx;
-  
+  letter-spacing: 1rpx;
+
   text {
     margin-left: 12rpx;
   }
@@ -491,21 +547,31 @@ function getDifficultyText(difficulty: string) {
 .loading-dot {
   width: 20rpx;
   height: 20rpx;
-  background: #FF6B35;
+  background: #00D4FF;
   border-radius: 50%;
-  animation: loading 1s infinite;
+  box-shadow: 0 0 12rpx rgba(0, 212, 255, 0.6);
+  animation: loading-pulse 1s infinite ease-in-out;
 }
 
-@keyframes loading {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+@keyframes loading-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+    box-shadow: 0 0 4rpx rgba(0, 212, 255, 0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 20rpx rgba(0, 212, 255, 0.8);
+  }
 }
 
 .no-more {
   text-align: center;
   padding: 40rpx;
-  color: #C7C7CC;
+  color: #555577;
   font-size: 26rpx;
+  letter-spacing: 2rpx;
 }
 
 .empty {
@@ -523,14 +589,16 @@ function getDifficultyText(difficulty: string) {
 
 .empty-text {
   font-size: 32rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   font-weight: 600;
   margin-bottom: 12rpx;
+  letter-spacing: 3rpx;
 }
 
 .empty-hint {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #555577;
+  letter-spacing: 1rpx;
 }
 
 /* 悬浮按钮 */
@@ -540,15 +608,27 @@ function getDifficultyText(difficulty: string) {
   bottom: 60rpx;
   width: 112rpx;
   height: 112rpx;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
-  
+  box-shadow: 0 8rpx 32rpx rgba(255, 107, 53, 0.4), 0 0 40rpx rgba(255, 45, 120, 0.2);
+  animation: pulse-glow 2s infinite ease-in-out;
+  transition: all 0.3s ease;
+
   &:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
+    box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.6), 0 0 60rpx rgba(255, 45, 120, 0.4);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 8rpx 32rpx rgba(255, 107, 53, 0.4), 0 0 40rpx rgba(255, 45, 120, 0.2);
+  }
+  50% {
+    box-shadow: 0 8rpx 40rpx rgba(255, 107, 53, 0.6), 0 0 60rpx rgba(255, 45, 120, 0.4);
   }
 }
 
@@ -556,5 +636,6 @@ function getDifficultyText(difficulty: string) {
   font-size: 56rpx;
   color: #FFFFFF;
   font-weight: 300;
+  text-shadow: 0 0 16rpx rgba(255, 255, 255, 0.4);
 }
 </style>

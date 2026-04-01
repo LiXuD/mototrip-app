@@ -21,9 +21,45 @@ function copyEmail() {
 </script>
 
 <style lang="scss" scoped>
-.help-page { min-height: 100vh; background: #f2f2f7; padding: 24rpx; }
-.faq-card { background: #fff; border-radius: 24rpx; padding: 24rpx; margin-bottom: 18rpx; }
-.question { display: block; font-size: 30rpx; font-weight: 600; color: #1a1a2e; margin-bottom: 14rpx; }
-.answer { display: block; font-size: 25rpx; color: #666; line-height: 1.8; }
-.feedback-btn { margin-top: 12rpx; background: #1a1a2e; color: #fff; border-radius: 20rpx; font-size: 30rpx; }
+.help-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+  padding: 24rpx;
+}
+.faq-card {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-bottom: 18rpx;
+  transition: all 0.3s ease;
+}
+.question {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 14rpx;
+}
+.answer {
+  display: block;
+  font-size: 25rpx;
+  color: #8888AA;
+  line-height: 1.8;
+}
+.feedback-btn {
+  margin-top: 12rpx;
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
+  color: #FFFFFF;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  letter-spacing: 1rpx;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
 </style>

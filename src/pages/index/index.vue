@@ -290,25 +290,35 @@ function onBannerChange(e: { detail: { current: number } }) {
 <style lang="scss" scoped>
 .index-page {
   min-height: 100vh;
-  background: #F2F2F7;
+  background: #0A0A1A;
 }
 
-/* 搜索栏 */
+/* 搜索栏 - 毛玻璃效果 */
 .search-bar {
   padding: 24rpx 32rpx;
-  background: #FFFFFF;
+  background: rgba(10, 10, 26, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.5);
 }
 
 .search-box {
   display: flex;
   align-items: center;
-  background: #F2F2F7;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
   border-radius: 28rpx;
   padding: 16rpx 24rpx;
   height: 88rpx;
+  transition: all 0.3s ease;
+
+  &:focus-within {
+    border-color: rgba(255, 107, 53, 0.5);
+    box-shadow: 0 0 20rpx rgba(255, 107, 53, 0.15);
+  }
 }
 
 .search-icon {
@@ -319,33 +329,34 @@ function onBannerChange(e: { detail: { current: number } }) {
 .search-input {
   flex: 1;
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
 }
 
 .search-placeholder {
-  color: #C7C7CC;
+  color: #555577;
   font-size: 28rpx;
 }
 
 /* 轮播图 */
 .banner-wrapper {
-  padding: 0 20rpx;
+  padding: 20rpx 20rpx 0;
 }
 
 .banner {
-  height: 380rpx;
-  border-radius: 24rpx;
+  height: 400rpx;
+  border-radius: 28rpx;
   overflow: hidden;
+  border: 1rpx solid rgba(42, 42, 74, 0.5);
 }
 
 .banner-item {
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 24rpx;
+  border-radius: 28rpx;
   overflow: hidden;
-  transition: transform 0.3s ease;
-  
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
   &.banner-active {
     transform: scale(1);
   }
@@ -364,9 +375,9 @@ function onBannerChange(e: { detail: { current: number } }) {
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.2) 30%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(10, 10, 26, 0.2) 0%,
+    rgba(10, 10, 26, 0.4) 40%,
+    rgba(10, 10, 26, 0.85) 100%
   );
 }
 
@@ -375,76 +386,94 @@ function onBannerChange(e: { detail: { current: number } }) {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 32rpx 28rpx;
+  padding: 36rpx 32rpx;
 }
 
 .banner-tag {
   display: inline-block;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
   color: #FFFFFF;
   font-size: 22rpx;
-  font-weight: 600;
-  padding: 6rpx 16rpx;
+  font-weight: 700;
+  padding: 8rpx 20rpx;
   border-radius: 20rpx;
-  margin-bottom: 12rpx;
+  margin-bottom: 16rpx;
+  letter-spacing: 2rpx;
+  box-shadow: 0 0 20rpx rgba(255, 107, 53, 0.3);
 }
 
 .banner-title {
   display: block;
-  font-size: 36rpx;
-  font-weight: 700;
+  font-size: 38rpx;
+  font-weight: 800;
   color: #FFFFFF;
   line-height: 1.3;
-  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
-  margin-bottom: 8rpx;
+  text-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.5);
+  margin-bottom: 10rpx;
+  letter-spacing: 2rpx;
 }
 
 .banner-subtitle {
   display: block;
   font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+  letter-spacing: 1rpx;
 }
 
-/* 功能导航 */
+/* 功能导航 - 毛玻璃卡片 */
 .nav-section {
-  background: #FFFFFF;
-  margin: 24rpx 0;
-  padding: 32rpx;
+  background: rgba(28, 28, 54, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  margin: 24rpx 20rpx;
+  padding: 36rpx 32rpx;
+  border-radius: 28rpx;
+  border: 1rpx solid rgba(42, 42, 74, 0.5);
 }
 
 .nav-grid {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 32rpx;
+  margin-bottom: 36rpx;
 }
 
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:active {
+    transform: scale(0.92);
+  }
 }
 
 .nav-icon-wrapper {
   width: 112rpx;
   height: 112rpx;
-  border-radius: 28rpx;
+  border-radius: 32rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12rpx;
-  
+  margin-bottom: 14rpx;
+  transition: all 0.3s ease;
+
   &.primary {
-    background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+    background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
+    box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.35);
   }
   &.warning {
-    background: linear-gradient(135deg, #FF9500 0%, #FFB340 100%);
+    background: linear-gradient(135deg, #FFD600 0%, #FF6B35 100%);
+    box-shadow: 0 8rpx 24rpx rgba(255, 214, 0, 0.25);
   }
   &.success {
-    background: linear-gradient(135deg, #34C759 0%, #5DD97E 100%);
+    background: linear-gradient(135deg, #00FF88 0%, #00D4FF 100%);
+    box-shadow: 0 8rpx 24rpx rgba(0, 255, 136, 0.25);
   }
   &.info {
-    background: linear-gradient(135deg, #5AC8FA 0%, #8ED6FF 100%);
+    background: linear-gradient(135deg, #00D4FF 0%, #7B2FFF 100%);
+    box-shadow: 0 8rpx 24rpx rgba(0, 212, 255, 0.25);
   }
 }
 
@@ -454,46 +483,57 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .nav-text {
   font-size: 26rpx;
-  color: #1A1A2E;
-  font-weight: 500;
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: 1rpx;
 }
 
 /* 快捷入口 */
 .quick-actions {
   display: flex;
   justify-content: space-around;
-  padding-top: 24rpx;
-  border-top: 1rpx solid #F2F2F7;
+  padding-top: 28rpx;
+  border-top: 1rpx solid rgba(42, 42, 74, 0.5);
 }
 
 .quick-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &:active {
+    transform: scale(0.9);
+  }
 }
 
 .quick-icon {
   font-size: 40rpx;
-  margin-bottom: 8rpx;
+  margin-bottom: 10rpx;
 }
 
 .quick-text {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
+  font-weight: 500;
 }
 
 /* 区块 */
 .section {
-  background: #FFFFFF;
-  margin-bottom: 24rpx;
+  background: rgba(28, 28, 54, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  margin: 0 20rpx 24rpx;
   padding: 32rpx;
+  border-radius: 28rpx;
+  border: 1rpx solid rgba(42, 42, 74, 0.5);
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24rpx;
+  margin-bottom: 28rpx;
 }
 
 .section-title-wrapper {
@@ -508,23 +548,30 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .section-title {
   font-size: 32rpx;
-  font-weight: 700;
-  color: #1A1A2E;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 2rpx;
 }
 
 .section-more {
   display: flex;
   align-items: center;
   font-size: 26rpx;
-  color: #8E8E93;
-  
+  color: #00D4FF;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:active {
+    opacity: 0.7;
+  }
+
   .arrow {
     margin-left: 4rpx;
     font-size: 32rpx;
   }
 }
 
-/* 路线卡片 */
+/* 路线卡片 - 深色毛玻璃 */
 .route-scroll {
   white-space: nowrap;
   margin: 0 -32rpx;
@@ -536,11 +583,19 @@ function onBannerChange(e: { detail: { current: number } }) {
   width: 260rpx;
   margin-right: 20rpx;
   vertical-align: top;
-  border-radius: 20rpx;
+  border-radius: 24rpx;
   overflow: hidden;
-  background: #F2F2F7;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
-  
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+    border-color: rgba(255, 107, 53, 0.4);
+    box-shadow: 0 0 20rpx rgba(255, 107, 53, 0.15);
+  }
+
   &:last-child {
     margin-right: 0;
   }
@@ -561,11 +616,14 @@ function onBannerChange(e: { detail: { current: number } }) {
   position: absolute;
   bottom: 12rpx;
   right: 12rpx;
-  background: rgba(0, 0, 0, 0.6);
-  color: #FFFFFF;
-  padding: 4rpx 12rpx;
+  background: rgba(10, 10, 26, 0.7);
+  backdrop-filter: blur(10px);
+  color: #00D4FF;
+  padding: 6rpx 14rpx;
   border-radius: 20rpx;
   font-size: 22rpx;
+  font-weight: 600;
+  border: 1rpx solid rgba(0, 212, 255, 0.3);
 }
 
 .route-info {
@@ -574,10 +632,11 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .route-name {
   font-size: 26rpx;
-  font-weight: 600;
-  color: #1A1A2E;
+  font-weight: 700;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 8rpx;
+  letter-spacing: 1rpx;
 }
 
 .route-meta {
@@ -587,7 +646,7 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .route-location {
   font-size: 22rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 .route-empty {
@@ -597,9 +656,10 @@ function onBannerChange(e: { detail: { current: number } }) {
   justify-content: center;
   width: 260rpx;
   height: 200rpx;
-  background: #F2F2F7;
-  border-radius: 20rpx;
+  background: rgba(28, 28, 54, 0.5);
+  border-radius: 24rpx;
   vertical-align: top;
+  border: 1rpx dashed rgba(42, 42, 74, 0.8);
 }
 
 .empty-icon {
@@ -609,10 +669,10 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .empty-text {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #555577;
 }
 
-/* 日记卡片 */
+/* 日记卡片 - 深色发光边框 */
 .diary-list {
   display: flex;
   flex-direction: column;
@@ -620,10 +680,18 @@ function onBannerChange(e: { detail: { current: number } }) {
 }
 
 .diary-card {
-  background: #F8F8FF;
-  border-radius: 20rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 24rpx;
   padding: 24rpx;
-  border: 1rpx solid #F2F2F7;
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  transition: all 0.3s ease;
+
+  &:active {
+    border-color: rgba(0, 212, 255, 0.4);
+    box-shadow: 0 0 20rpx rgba(0, 212, 255, 0.1);
+    transform: scale(0.98);
+  }
 }
 
 .diary-header {
@@ -637,6 +705,7 @@ function onBannerChange(e: { detail: { current: number } }) {
   height: 64rpx;
   border-radius: 50%;
   margin-right: 16rpx;
+  border: 2rpx solid rgba(255, 107, 53, 0.4);
 }
 
 .diary-user-info {
@@ -647,13 +716,14 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .diary-author {
   font-size: 26rpx;
-  font-weight: 600;
-  color: #1A1A2E;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
 }
 
 .diary-time {
   font-size: 22rpx;
-  color: #8E8E93;
+  color: #555577;
   margin-top: 4rpx;
 }
 
@@ -664,15 +734,16 @@ function onBannerChange(e: { detail: { current: number } }) {
 .diary-title {
   font-size: 30rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 8rpx;
   line-height: 1.4;
+  letter-spacing: 1rpx;
 }
 
 .diary-content {
   font-size: 26rpx;
-  color: #666666;
+  color: #8888AA;
   display: block;
   line-height: 1.5;
 }
@@ -690,7 +761,13 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .stat-item {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
+}
+
+.diary-tag.tag.tag-primary {
+  background: rgba(255, 107, 53, 0.2);
+  color: #FF6B35;
+  border: 1rpx solid rgba(255, 107, 53, 0.3);
 }
 
 .diary-empty {

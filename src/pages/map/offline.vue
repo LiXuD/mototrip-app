@@ -317,7 +317,7 @@ function getStatusText(status: string) {
 <style lang="scss" scoped>
 .offline-map-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #0A0A1A;
   padding: 20rpx;
   padding-bottom: 120rpx;
 }
@@ -328,7 +328,7 @@ function getStatusText(status: string) {
   align-items: center;
   justify-content: center;
   padding: 120rpx 40rpx;
-  color: #999;
+  color: #8888AA;
 }
 
 .tip-icon {
@@ -339,11 +339,12 @@ function getStatusText(status: string) {
 .tip-text {
   font-size: 32rpx;
   margin-bottom: 12rpx;
+  color: #FFFFFF;
 }
 
 .tip-sub {
   font-size: 26rpx;
-  color: #bbb;
+  color: #555577;
 }
 
 .map-list {
@@ -351,10 +352,13 @@ function getStatusText(status: string) {
 }
 
 .map-card {
-  background: #fff;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 16rpx;
   padding: 24rpx;
   margin-bottom: 20rpx;
+  transition: all 0.3s ease;
 }
 
 .map-info {
@@ -366,11 +370,12 @@ function getStatusText(status: string) {
   font-weight: bold;
   display: block;
   margin-bottom: 8rpx;
+  color: #FFFFFF;
 }
 
 .map-desc {
   font-size: 26rpx;
-  color: #666;
+  color: #8888AA;
   display: block;
   margin-bottom: 12rpx;
 }
@@ -383,7 +388,7 @@ function getStatusText(status: string) {
 
 .meta-item {
   font-size: 24rpx;
-  color: #999;
+  color: #8888AA;
 }
 
 .map-stats {
@@ -393,7 +398,7 @@ function getStatusText(status: string) {
 
 .stat-item {
   font-size: 24rpx;
-  color: #666;
+  color: #8888AA;
 }
 
 .map-status {
@@ -408,7 +413,7 @@ function getStatusText(status: string) {
 
 .progress-text {
   font-size: 24rpx;
-  color: #007AFF;
+  color: #00D4FF;
 }
 
 .status-tag {
@@ -416,22 +421,30 @@ function getStatusText(status: string) {
   padding: 6rpx 16rpx;
   font-size: 24rpx;
   border-radius: 8rpx;
+  transition: all 0.3s ease;
 
   &.status-pending {
-    background: #f5f5f5;
-    color: #999;
+    background: rgba(28, 28, 54, 0.8);
+    color: #8888AA;
+    border: 1rpx solid rgba(42, 42, 74, 0.6);
   }
   &.status-downloading {
-    background: #e3f2fd;
-    color: #1976d2;
+    background: rgba(0, 212, 255, 0.15);
+    color: #00D4FF;
+    border: 1rpx solid rgba(0, 212, 255, 0.4);
+    box-shadow: 0 0 8rpx rgba(0, 212, 255, 0.2);
   }
   &.status-completed {
-    background: #e8f5e9;
-    color: #4caf50;
+    background: rgba(0, 255, 136, 0.15);
+    color: #00FF88;
+    border: 1rpx solid rgba(0, 255, 136, 0.4);
+    box-shadow: 0 0 8rpx rgba(0, 255, 136, 0.2);
   }
   &.status-failed {
-    background: #ffebee;
-    color: #f44336;
+    background: rgba(255, 45, 120, 0.15);
+    color: #FF2D78;
+    border: 1rpx solid rgba(255, 45, 120, 0.4);
+    box-shadow: 0 0 8rpx rgba(255, 45, 120, 0.2);
   }
 }
 
@@ -446,25 +459,33 @@ function getStatusText(status: string) {
   padding: 16rpx 0;
   border-radius: 8rpx;
   border: none;
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
 
   &.download {
-    background: #007AFF;
-    color: #fff;
+    background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+    color: #FFFFFF;
+    box-shadow: 0 4rpx 16rpx rgba(0, 212, 255, 0.3);
   }
   &.view {
-    background: #4caf50;
-    color: #fff;
+    background: linear-gradient(135deg, #00FF88, #00D4FF);
+    color: #FFFFFF;
+    box-shadow: 0 4rpx 16rpx rgba(0, 255, 136, 0.3);
   }
   &.delete {
-    background: #f5f5f5;
-    color: #666;
+    background: rgba(28, 28, 54, 0.8);
+    color: #8888AA;
+    border: 1rpx solid rgba(42, 42, 74, 0.6);
   }
 }
 
 .loading {
   text-align: center;
   padding: 40rpx;
-  color: #999;
+  color: #8888AA;
   font-size: 26rpx;
 }
 
@@ -474,14 +495,19 @@ function getStatusText(status: string) {
   bottom: 40rpx;
   width: 100rpx;
   height: 100rpx;
-  background: #007AFF;
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 60rpx;
-  color: #fff;
-  box-shadow: 0 8rpx 20rpx rgba(0, 122, 255, 0.4);
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(0, 212, 255, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
 
 /* 弹窗样式 */
@@ -491,7 +517,7 @@ function getStatusText(status: string) {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -500,7 +526,9 @@ function getStatusText(status: string) {
 
 .modal-content {
   width: 600rpx;
-  background: #fff;
+  background: rgba(28, 28, 54, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 16rpx;
   overflow: hidden;
 }
@@ -510,17 +538,18 @@ function getStatusText(status: string) {
   justify-content: space-between;
   align-items: center;
   padding: 24rpx;
-  border-bottom: 1rpx solid #eee;
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .modal-title {
   font-size: 32rpx;
   font-weight: bold;
+  color: #FFFFFF;
 }
 
 .modal-close {
   font-size: 32rpx;
-  color: #999;
+  color: #8888AA;
 }
 
 .modal-body {
@@ -534,7 +563,7 @@ function getStatusText(status: string) {
 .form-label {
   display: block;
   font-size: 26rpx;
-  color: #333;
+  color: #8888AA;
   margin-bottom: 12rpx;
 }
 
@@ -542,10 +571,17 @@ function getStatusText(status: string) {
   width: 100%;
   height: 72rpx;
   padding: 0 20rpx;
-  border: 1rpx solid #ddd;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
   border-radius: 8rpx;
   font-size: 28rpx;
+  color: #FFFFFF;
   box-sizing: border-box;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #555577;
+  }
 
   &.small {
     width: 160rpx;
@@ -567,17 +603,17 @@ function getStatusText(status: string) {
 
 .coord-label {
   font-size: 24rpx;
-  color: #666;
+  color: #8888AA;
   width: 140rpx;
 }
 
 .coord-sep {
-  color: #999;
+  color: #555577;
 }
 
 .modal-footer {
   display: flex;
-  border-top: 1rpx solid #eee;
+  border-top: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .btn-cancel, .btn-confirm {
@@ -586,20 +622,21 @@ function getStatusText(status: string) {
   font-size: 28rpx;
   border: none;
   border-radius: 0;
-  background: #fff;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
 .btn-cancel {
-  color: #666;
-  border-right: 1rpx solid #eee;
+  color: #8888AA;
+  border-right: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .btn-confirm {
-  color: #007AFF;
-  background: #fff;
+  color: #00D4FF;
+  background: transparent;
 
   &[disabled] {
-    color: #ccc;
+    color: #3A3A5A;
   }
 }
 </style>

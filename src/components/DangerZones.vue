@@ -130,32 +130,35 @@ function handleNoParkingClick(zone: NoParkingZone | NoParkingWarning) {
 .danger-item, .no-parking-item {
   display: flex;
   align-items: center;
-  background: #fff;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 12rpx;
   padding: 20rpx;
   margin-bottom: 16rpx;
   border-left: 6rpx solid;
+  transition: all 0.3s ease;
 }
 
 .danger-item {
-  border-left-color: #ff9800;
-  
+  border-left-color: #FF6B35;
+
   &.severity-severe {
-    border-left-color: #f44336;
-    background: #fff5f5;
+    border-left-color: #FF2D78;
+    box-shadow: 0 0 12rpx rgba(255, 45, 120, 0.2);
   }
-  
+
   &.severity-medium {
-    border-left-color: #ff9800;
+    border-left-color: #FF6B35;
   }
-  
+
   &.severity-light {
-    border-left-color: #4caf50;
+    border-left-color: #00FF88;
   }
 }
 
 .no-parking-item {
-  border-left-color: #9e9e9e;
+  border-left-color: #8888AA;
 }
 
 .danger-icon, .no-parking-icon {
@@ -171,20 +174,20 @@ function handleNoParkingClick(zone: NoParkingZone | NoParkingWarning) {
   display: block;
   font-size: 28rpx;
   font-weight: bold;
-  color: #333;
+  color: #FFFFFF;
 }
 
 .danger-type, .no-parking-reason {
   display: block;
   font-size: 24rpx;
-  color: #666;
+  color: #8888AA;
   margin-top: 4rpx;
 }
 
 .danger-distance, .no-parking-distance {
   display: block;
   font-size: 22rpx;
-  color: #999;
+  color: #555577;
   margin-top: 4rpx;
 }
 
@@ -192,20 +195,27 @@ function handleNoParkingClick(zone: NoParkingZone | NoParkingWarning) {
   padding: 6rpx 16rpx;
   border-radius: 20rpx;
   font-size: 22rpx;
-  
+  transition: all 0.3s ease;
+
   &.severity-severe {
-    background: #ffebee;
-    color: #f44336;
+    background: rgba(255, 45, 120, 0.15);
+    color: #FF2D78;
+    border: 1rpx solid rgba(255, 45, 120, 0.4);
+    box-shadow: 0 0 8rpx rgba(255, 45, 120, 0.2);
   }
-  
+
   &.severity-medium {
-    background: #fff3e0;
-    color: #ff9800;
+    background: rgba(255, 107, 53, 0.15);
+    color: #FF6B35;
+    border: 1rpx solid rgba(255, 107, 53, 0.4);
+    box-shadow: 0 0 8rpx rgba(255, 107, 53, 0.2);
   }
-  
+
   &.severity-light {
-    background: #e8f5e9;
-    color: #4caf50;
+    background: rgba(0, 255, 136, 0.15);
+    color: #00FF88;
+    border: 1rpx solid rgba(0, 255, 136, 0.4);
+    box-shadow: 0 0 8rpx rgba(0, 255, 136, 0.2);
   }
 }
 </style>

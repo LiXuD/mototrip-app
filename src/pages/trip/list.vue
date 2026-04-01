@@ -186,13 +186,15 @@ function formatDate(dateStr: string) {
 <style lang="scss" scoped>
 .trip-list-page {
   min-height: 100vh;
-  background: #F2F2F7;
+  background: #0A0A1A;
 }
 
 /* 状态筛选 */
 .status-tabs {
   display: flex;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
   padding: 20rpx 24rpx;
   gap: 12rpx;
 }
@@ -205,13 +207,17 @@ function formatDate(dateStr: string) {
   padding: 16rpx 0;
   font-size: 26rpx;
   border-radius: 24rpx;
-  background: #F2F2F7;
-  color: #8E8E93;
-  
+  background: rgba(28, 28, 54, 0.8);
+  color: #8888AA;
+  transition: all 0.3s ease;
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+
   &.active {
-    background: #FF6B35;
+    background: linear-gradient(135deg, #FF6B35, #FF2D78);
     color: #FFFFFF;
-    
+    box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.4);
+    border-color: transparent;
+
     .tab-dot {
       background: #FFFFFF;
     }
@@ -223,10 +229,10 @@ function formatDate(dateStr: string) {
   height: 10rpx;
   border-radius: 50%;
   margin-right: 8rpx;
-  
-  &.planning { background: #5AC8FA; }
-  &.ongoing { background: #FF9500; }
-  &.completed { background: #34C759; }
+
+  &.planning { background: #00D4FF; }
+  &.ongoing { background: #FFD600; }
+  &.completed { background: #00FF88; }
 }
 
 /* 行程列表 */
@@ -236,11 +242,17 @@ function formatDate(dateStr: string) {
 }
 
 .trip-card {
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 24rpx;
   overflow: hidden;
   margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
 .trip-cover-wrapper {
@@ -262,18 +274,25 @@ function formatDate(dateStr: string) {
   border-radius: 20rpx;
   font-size: 22rpx;
   font-weight: 600;
-  
+  backdrop-filter: blur(8px);
+
   &.status-planning {
-    background: rgba(90, 200, 250, 0.95);
-    color: #FFFFFF;
+    background: rgba(0, 212, 255, 0.25);
+    color: #00D4FF;
+    border: 1rpx solid rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 12rpx rgba(0, 212, 255, 0.3);
   }
   &.status-ongoing {
-    background: rgba(255, 149, 0, 0.95);
-    color: #FFFFFF;
+    background: rgba(255, 214, 0, 0.25);
+    color: #FFD600;
+    border: 1rpx solid rgba(255, 214, 0, 0.5);
+    box-shadow: 0 0 12rpx rgba(255, 214, 0, 0.3);
   }
   &.status-completed {
-    background: rgba(52, 199, 89, 0.95);
-    color: #FFFFFF;
+    background: rgba(0, 255, 136, 0.25);
+    color: #00FF88;
+    border: 1rpx solid rgba(0, 255, 136, 0.5);
+    box-shadow: 0 0 12rpx rgba(0, 255, 136, 0.3);
   }
 }
 
@@ -284,14 +303,15 @@ function formatDate(dateStr: string) {
 .trip-name {
   font-size: 32rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 8rpx;
+  letter-spacing: 1rpx;
 }
 
 .trip-desc {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
   display: block;
   margin-bottom: 16rpx;
   line-height: 1.5;
@@ -315,19 +335,19 @@ function formatDate(dateStr: string) {
 
 .meta-text {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 /* 进度条 */
 .trip-progress {
   margin-top: 16rpx;
   padding-top: 16rpx;
-  border-top: 1rpx solid #F2F2F7;
+  border-top: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .progress-bar {
   height: 12rpx;
-  background: #F2F2F7;
+  background: rgba(28, 28, 54, 0.8);
   border-radius: 6rpx;
   overflow: hidden;
   margin-bottom: 8rpx;
@@ -335,15 +355,16 @@ function formatDate(dateStr: string) {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #FF6B35, #FF8A5C);
+  background: linear-gradient(90deg, #FF6B35, #FFD600);
   border-radius: 6rpx;
   transition: width 0.3s ease;
+  box-shadow: 0 0 8rpx rgba(255, 107, 53, 0.4);
 }
 
 .progress-text {
   font-size: 22rpx;
   color: #FF6B35;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* 加载状态 */
@@ -352,9 +373,9 @@ function formatDate(dateStr: string) {
   align-items: center;
   justify-content: center;
   padding: 32rpx;
-  color: #8E8E93;
+  color: #8888AA;
   font-size: 26rpx;
-  
+
   text {
     margin-left: 12rpx;
   }
@@ -363,9 +384,10 @@ function formatDate(dateStr: string) {
 .loading-dot {
   width: 20rpx;
   height: 20rpx;
-  background: #FF6B35;
+  background: #00D4FF;
   border-radius: 50%;
   animation: loading 1s infinite;
+  box-shadow: 0 0 8rpx rgba(0, 212, 255, 0.5);
 }
 
 @keyframes loading {
@@ -376,7 +398,7 @@ function formatDate(dateStr: string) {
 .no-more {
   text-align: center;
   padding: 40rpx;
-  color: #C7C7CC;
+  color: #3A3A5A;
   font-size: 26rpx;
 }
 
@@ -395,26 +417,33 @@ function formatDate(dateStr: string) {
 
 .empty-text {
   font-size: 32rpx;
-  font-weight: 600;
-  color: #1A1A2E;
+  font-weight: 700;
+  color: #FFFFFF;
   margin-bottom: 12rpx;
 }
 
 .empty-hint {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
   margin-bottom: 32rpx;
 }
 
 .empty-btn {
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
   color: #FFFFFF;
   padding: 20rpx 60rpx;
   border-radius: 40rpx;
   font-size: 28rpx;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
-  
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+    opacity: 0.9;
+  }
+
   &::after {
     display: none;
   }
@@ -427,15 +456,26 @@ function formatDate(dateStr: string) {
   bottom: 60rpx;
   width: 112rpx;
   height: 112rpx;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
-  
+  animation: fab-pulse 2s infinite;
+  transition: all 0.3s ease;
+
   &:active {
-    transform: scale(0.95);
+    transform: scale(0.96);
+  }
+}
+
+@keyframes fab-pulse {
+  0%, 100% {
+    box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 8rpx 32rpx rgba(255, 107, 53, 0.7), 0 0 48rpx rgba(255, 45, 120, 0.3);
   }
 }
 

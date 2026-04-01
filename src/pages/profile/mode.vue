@@ -134,7 +134,7 @@ function goBack() {
 <style lang="scss" scoped>
 .mode-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #0A0A1A;
   padding: 30rpx;
 }
 
@@ -147,14 +147,15 @@ function goBack() {
   display: block;
   font-size: 40rpx;
   font-weight: bold;
-  color: #333;
+  color: #FFFFFF;
+  letter-spacing: 2rpx;
   margin-bottom: 16rpx;
 }
 
 .subtitle {
   display: block;
   font-size: 26rpx;
-  color: #666;
+  color: #8888AA;
 }
 
 .mode-list {
@@ -163,16 +164,20 @@ function goBack() {
 
 .mode-card {
   display: flex;
-  background: #fff;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 16rpx;
   padding: 30rpx;
   margin-bottom: 24rpx;
-  border: 4rpx solid transparent;
+  border: 2rpx solid transparent;
   position: relative;
-  
+  transition: all 0.3s ease;
+
   &.active {
-    border-color: #007AFF;
-    background: #f0f7ff;
+    border-color: #00D4FF;
+    background: rgba(28, 28, 54, 0.9);
+    box-shadow: 0 0 20rpx rgba(0, 212, 255, 0.3);
   }
 }
 
@@ -189,14 +194,14 @@ function goBack() {
   display: block;
   font-size: 32rpx;
   font-weight: bold;
-  color: #333;
+  color: #FFFFFF;
   margin-bottom: 12rpx;
 }
 
 .mode-description {
   display: block;
   font-size: 24rpx;
-  color: #666;
+  color: #8888AA;
   margin-bottom: 16rpx;
 }
 
@@ -209,10 +214,13 @@ function goBack() {
 .feature-tag {
   display: inline-block;
   padding: 6rpx 16rpx;
-  background: #f0f0f0;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 20rpx;
   font-size: 22rpx;
-  color: #666;
+  color: #8888AA;
+  transition: all 0.3s ease;
 }
 
 .mode-check {
@@ -221,15 +229,16 @@ function goBack() {
   right: 20rpx;
   width: 44rpx;
   height: 44rpx;
-  background: #007AFF;
+  background: #00D4FF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 12rpx rgba(0, 212, 255, 0.5);
 }
 
 .check-icon {
-  color: #fff;
+  color: #FFFFFF;
   font-size: 28rpx;
   font-weight: bold;
 }
@@ -237,14 +246,16 @@ function goBack() {
 .current-mode {
   text-align: center;
   padding: 20rpx;
-  background: #fff;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 12rpx;
   margin-bottom: 40rpx;
 }
 
 .current-label {
   font-size: 28rpx;
-  color: #666;
+  color: #8888AA;
 }
 
 .action-section {
@@ -253,27 +264,41 @@ function goBack() {
 
 .confirm-btn {
   width: 100%;
-  background: #007AFF;
-  color: #fff;
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+  color: #FFFFFF;
   border: none;
   padding: 24rpx;
   border-radius: 12rpx;
   font-size: 32rpx;
   font-weight: bold;
+  letter-spacing: 1rpx;
   margin-bottom: 20rpx;
-  
+  box-shadow: 0 8rpx 24rpx rgba(0, 212, 255, 0.3);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+
   &:disabled {
-    background: #ccc;
+    background: #3A3A5A;
+    box-shadow: none;
   }
 }
 
 .cancel-btn {
   width: 100%;
-  background: #fff;
-  color: #666;
-  border: 1rpx solid #ddd;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  color: #8888AA;
   padding: 24rpx;
   border-radius: 12rpx;
   font-size: 32rpx;
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
 </style>

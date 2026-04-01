@@ -180,12 +180,14 @@ async function handleSubmit() {
 <style lang="scss" scoped>
 .no-parking-report-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #0A0A1A;
   padding: 20rpx;
 }
 
 .form-container {
-  background: #fff;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 16rpx;
   padding: 24rpx;
 }
@@ -199,26 +201,36 @@ async function handleSubmit() {
   font-size: 28rpx;
   font-weight: bold;
   margin-bottom: 12rpx;
-  color: #333;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
 }
 
 .input {
   width: 100%;
   padding: 20rpx;
-  border: 1px solid #e0e0e0;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
   border-radius: 8rpx;
   font-size: 28rpx;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #555577;
+  }
 }
 
 .location-selector {
   padding: 20rpx;
-  border: 1px dashed #007AFF;
+  border: 1rpx dashed rgba(0, 212, 255, 0.5);
   border-radius: 8rpx;
   text-align: center;
-  color: #007AFF;
-  
+  color: #00D4FF;
+  transition: all 0.3s ease;
+
   .placeholder {
-    color: #999;
+    color: #555577;
   }
 }
 
@@ -233,12 +245,15 @@ async function handleSubmit() {
   flex-direction: column;
   align-items: center;
   padding: 16rpx;
-  border: 1px solid #e0e0e0;
+  background: rgba(28, 28, 54, 0.7);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 8rpx;
-  
+  transition: all 0.3s ease;
+
   &.active {
-    border-color: #007AFF;
-    background: #e3f2fd;
+    border-color: #00D4FF;
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 12rpx rgba(0, 212, 255, 0.3);
   }
 }
 
@@ -249,15 +264,28 @@ async function handleSubmit() {
 .reason-text {
   font-size: 22rpx;
   margin-top: 4rpx;
+  color: #8888AA;
+}
+
+.reason-option.active .reason-text {
+  color: #00D4FF;
 }
 
 .textarea {
   width: 100%;
   padding: 20rpx;
-  border: 1px solid #e0e0e0;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
   border-radius: 8rpx;
   font-size: 28rpx;
+  color: #FFFFFF;
   min-height: 150rpx;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #555577;
+  }
 }
 
 .time-range {
@@ -269,29 +297,40 @@ async function handleSubmit() {
 .time-input {
   flex: 1;
   padding: 20rpx;
-  border: 1px solid #e0e0e0;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
   border-radius: 8rpx;
   text-align: center;
-  
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+
   .placeholder {
-    color: #999;
+    color: #555577;
   }
 }
 
 .time-separator {
-  color: #666;
+  color: #8888AA;
 }
 
 .submit-btn {
   width: 100%;
   padding: 24rpx;
-  background: #007AFF;
-  color: #fff;
+  background: linear-gradient(135deg, #FF6B35, #FFD600);
+  color: #FFFFFF;
   border-radius: 12rpx;
   font-size: 30rpx;
-  
+  letter-spacing: 1rpx;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+
   &[disabled] {
-    background: #ccc;
+    background: #3A3A5A;
+    box-shadow: none;
   }
 }
 </style>

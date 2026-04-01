@@ -331,16 +331,23 @@ function getWaypointTypeText(type: string): string {
 </script>
 
 <style lang="scss" scoped>
+/* ========================================
+   潮流运动风 · 暗色主题
+   ======================================== */
+
 .route-detail-page {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background: #0A0A1A;
 }
 
-/* 地图 */
+/* ---- 地图 ---- */
 .map-container {
   position: relative;
   height: 50vh;
+  width: 100%;
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .route-map {
@@ -348,52 +355,67 @@ function getWaypointTypeText(type: string): string {
   height: 100%;
 }
 
+/* ---- 显示危险区域按钮（毛玻璃） ---- */
 .show-dangers-btn {
   position: absolute;
   right: 24rpx;
   bottom: 24rpx;
-  background: #FFFFFF;
-  padding: 16rpx 24rpx;
-  border-radius: 28rpx;
-  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.12);
+  background: rgba(28, 28, 54, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 16rpx 28rpx;
+  border-radius: 32rpx;
+  border: 1rpx solid rgba(0, 255, 255, 0.35);
+  box-shadow: 0 0 20rpx rgba(0, 255, 255, 0.15), 0 4rpx 16rpx rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   z-index: 10;
-  
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 30rpx rgba(0, 255, 255, 0.3), 0 4rpx 16rpx rgba(0, 0, 0, 0.4);
+  }
+
   .btn-icon {
     font-size: 28rpx;
     margin-right: 8rpx;
   }
-  
+
   .btn-text {
     font-size: 26rpx;
-    color: #1A1A2E;
+    color: #FFFFFF;
     font-weight: 500;
   }
-  
+
   .badge {
     background: #FF3B30;
     color: #FFFFFF;
-    padding: 4rpx 12rpx;
+    padding: 4rpx 14rpx;
     border-radius: 16rpx;
     margin-left: 12rpx;
     font-size: 22rpx;
     font-weight: 600;
+    box-shadow: 0 0 10rpx rgba(255, 59, 48, 0.5);
   }
 }
 
-/* 危险区域面板 */
-.danger-zones-panel, .route-info {
+/* ---- 危险区域面板 & 路线信息 ---- */
+.danger-zones-panel,
+.route-info {
   flex: 1;
-  background: #F2F2F7;
+  background: #0A0A1A;
 }
 
 .panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24rpx 32rpx;
-  background: #FFFFFF;
+  padding: 28rpx 32rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .panel-title-wrapper {
@@ -409,17 +431,20 @@ function getWaypointTypeText(type: string): string {
 .panel-title {
   font-size: 32rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
 }
 
 .panel-subtitle {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
-/* 路线信息 */
+/* ---- 路线头部 ---- */
 .route-header {
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
   padding-bottom: 24rpx;
 }
 
@@ -427,6 +452,7 @@ function getWaypointTypeText(type: string): string {
   position: relative;
   width: 100%;
   height: 360rpx;
+  overflow: hidden;
 }
 
 .cover-image {
@@ -440,27 +466,42 @@ function getWaypointTypeText(type: string): string {
   left: 0;
   right: 0;
   padding: 24rpx;
-  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 26, 0.95) 0%,
+    rgba(10, 10, 26, 0.6) 40%,
+    transparent 100%
+  );
 }
 
+/* ---- 难度徽章 ---- */
 .difficulty-badge {
   display: inline-block;
-  padding: 8rpx 20rpx;
+  padding: 8rpx 24rpx;
   border-radius: 20rpx;
   font-size: 24rpx;
   font-weight: 600;
-  
+  background: rgba(10, 10, 26, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+
   &.difficulty-easy {
-    background: #34C759;
-    color: #FFFFFF;
+    color: #00FF88;
+    border: 1rpx solid #00FF88;
+    box-shadow: 0 0 12rpx rgba(0, 255, 136, 0.25);
   }
+
   &.difficulty-medium {
-    background: #FF9500;
-    color: #FFFFFF;
+    color: #FFD600;
+    border: 1rpx solid #FFD600;
+    box-shadow: 0 0 12rpx rgba(255, 214, 0, 0.25);
   }
+
   &.difficulty-hard {
-    background: #FF3B30;
-    color: #FFFFFF;
+    color: #FF3B30;
+    border: 1rpx solid #FF3B30;
+    box-shadow: 0 0 12rpx rgba(255, 59, 48, 0.25);
   }
 }
 
@@ -471,9 +512,10 @@ function getWaypointTypeText(type: string): string {
 .route-name {
   font-size: 40rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 16rpx;
+  letter-spacing: 2rpx;
 }
 
 .route-tags {
@@ -493,20 +535,25 @@ function getWaypointTypeText(type: string): string {
 
 .tag-text {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
-/* 内容区块 */
+/* ---- 内容区块 ---- */
 .content-section {
-  background: #FFFFFF;
-  margin-top: 16rpx;
-  padding: 24rpx 32rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  margin: 16rpx 24rpx;
+  padding: 28rpx 32rpx;
+  border-radius: 20rpx;
+  transition: all 0.3s ease;
 }
 
 .section-header {
   display: flex;
   align-items: center;
-  margin-bottom: 16rpx;
+  margin-bottom: 20rpx;
 }
 
 .section-icon {
@@ -517,22 +564,22 @@ function getWaypointTypeText(type: string): string {
 .section-title {
   font-size: 30rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
 }
 
 .section-count {
   margin-left: auto;
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 .description {
   font-size: 28rpx;
-  color: #666666;
-  line-height: 1.7;
+  color: #AAAACC;
+  line-height: 1.8;
 }
 
-/* 途经点 */
+/* ---- 途经点 ---- */
 .waypoints-list {
   display: flex;
   flex-direction: column;
@@ -542,17 +589,22 @@ function getWaypointTypeText(type: string): string {
   display: flex;
   align-items: center;
   padding: 20rpx 0;
-  border-bottom: 1rpx solid #F2F2F7;
-  
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
+  transition: all 0.3s ease;
+
   &:last-child {
     border-bottom: none;
+  }
+
+  &:active {
+    opacity: 0.7;
   }
 }
 
 .waypoint-number {
   width: 48rpx;
   height: 48rpx;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
   color: #FFFFFF;
   border-radius: 50%;
   display: flex;
@@ -561,6 +613,8 @@ function getWaypointTypeText(type: string): string {
   font-size: 24rpx;
   font-weight: 600;
   margin-right: 16rpx;
+  box-shadow: 0 0 14rpx rgba(255, 107, 53, 0.35);
+  transition: all 0.3s ease;
 }
 
 .waypoint-info {
@@ -569,63 +623,83 @@ function getWaypointTypeText(type: string): string {
 
 .waypoint-name {
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 4rpx;
 }
 
 .waypoint-type {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 .waypoint-arrow {
   font-size: 32rpx;
-  color: #C7C7CC;
+  color: rgba(136, 136, 170, 0.5);
 }
 
-/* 信息网格 */
+/* ---- 信息网格 ---- */
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24rpx;
+  gap: 20rpx;
 }
 
 .info-item {
   display: flex;
   flex-direction: column;
-  background: #F8F8F8;
+  background: rgba(28, 28, 54, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 20rpx;
   border-radius: 16rpx;
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  box-shadow: 0 0 12rpx rgba(0, 255, 255, 0.06);
+  transition: all 0.3s ease;
+
+  &:active {
+    border-color: rgba(0, 255, 255, 0.25);
+    box-shadow: 0 0 20rpx rgba(0, 255, 255, 0.12);
+  }
 }
 
 .info-label {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
   margin-bottom: 8rpx;
 }
 
 .info-value {
   font-size: 28rpx;
-  color: #1A1A2E;
-  
+  color: #FFFFFF;
+
   &.difficulty-text {
-    &.difficulty-easy { color: #34C759; }
-    &.difficulty-medium { color: #FF9500; }
-    &.difficulty-hard { color: #FF3B30; }
+    &.difficulty-easy {
+      color: #00FF88;
+    }
+    &.difficulty-medium {
+      color: #FFD600;
+    }
+    &.difficulty-hard {
+      color: #FF3B30;
+    }
   }
 }
 
-/* 操作栏 */
+/* ---- 操作栏 ---- */
 .action-bar {
   display: flex;
   gap: 20rpx;
   padding: 24rpx 32rpx;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1rpx solid rgba(42, 42, 74, 0.6);
   margin-top: 16rpx;
 }
 
-.btn-primary, .btn-secondary {
+.btn-primary,
+.btn-secondary {
   flex: 1;
   display: flex;
   align-items: center;
@@ -634,27 +708,44 @@ function getWaypointTypeText(type: string): string {
   border-radius: 16rpx;
   font-size: 30rpx;
   font-weight: 600;
-  
+  transition: all 0.3s ease;
+
   .btn-icon {
     margin-right: 8rpx;
     font-size: 32rpx;
   }
-  
+
   &::after {
     display: none;
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
   color: #FFFFFF;
-  box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4rpx 24rpx rgba(255, 107, 53, 0.4), 0 0 40rpx rgba(255, 45, 120, 0.2);
+
+  &:active {
+    box-shadow: 0 2rpx 16rpx rgba(255, 107, 53, 0.6), 0 0 50rpx rgba(255, 45, 120, 0.35);
+  }
 }
 
 .btn-secondary {
-  background: #FFFFFF;
-  color: #FF6B35;
-  border: 2rpx solid #FF6B35;
+  background: rgba(28, 28, 54, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #00FFFF;
+  border: 2rpx solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 16rpx rgba(0, 255, 255, 0.12);
+
+  &:active {
+    border-color: rgba(0, 255, 255, 0.7);
+    box-shadow: 0 0 28rpx rgba(0, 255, 255, 0.25);
+  }
 }
 
 .bottom-space {

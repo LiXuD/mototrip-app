@@ -80,18 +80,111 @@ function formatDateRange(startDate?: string, endDate?: string) {
 </script>
 
 <style lang="scss" scoped>
-.trip-detail-page { min-height: 100vh; background: #f2f2f7; padding: 24rpx; }
-.summary { background: linear-gradient(135deg, #4f7cff, #6a5cff); color: #fff; border-radius: 28rpx; padding: 32rpx; margin-bottom: 24rpx; }
-.summary-title { display: block; font-size: 42rpx; font-weight: 700; margin-bottom: 14rpx; }
-.summary-meta,.summary-status { display: block; font-size: 26rpx; line-height: 1.7; }
-.card { background: #fff; border-radius: 24rpx; padding: 24rpx; }
-.section-title { display: block; font-size: 30rpx; font-weight: 600; color: #1a1a2e; margin-bottom: 18rpx; }
-.schedule-item { display: flex; gap: 20rpx; padding: 22rpx 0; border-top: 1rpx solid #f2f2f7; }
-.schedule-item:first-of-type { border-top: none; }
-.schedule-day { width: 64rpx; height: 64rpx; line-height: 64rpx; text-align: center; background: #fff1eb; color: #ff6b35; border-radius: 50%; font-weight: 700; }
-.schedule-title { display: block; font-size: 28rpx; color: #1a1a2e; font-weight: 600; }
-.schedule-desc { display: block; margin-top: 8rpx; font-size: 24rpx; color: #8e8e93; line-height: 1.7; }
-.empty-state { padding: 36rpx 12rpx; text-align: center; }
-.empty-title { display: block; font-size: 30rpx; color: #1a1a2e; font-weight: 600; }
-.empty-desc { display: block; margin-top: 12rpx; font-size: 25rpx; color: #8e8e93; line-height: 1.7; }
+.trip-detail-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+  padding: 24rpx;
+}
+
+.summary {
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+  color: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 212, 255, 0.3);
+}
+
+.summary-title {
+  display: block;
+  font-size: 42rpx;
+  font-weight: 800;
+  margin-bottom: 14rpx;
+  letter-spacing: 2rpx;
+}
+
+.summary-meta,
+.summary-status {
+  display: block;
+  font-size: 26rpx;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.card {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
+  padding: 24rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 18rpx;
+  letter-spacing: 1rpx;
+}
+
+.schedule-item {
+  display: flex;
+  gap: 20rpx;
+  padding: 22rpx 0;
+  border-top: 1rpx solid rgba(42, 42, 74, 0.6);
+  transition: all 0.3s ease;
+}
+
+.schedule-item:first-of-type {
+  border-top: none;
+}
+
+.schedule-day {
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-weight: 700;
+  box-shadow: 0 4rpx 12rpx rgba(255, 107, 53, 0.4);
+  flex-shrink: 0;
+}
+
+.schedule-title {
+  display: block;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.schedule-desc {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #8888AA;
+  line-height: 1.7;
+}
+
+.empty-state {
+  padding: 36rpx 12rpx;
+  text-align: center;
+}
+
+.empty-title {
+  display: block;
+  font-size: 30rpx;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.empty-desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 25rpx;
+  color: #8888AA;
+  line-height: 1.7;
+}
 </style>

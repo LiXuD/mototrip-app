@@ -25,11 +25,55 @@ const filteredItems = computed(() => currentTab.value === '全部' ? items : ite
 </script>
 
 <style lang="scss" scoped>
-.favorites-page { min-height: 100vh; background: #f2f2f7; padding: 24rpx; }
-.tabs { display: flex; gap: 14rpx; margin-bottom: 20rpx; }
-.tab { flex: 1; text-align: center; padding: 16rpx 0; background: #fff; border-radius: 18rpx; color: #8e8e93; font-size: 26rpx; }
-.tab.active { background: #ff6b35; color: #fff; font-weight: 600; }
-.favorite-card { background: #fff; border-radius: 24rpx; padding: 24rpx; margin-bottom: 18rpx; }
-.favorite-title { display: block; font-size: 30rpx; font-weight: 600; color: #1a1a2e; }
-.favorite-desc,.favorite-meta { display: block; margin-top: 10rpx; font-size: 24rpx; color: #8e8e93; line-height: 1.7; }
+.favorites-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+  padding: 24rpx;
+}
+.tabs {
+  display: flex;
+  gap: 14rpx;
+  margin-bottom: 20rpx;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 18rpx;
+  color: #8888AA;
+  font-size: 26rpx;
+  transition: all 0.3s ease;
+}
+.tab.active {
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
+  color: #FFFFFF;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.3);
+}
+.favorite-card {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-bottom: 18rpx;
+  transition: all 0.3s ease;
+}
+.favorite-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.favorite-desc, .favorite-meta {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: #8888AA;
+  line-height: 1.7;
+}
 </style>

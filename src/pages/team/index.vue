@@ -181,13 +181,15 @@ function formatTime(dateStr?: string) {
 <style lang="scss" scoped>
 .team-list-page {
   min-height: 100vh;
-  background: #F2F2F7;
+  background: #0A0A1A;
 }
 
 /* 筛选栏 */
 .filter-bar {
   display: flex;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
   padding: 20rpx 24rpx;
   gap: 12rpx;
 }
@@ -200,13 +202,17 @@ function formatTime(dateStr?: string) {
   padding: 16rpx 0;
   font-size: 26rpx;
   border-radius: 24rpx;
-  background: #F2F2F7;
-  color: #8E8E93;
-  
+  background: rgba(42, 42, 74, 0.4);
+  color: #8888AA;
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  transition: all 0.3s ease;
+
   &.active {
-    background: #FF6B35;
+    background: linear-gradient(135deg, #FF6B35, #FF2D78);
     color: #FFFFFF;
-    
+    border-color: transparent;
+    box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.4);
+
     .filter-dot {
       background: #FFFFFF;
     }
@@ -218,9 +224,9 @@ function formatTime(dateStr?: string) {
   height: 10rpx;
   border-radius: 50%;
   margin-right: 8rpx;
-  
-  &.open { background: #34C759; }
-  &.ongoing { background: #FF9500; }
+
+  &.open { background: #00FF88; }
+  &.ongoing { background: #FFD600; }
 }
 
 /* 队伍列表 */
@@ -230,11 +236,13 @@ function formatTime(dateStr?: string) {
 }
 
 .team-card {
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 24rpx;
   overflow: hidden;
   margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
 .team-cover-wrapper {
@@ -257,21 +265,41 @@ function formatTime(dateStr?: string) {
   font-weight: 600;
   color: #FFFFFF;
   border-radius: 20rpx;
-  
-  &.open { background: rgba(52, 199, 89, 0.95); }
-  &.full { background: rgba(255, 149, 0, 0.95); }
-  &.ongoing { background: rgba(255, 107, 53, 0.95); }
-  &.completed { background: rgba(142, 142, 147, 0.95); }
+
+  &.open {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00FF88;
+    border: 1rpx solid rgba(0, 255, 136, 0.4);
+    box-shadow: 0 0 12rpx rgba(0, 255, 136, 0.3);
+  }
+  &.full {
+    background: rgba(255, 214, 0, 0.2);
+    color: #FFD600;
+    border: 1rpx solid rgba(255, 214, 0, 0.4);
+    box-shadow: 0 0 12rpx rgba(255, 214, 0, 0.3);
+  }
+  &.ongoing {
+    background: rgba(255, 107, 53, 0.2);
+    color: #FF6B35;
+    border: 1rpx solid rgba(255, 107, 53, 0.4);
+    box-shadow: 0 0 12rpx rgba(255, 107, 53, 0.3);
+  }
+  &.completed {
+    background: rgba(58, 58, 90, 0.6);
+    color: #8888AA;
+    border: 1rpx solid rgba(42, 42, 74, 0.6);
+  }
 }
 
 .team-members-count {
   position: absolute;
   bottom: 16rpx;
   right: 16rpx;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
   padding: 8rpx 16rpx;
   border-radius: 16rpx;
-  
+
   text {
     font-size: 22rpx;
     color: #FFFFFF;
@@ -285,9 +313,10 @@ function formatTime(dateStr?: string) {
 .team-name {
   font-size: 32rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 12rpx;
+  letter-spacing: 1rpx;
 }
 
 .team-route {
@@ -303,7 +332,7 @@ function formatTime(dateStr?: string) {
 
 .route-text {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 .team-info {
@@ -323,7 +352,7 @@ function formatTime(dateStr?: string) {
 
 .info-text {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 /* 加载状态 */
@@ -332,9 +361,9 @@ function formatTime(dateStr?: string) {
   align-items: center;
   justify-content: center;
   padding: 32rpx;
-  color: #8E8E93;
+  color: #8888AA;
   font-size: 26rpx;
-  
+
   text {
     margin-left: 12rpx;
   }
@@ -356,7 +385,7 @@ function formatTime(dateStr?: string) {
 .no-more {
   text-align: center;
   padding: 40rpx;
-  color: #C7C7CC;
+  color: #3A3A5A;
   font-size: 26rpx;
 }
 
@@ -376,25 +405,31 @@ function formatTime(dateStr?: string) {
 .empty-text {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #FFFFFF;
   margin-bottom: 12rpx;
 }
 
 .empty-hint {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
   margin-bottom: 32rpx;
 }
 
 .empty-btn {
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
   color: #FFFFFF;
   padding: 20rpx 60rpx;
   border-radius: 40rpx;
   font-size: 28rpx;
   font-weight: 600;
   border: none;
-  
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+
   &::after {
     display: none;
   }
@@ -407,16 +442,23 @@ function formatTime(dateStr?: string) {
   bottom: 60rpx;
   width: 112rpx;
   height: 112rpx;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
-  
+  animation: fabPulse 2s infinite;
+  transition: all 0.3s ease;
+
   &:active {
-    transform: scale(0.95);
+    transform: scale(0.96);
   }
+}
+
+@keyframes fabPulse {
+  0%, 100% { box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4); }
+  50% { box-shadow: 0 8rpx 40rpx rgba(255, 107, 53, 0.7); }
 }
 
 .fab-icon {

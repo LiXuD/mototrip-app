@@ -97,17 +97,100 @@ function formatTime(dateStr: string) {
 </script>
 
 <style lang="scss" scoped>
-.footprint-page { height: 100vh; display: flex; flex-direction: column; }
-.stats-bar { display: flex; background: #fff; padding: 20rpx; }
-.stat-item { flex: 1; text-align: center; }
-.stat-num { font-size: 36rpx; font-weight: bold; color: #007AFF; display: block; }
-.stat-label { font-size: 24rpx; color: #999; }
-.footprint-map { flex: 1; width: 100%; }
-.footprint-list { background: #fff; padding: 20rpx; height: 200rpx; }
-.list-title { font-size: 28rpx; font-weight: bold; display: block; margin-bottom: 16rpx; }
-.list-scroll { white-space: nowrap; height: 120rpx; }
-.footprint-card { display: inline-block; width: 160rpx; padding: 16rpx; margin-right: 16rpx; background: #f5f5f5; border-radius: 8rpx; text-align: center; }
-.fp-location { font-size: 24rpx; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.fp-time { font-size: 20rpx; color: #999; }
-.fab { position: fixed; right: 40rpx; bottom: 60rpx; width: 100rpx; height: 100rpx; background: #007AFF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 60rpx; color: #fff; box-shadow: 0 8rpx 20rpx rgba(0, 122, 255, 0.4); }
+.footprint-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #0A0A1A;
+}
+.stats-bar {
+  display: flex;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  padding: 20rpx;
+}
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+.stat-num {
+  font-size: 36rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+}
+.stat-label {
+  font-size: 24rpx;
+  color: #8888AA;
+}
+.footprint-map {
+  flex: 1;
+  width: 100%;
+}
+.footprint-list {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border-top: 1rpx solid rgba(42, 42, 74, 0.6);
+  padding: 20rpx;
+  height: 200rpx;
+}
+.list-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 16rpx;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
+}
+.list-scroll {
+  white-space: nowrap;
+  height: 120rpx;
+}
+.footprint-card {
+  display: inline-block;
+  width: 160rpx;
+  padding: 16rpx;
+  margin-right: 16rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 8rpx;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.fp-location {
+  font-size: 24rpx;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #FFFFFF;
+}
+.fp-time {
+  font-size: 20rpx;
+  color: #8888AA;
+}
+.fab {
+  position: fixed;
+  right: 40rpx;
+  bottom: 60rpx;
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(0, 212, 255, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
 </style>

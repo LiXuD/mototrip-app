@@ -103,17 +103,113 @@ async function loadWaypoints() {
 </script>
 
 <style lang="scss" scoped>
-.waypoint-page { min-height: 100vh; background: #f2f2f7; padding: 24rpx; }
-.hero { background: linear-gradient(135deg, #ff9a62, #ff6b35); border-radius: 28rpx; padding: 32rpx; color: #fff; margin-bottom: 24rpx; }
-.hero-title { display: block; font-size: 40rpx; font-weight: 700; margin-bottom: 12rpx; }
-.hero-subtitle { display: block; font-size: 26rpx; line-height: 1.6; opacity: 0.92; }
-.filter-row { display: flex; gap: 16rpx; overflow-x: auto; margin-bottom: 24rpx; }
-.filter-chip { flex-shrink: 0; padding: 14rpx 28rpx; border-radius: 999rpx; background: #fff; color: #666; font-size: 26rpx; }
-.filter-chip.active { background: #1a1a2e; color: #fff; }
-.waypoint-card { background: #fff; border-radius: 24rpx; padding: 24rpx; margin-bottom: 20rpx; box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.05); }
-.card-top { display: flex; justify-content: space-between; gap: 20rpx; margin-bottom: 16rpx; }
-.waypoint-name { display: block; font-size: 32rpx; font-weight: 600; color: #1a1a2e; margin-bottom: 8rpx; }
-.waypoint-desc { display: block; color: #666; font-size: 25rpx; line-height: 1.6; }
-.type-badge { align-self: flex-start; background: #fff1eb; color: #ff6b35; padding: 8rpx 20rpx; border-radius: 999rpx; font-size: 24rpx; }
-.meta-row { display: flex; justify-content: space-between; color: #8e8e93; font-size: 24rpx; margin-top: 12rpx; gap: 20rpx; }
+.waypoint-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+  padding: 24rpx;
+}
+
+.hero {
+  background: linear-gradient(135deg, #FF6B35, #FFD600);
+  border-radius: 28rpx;
+  padding: 32rpx;
+  color: #FFFFFF;
+  margin-bottom: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(255, 107, 53, 0.3);
+}
+
+.hero-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+  margin-bottom: 12rpx;
+}
+
+.hero-subtitle {
+  display: block;
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.filter-row {
+  display: flex;
+  gap: 16rpx;
+  overflow-x: auto;
+  margin-bottom: 24rpx;
+}
+
+.filter-chip {
+  flex-shrink: 0;
+  padding: 14rpx 28rpx;
+  border-radius: 999rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  color: #8888AA;
+  font-size: 26rpx;
+  transition: all 0.3s ease;
+
+  &.active {
+    background: linear-gradient(135deg, #FF6B35, #FF2D78);
+    color: #FFFFFF;
+    border-color: transparent;
+    box-shadow: 0 4rpx 16rpx rgba(255, 107, 53, 0.4);
+  }
+}
+
+.waypoint-card {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  transition: all 0.3s ease;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.waypoint-name {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
+  margin-bottom: 8rpx;
+}
+
+.waypoint-desc {
+  display: block;
+  color: #8888AA;
+  font-size: 25rpx;
+  line-height: 1.6;
+}
+
+.type-badge {
+  align-self: flex-start;
+  background: rgba(255, 107, 53, 0.15);
+  color: #FF6B35;
+  padding: 8rpx 20rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  box-shadow: 0 0 12rpx rgba(255, 107, 53, 0.3);
+  border: 1rpx solid rgba(255, 107, 53, 0.3);
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  color: #8888AA;
+  font-size: 24rpx;
+  margin-top: 12rpx;
+  gap: 20rpx;
+}
 </style>

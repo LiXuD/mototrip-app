@@ -1,39 +1,59 @@
 /* ===================================
-   摩旅助手 - 全局样式系统 v2.0
-   统一配色、间距、圆角、字体
+   摩旅助手 - 全局样式系统 v3.0
+   潮流运动风 · 大胆配色 · 强烈对比
    =================================== */
 
 /* ---------- 主题色系 ---------- */
 $uni-color-primary: #FF6B35;        /* 活力橙 - 主色 */
 $uni-color-primary-dark: #E55A2B;    /* 深橙色 */
 $uni-color-primary-light: #FF8A5C;  /* 浅橙色 */
-$uni-color-success: #4CD964;
-$uni-color-warning: #FF9500;        /* 警告橙 */
-$uni-color-error: #FF3B30;          /* 错误红 */
-$uni-color-info: #5AC8FA;          /* 信息蓝 */
+$uni-color-success: #00FF88;         /* 荧光绿 */
+$uni-color-warning: #FFD600;         /* 电光黄 */
+$uni-color-error: #FF3B30;           /* 错误红 */
+$uni-color-info: #00D4FF;           /* 赛博蓝 */
 
-/* 渐变色 */
-$gradient-primary: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
-$gradient-sunset: linear-gradient(135deg, #FF6B35 0%, #FF9500 100%);
-$gradient-night: linear-gradient(180deg, #1A1A2E 0%, #16213E 100%);
+/* 潮流辅助色 */
+$color-purple: #7B2FFF;             /* 电光紫 */
+$color-magenta: #FF2D78;            /* 霓虹粉 */
+$color-cyan: #00E5FF;               /* 冰蓝 */
+$color-lime: #C6FF00;               /* 酸橙绿 */
+$color-gold: #FFB800;               /* 金属金 */
+$color-dark: #0A0A1A;               /* 深空黑 */
+$color-dark-card: #141428;          /* 深色卡片 */
+$color-dark-surface: #1C1C36;       /* 深色表面 */
+$color-dark-border: #2A2A4A;        /* 深色边框 */
+
+/* 渐变色 - 潮流运动风 */
+$gradient-primary: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
+$gradient-sunset: linear-gradient(135deg, #FF6B35 0%, #FFD600 50%, #FF2D78 100%);
+$gradient-night: linear-gradient(180deg, #0A0A1A 0%, #1C1C36 50%, #2A1A4E 100%);
+$gradient-cyber: linear-gradient(135deg, #00D4FF 0%, #7B2FFF 100%);
+$gradient-neon: linear-gradient(135deg, #00FF88 0%, #00D4FF 100%);
+$gradient-fire: linear-gradient(135deg, #FF6B35 0%, #FFD600 100%);
+$gradient-aurora: linear-gradient(135deg, #7B2FFF 0%, #00D4FF 50%, #00FF88 100%);
+$gradient-dark: linear-gradient(180deg, #0A0A1A 0%, #141428 100%);
+$gradient-card-dark: linear-gradient(145deg, #1C1C36 0%, #2A2A4A 100%);
 
 /* ---------- 文字颜色 ---------- */
-$uni-text-color: #1A1A2E;           /* 深色主文字 */
-$uni-text-color-inverse: #FFFFFF;
-$uni-text-color-grey: #8E8E93;      /* 灰色辅助文字 */
-$uni-text-color-placeholder: #C7C7CC;
-$uni-text-color-disable: #D1D1D6;
+$uni-text-color: #FFFFFF;            /* 深色主题主文字 */
+$uni-text-color-inverse: #0A0A1A;
+$uni-text-color-grey: #8888AA;      /* 灰色辅助文字 */
+$uni-text-color-placeholder: #555577;
+$uni-text-color-disable: #3A3A5A;
+$uni-text-color-accent: #00D4FF;    /* 强调文字色 */
 
 /* ---------- 背景颜色 ---------- */
-$uni-bg-color: #FFFFFF;
-$uni-bg-color-grey: #F2F2F7;        /* 浅灰背景 */
-$uni-bg-color-hover: #E8E8ED;
-$uni-bg-color-mask: rgba(26, 26, 46, 0.5);
-$uni-bg-color-card: #FFFFFF;
+$uni-bg-color: #141428;
+$uni-bg-color-grey: #0A0A1A;        /* 深色背景 */
+$uni-bg-color-hover: #1C1C36;
+$uni-bg-color-mask: rgba(10, 10, 26, 0.7);
+$uni-bg-color-card: #1C1C36;
+$uni-bg-color-card-hover: #242444;
 
 /* ---------- 边框颜色 ---------- */
-$uni-border-color: #E5E5EA;
-$uni-border-color-light: #F2F2F7;
+$uni-border-color: #2A2A4A;
+$uni-border-color-light: #1C1C36;
+$uni-border-color-glow: rgba(0, 212, 255, 0.3);
 
 /* ---------- 间距系统 (8rpx 基准) ---------- */
 $uni-spacing-xs: 8rpx;
@@ -61,16 +81,26 @@ $uni-font-size-xxl: 40rpx;
 $uni-font-size-display: 48rpx;
 
 /* ---------- 阴影系统 ---------- */
-$uni-shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
-$uni-shadow-base: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
-$uni-shadow-lg: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
-$uni-shadow-primary: 0 4rpx 16rpx rgba(255, 107, 53, 0.3);
+$uni-shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
+$uni-shadow-base: 0 4rpx 16rpx rgba(0, 0, 0, 0.4);
+$uni-shadow-lg: 0 8rpx 32rpx rgba(0, 0, 0, 0.5);
+$uni-shadow-primary: 0 4rpx 20rpx rgba(255, 107, 53, 0.4);
+$uni-shadow-glow-orange: 0 0 20rpx rgba(255, 107, 53, 0.3), 0 0 60rpx rgba(255, 107, 53, 0.1);
+$uni-shadow-glow-cyan: 0 0 20rpx rgba(0, 212, 255, 0.3), 0 0 60rpx rgba(0, 212, 255, 0.1);
+$uni-shadow-glow-purple: 0 0 20rpx rgba(123, 47, 255, 0.3), 0 0 60rpx rgba(123, 47, 255, 0.1);
+$uni-shadow-glow-green: 0 0 20rpx rgba(0, 255, 136, 0.3), 0 0 60rpx rgba(0, 255, 136, 0.1);
 
 /* ---------- 图标尺寸 ---------- */
 $uni-icon-sm: 32rpx;
 $uni-icon-base: 40rpx;
 $uni-icon-lg: 48rpx;
 $uni-icon-xl: 56rpx;
+
+/* ---------- 动效系统 ---------- */
+$transition-fast: 0.15s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.5s ease;
+$transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 
 /* ===================================
    通用样式类 (可在全局使用)
@@ -82,18 +112,26 @@ $uni-icon-xl: 56rpx;
   background: $uni-bg-color-grey;
 }
 
-/* 卡片 */
+/* 卡片 - 毛玻璃深色风格 */
 .card {
-  background: $uni-bg-color-card;
-  border-radius: $uni-border-radius-lg;
-  box-shadow: $uni-shadow-base;
+  background: rgba(28, 28, 54, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: $uni-border-radius-xl;
+  border: 1rpx solid $uni-border-color;
   padding: $uni-spacing-base;
 }
 
+.card-glow {
+  box-shadow: $uni-shadow-glow-orange;
+}
+
 .card-hover {
+  transition: all $transition-base;
+
   &:active {
-    transform: scale(0.98);
-    opacity: 0.9;
+    transform: scale(0.97);
+    border-color: rgba(255, 107, 53, 0.4);
   }
 }
 
@@ -104,9 +142,14 @@ $uni-icon-xl: 56rpx;
   padding: $uni-spacing-base;
   background: $uni-bg-color-card;
   border-bottom: 1rpx solid $uni-border-color-light;
-  
+  transition: background $transition-fast;
+
   &:last-child {
     border-bottom: none;
+  }
+
+  &:active {
+    background: $uni-bg-color-hover;
   }
 }
 
@@ -115,6 +158,7 @@ $uni-icon-xl: 56rpx;
   font-size: $uni-font-size-xl;
   font-weight: 700;
   color: $uni-text-color;
+  letter-spacing: 1rpx;
 }
 
 .title-secondary {
@@ -140,52 +184,101 @@ $uni-icon-xl: 56rpx;
   color: $uni-text-color-placeholder;
 }
 
-/* 按钮 - 主按钮 */
+.text-accent {
+  color: $uni-text-color-accent;
+}
+
+.text-gradient {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 按钮 - 主按钮 (渐变发光) */
 .btn-primary {
   background: $gradient-primary;
   color: #FFFFFF;
   border-radius: $uni-border-radius-full;
   padding: $uni-spacing-sm $uni-spacing-lg;
   font-size: $uni-font-size-base;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
-  box-shadow: $uni-shadow-primary;
-  
+  box-shadow: $uni-shadow-glow-orange;
+  letter-spacing: 2rpx;
+  transition: all $transition-base;
+
   &:active {
-    opacity: 0.9;
-    transform: scale(0.98);
+    transform: scale(0.96);
+    box-shadow: 0 2rpx 10rpx rgba(255, 107, 53, 0.5);
   }
-  
+
   &[disabled] {
     background: $uni-text-color-disable;
     box-shadow: none;
   }
 }
 
-/* 按钮 - 次按钮 */
+/* 按钮 - 次按钮 (描边发光) */
 .btn-secondary {
-  background: $uni-bg-color-card;
+  background: transparent;
   color: $uni-color-primary;
   border: 2rpx solid $uni-color-primary;
   border-radius: $uni-border-radius-full;
   padding: $uni-spacing-sm $uni-spacing-lg;
   font-size: $uni-font-size-base;
   font-weight: 600;
-  
+  transition: all $transition-base;
+
   &:active {
-    background: rgba(255, 107, 53, 0.1);
+    background: rgba(255, 107, 53, 0.15);
+    box-shadow: $uni-shadow-glow-orange;
   }
 }
 
 /* 按钮 - 文字按钮 */
 .btn-text {
   background: transparent;
-  color: $uni-color-primary;
+  color: $uni-text-color-accent;
   padding: $uni-spacing-xs $uni-spacing-sm;
   font-size: $uni-font-size-base;
-  
+
   &:active {
     opacity: 0.7;
+  }
+}
+
+/* 按钮 - 赛博蓝 */
+.btn-cyber {
+  background: $gradient-cyber;
+  color: #FFFFFF;
+  border-radius: $uni-border-radius-full;
+  padding: $uni-spacing-sm $uni-spacing-lg;
+  font-size: $uni-font-size-base;
+  font-weight: 700;
+  box-shadow: $uni-shadow-glow-cyan;
+  letter-spacing: 2rpx;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+/* 按钮 - 霓虹绿 */
+.btn-neon {
+  background: $gradient-neon;
+  color: $color-dark;
+  border-radius: $uni-border-radius-full;
+  padding: $uni-spacing-sm $uni-spacing-lg;
+  font-size: $uni-font-size-base;
+  font-weight: 700;
+  box-shadow: $uni-shadow-glow-green;
+  letter-spacing: 2rpx;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.96);
   }
 }
 
@@ -196,38 +289,55 @@ $uni-icon-xl: 56rpx;
   padding: 4rpx 16rpx;
   border-radius: $uni-border-radius-full;
   font-size: $uni-font-size-xs;
-  font-weight: 500;
-  
+  font-weight: 600;
+
   &.tag-primary {
-    background: rgba(255, 107, 53, 0.15);
+    background: rgba(255, 107, 53, 0.2);
     color: $uni-color-primary;
+    border: 1rpx solid rgba(255, 107, 53, 0.3);
   }
-  
+
   &.tag-success {
-    background: rgba(76, 217, 100, 0.15);
+    background: rgba(0, 255, 136, 0.15);
     color: $uni-color-success;
+    border: 1rpx solid rgba(0, 255, 136, 0.3);
   }
-  
+
   &.tag-warning {
-    background: rgba(255, 149, 0, 0.15);
+    background: rgba(255, 214, 0, 0.15);
     color: $uni-color-warning;
+    border: 1rpx solid rgba(255, 214, 0, 0.3);
   }
-  
+
   &.tag-error {
     background: rgba(255, 59, 48, 0.15);
     color: $uni-color-error;
+    border: 1rpx solid rgba(255, 59, 48, 0.3);
   }
-  
+
+  &.tag-info {
+    background: rgba(0, 212, 255, 0.15);
+    color: $uni-color-info;
+    border: 1rpx solid rgba(0, 212, 255, 0.3);
+  }
+
+  &.tag-purple {
+    background: rgba(123, 47, 255, 0.15);
+    color: $color-purple;
+    border: 1rpx solid rgba(123, 47, 255, 0.3);
+  }
+
   &.tag-grey {
-    background: $uni-bg-color-grey;
+    background: rgba(136, 136, 170, 0.15);
     color: $uni-text-color-grey;
+    border: 1rpx solid rgba(136, 136, 170, 0.2);
   }
 }
 
 /* 分隔线 */
 .divider {
   height: 1rpx;
-  background: $uni-border-color-light;
+  background: $uni-border-color;
   margin: $uni-spacing-base 0;
 }
 
@@ -282,8 +392,122 @@ $uni-icon-xl: 56rpx;
   overflow: hidden;
 }
 
+.ellipsis-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 /* 安全区域 */
 .safe-area-bottom {
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ===================================
+   潮流运动风特效类
+   =================================== */
+
+/* 发光边框卡片 */
+.glow-border {
+  border: 1rpx solid transparent;
+  background-clip: padding-box;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1rpx;
+    left: -1rpx;
+    right: -1rpx;
+    bottom: -1rpx;
+    border-radius: inherit;
+    background: $gradient-primary;
+    z-index: -1;
+    opacity: 0.5;
+  }
+}
+
+/* 渐变文字 */
+.gradient-text {
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cyber {
+  background: $gradient-cyber;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-neon {
+  background: $gradient-neon;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 脉冲动画 */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10rpx rgba(255, 107, 53, 0.3); }
+  50% { box-shadow: 0 0 30rpx rgba(255, 107, 53, 0.6), 0 0 60rpx rgba(255, 107, 53, 0.2); }
+}
+
+@keyframes pulse-cyan {
+  0%, 100% { box-shadow: 0 0 10rpx rgba(0, 212, 255, 0.3); }
+  50% { box-shadow: 0 0 30rpx rgba(0, 212, 255, 0.6), 0 0 60rpx rgba(0, 212, 255, 0.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8rpx); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 毛玻璃效果 */
+.glass {
+  background: rgba(28, 28, 54, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* 噪点纹理覆盖 */
+.noise-overlay {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
 }

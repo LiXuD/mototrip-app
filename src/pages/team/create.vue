@@ -110,13 +110,15 @@ async function submit() {
 <style lang="scss" scoped>
 .create-team-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #0A0A1A;
   padding: 20rpx;
 }
 
 .form {
-  background: #fff;
-  border-radius: 16rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
   padding: 20rpx;
 }
 
@@ -126,17 +128,31 @@ async function submit() {
 
 .label {
   font-size: 28rpx;
-  font-weight: bold;
+  font-weight: 700;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 12rpx;
+  letter-spacing: 1rpx;
 }
 
 .input, .textarea {
   width: 100%;
   padding: 20rpx;
-  background: #f5f5f5;
-  border-radius: 8rpx;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
+  border-radius: 12rpx;
   font-size: 28rpx;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #555577;
+  }
+
+  &:focus {
+    border-color: #00D4FF;
+    box-shadow: 0 0 16rpx rgba(0, 212, 255, 0.3);
+  }
 }
 
 .textarea {
@@ -145,32 +161,61 @@ async function submit() {
 
 .picker {
   padding: 20rpx;
-  background: #f5f5f5;
-  border-radius: 8rpx;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
+  border-radius: 12rpx;
   font-size: 28rpx;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
 }
 
 .cover-upload {
   width: 200rpx;
   height: 200rpx;
-  background: #f5f5f5;
-  border-radius: 8rpx;
+  background: rgba(28, 28, 54, 0.8);
+  border: 2rpx dashed rgba(42, 42, 74, 0.8);
+  border-radius: 16rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-  color: #999;
+  color: #555577;
+  transition: all 0.3s ease;
+
+  &:active {
+    border-color: #00D4FF;
+    box-shadow: 0 0 16rpx rgba(0, 212, 255, 0.2);
+  }
+
   image {
     width: 100%;
     height: 100%;
-    border-radius: 8rpx;
+    border-radius: 16rpx;
   }
 }
 
 .submit-btn {
   margin-top: 40rpx;
-  background: #007AFF;
-  color: #fff;
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+  color: #FFFFFF;
   border-radius: 44rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(0, 212, 255, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &::after {
+    display: none;
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+  }
 }
 </style>

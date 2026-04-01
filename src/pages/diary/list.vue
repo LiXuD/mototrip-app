@@ -232,17 +232,17 @@ function getMoodEmoji(mood: string) {
 <style lang="scss" scoped>
 .diary-list-page {
   min-height: 100vh;
-  background: #F2F2F7;
+  background: #0A0A1A;
 }
 
 /* 标签筛选 */
 .filter-tabs {
   display: flex;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.8);
   padding: 20rpx 24rpx;
   gap: 12rpx;
   overflow-x: auto;
-  border-bottom: 1rpx solid #F2F2F7;
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .tab-item {
@@ -250,14 +250,16 @@ function getMoodEmoji(mood: string) {
   padding: 12rpx 28rpx;
   font-size: 26rpx;
   border-radius: 24rpx;
-  background: #F2F2F7;
-  color: #8E8E93;
+  background: transparent;
+  color: #8888AA;
   white-space: nowrap;
-  
+  transition: all 0.3s ease;
+
   &.active {
-    background: #FF6B35;
+    background: linear-gradient(135deg, #FF6B35, #FF2D78);
     color: #FFFFFF;
     font-weight: 600;
+    box-shadow: 0 4rpx 20rpx rgba(255, 107, 53, 0.4), 0 0 30rpx rgba(255, 45, 120, 0.2);
   }
 }
 
@@ -268,11 +270,19 @@ function getMoodEmoji(mood: string) {
 }
 
 .diary-card {
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
   border-radius: 24rpx;
   padding: 24rpx;
   margin-bottom: 20rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  transition: all 0.3s ease;
+
+  &:active {
+    border-color: rgba(0, 212, 255, 0.6);
+    box-shadow: 0 0 20rpx rgba(0, 212, 255, 0.15), 0 0 40rpx rgba(0, 212, 255, 0.05);
+  }
 }
 
 .diary-header {
@@ -286,6 +296,8 @@ function getMoodEmoji(mood: string) {
   height: 80rpx;
   border-radius: 50%;
   margin-right: 16rpx;
+  border: 2rpx solid rgba(0, 212, 255, 0.4);
+  transition: all 0.3s ease;
 }
 
 .user-info {
@@ -295,7 +307,7 @@ function getMoodEmoji(mood: string) {
 .user-name {
   font-size: 28rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 6rpx;
 }
@@ -308,7 +320,7 @@ function getMoodEmoji(mood: string) {
 
 .diary-time {
   font-size: 22rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 .diary-tag {
@@ -326,15 +338,16 @@ function getMoodEmoji(mood: string) {
 .diary-title {
   font-size: 32rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 12rpx;
   line-height: 1.4;
+  letter-spacing: 1rpx;
 }
 
 .diary-content {
   font-size: 28rpx;
-  color: #666666;
+  color: #8888AA;
   line-height: 1.6;
   display: block;
 }
@@ -351,6 +364,8 @@ function getMoodEmoji(mood: string) {
   border-radius: 16rpx;
   margin-right: 12rpx;
   display: inline-block;
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  transition: all 0.3s ease;
 }
 
 .more-images {
@@ -360,12 +375,13 @@ function getMoodEmoji(mood: string) {
   width: 180rpx;
   height: 180rpx;
   border-radius: 16rpx;
-  background: #F2F2F7;
-  
+  background: rgba(10, 10, 26, 0.7);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+
   text {
     font-size: 32rpx;
     font-weight: 600;
-    color: #8E8E93;
+    color: #00D4FF;
   }
 }
 
@@ -375,13 +391,14 @@ function getMoodEmoji(mood: string) {
   flex-wrap: wrap;
   gap: 20rpx;
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
   margin-bottom: 16rpx;
 }
 
 .meta-icon {
   display: flex;
   align-items: center;
+  color: #8888AA;
 }
 
 /* 统计 */
@@ -389,12 +406,13 @@ function getMoodEmoji(mood: string) {
   display: flex;
   gap: 48rpx;
   padding-top: 20rpx;
-  border-top: 1rpx solid #F2F2F7;
+  border-top: 1rpx solid rgba(42, 42, 74, 0.6);
 }
 
 .stat-item {
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
 }
 
 .stat-icon {
@@ -404,7 +422,19 @@ function getMoodEmoji(mood: string) {
 
 .stat-text {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #8888AA;
+  transition: all 0.3s ease;
+}
+
+/* 标签 */
+.tag {
+  padding: 4rpx 14rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  background: rgba(255, 107, 53, 0.2);
+  color: #FF6B35;
+  border: 1rpx solid rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
 }
 
 /* 加载状态 */
@@ -413,9 +443,9 @@ function getMoodEmoji(mood: string) {
   align-items: center;
   justify-content: center;
   padding: 32rpx;
-  color: #8E8E93;
+  color: #8888AA;
   font-size: 26rpx;
-  
+
   text {
     margin-left: 12rpx;
   }
@@ -424,20 +454,21 @@ function getMoodEmoji(mood: string) {
 .loading-dot {
   width: 20rpx;
   height: 20rpx;
-  background: #FF6B35;
+  background: #00D4FF;
   border-radius: 50%;
   animation: loading 1s infinite;
+  box-shadow: 0 0 10rpx rgba(0, 212, 255, 0.5);
 }
 
 @keyframes loading {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
 .no-more {
   text-align: center;
   padding: 40rpx;
-  color: #C7C7CC;
+  color: #3A3A5A;
   font-size: 26rpx;
 }
 
@@ -457,13 +488,13 @@ function getMoodEmoji(mood: string) {
 .empty-text {
   font-size: 32rpx;
   font-weight: 600;
-  color: #1A1A2E;
+  color: #555577;
   margin-bottom: 12rpx;
 }
 
 .empty-hint {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #555577;
 }
 
 /* 悬浮按钮 */
@@ -473,15 +504,26 @@ function getMoodEmoji(mood: string) {
   bottom: 60rpx;
   width: 112rpx;
   height: 112rpx;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
-  
+  animation: fab-glow 2s ease-in-out infinite;
+  transition: all 0.3s ease;
+
   &:active {
     transform: scale(0.95);
+  }
+}
+
+@keyframes fab-glow {
+  0%, 100% {
+    box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4), 0 0 20rpx rgba(255, 45, 120, 0.2);
+  }
+  50% {
+    box-shadow: 0 8rpx 32rpx rgba(255, 107, 53, 0.6), 0 0 40rpx rgba(255, 45, 120, 0.4);
   }
 }
 

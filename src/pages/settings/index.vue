@@ -21,9 +21,39 @@ const settings = reactive({ alert: true, team: true, offline: false })
 </script>
 
 <style lang="scss" scoped>
-.settings-page { min-height: 100vh; background: #f2f2f7; padding: 24rpx; }
-.group { background: #fff; border-radius: 24rpx; padding: 12rpx 24rpx; margin-bottom: 20rpx; }
-.group-title { display: block; padding: 16rpx 0; font-size: 28rpx; font-weight: 600; color: #1a1a2e; }
-.row { display: flex; justify-content: space-between; align-items: center; padding: 24rpx 0; border-top: 1rpx solid #f2f2f7; font-size: 28rpx; color: #1a1a2e; }
-.row.static .row-value { color: #8e8e93; font-size: 24rpx; }
+.settings-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+  padding: 24rpx;
+}
+.group {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
+  padding: 12rpx 24rpx;
+  margin-bottom: 20rpx;
+}
+.group-title {
+  display: block;
+  padding: 16rpx 0;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+  border-top: 1rpx solid rgba(42, 42, 74, 0.4);
+  font-size: 28rpx;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+}
+.row.static .row-value {
+  color: #8888AA;
+  font-size: 24rpx;
+}
 </style>

@@ -95,15 +95,107 @@ function formatDate(value?: string) {
 </script>
 
 <style lang="scss" scoped>
-.my-route-page { min-height: 100vh; background: #f2f2f7; padding: 24rpx; }
-.header { margin-bottom: 24rpx; }
-.header-title { display: block; font-size: 42rpx; font-weight: 700; color: #1a1a2e; }
-.header-subtitle { display: block; margin-top: 12rpx; font-size: 25rpx; color: #8e8e93; line-height: 1.7; }
-.route-card,.empty-card { background: #fff; border-radius: 24rpx; padding: 24rpx; margin-bottom: 18rpx; }
-.card-row { display: flex; justify-content: space-between; gap: 20rpx; align-items: flex-start; }
-.route-name { display: block; font-size: 30rpx; font-weight: 600; color: #1a1a2e; }
-.route-meta,.route-desc,.empty-desc { display: block; font-size: 24rpx; color: #8e8e93; margin-top: 10rpx; line-height: 1.7; }
-.status { padding: 8rpx 18rpx; border-radius: 999rpx; background: #fff1eb; color: #ff6b35; font-size: 24rpx; }
-.empty-title { display: block; font-size: 30rpx; font-weight: 600; color: #1a1a2e; }
-.create-btn { margin-top: 20rpx; background: #ff6b35; color: #fff; border-radius: 20rpx; font-size: 30rpx; }
+.my-route-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+  padding: 24rpx;
+}
+
+.header {
+  margin-bottom: 24rpx;
+}
+
+.header-title {
+  display: block;
+  font-size: 42rpx;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 2rpx;
+}
+
+.header-subtitle {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 25rpx;
+  color: #8888AA;
+  line-height: 1.7;
+}
+
+.route-card,
+.empty-card {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
+  padding: 24rpx;
+  margin-bottom: 18rpx;
+  transition: all 0.3s ease;
+}
+
+.route-card:active {
+  transform: scale(0.98);
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  align-items: flex-start;
+}
+
+.route-name {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.route-meta,
+.route-desc,
+.empty-desc {
+  display: block;
+  font-size: 24rpx;
+  color: #8888AA;
+  margin-top: 10rpx;
+  line-height: 1.7;
+}
+
+.status {
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 107, 53, 0.15);
+  color: #FF6B35;
+  font-size: 24rpx;
+  font-weight: 600;
+  box-shadow: 0 0 12rpx rgba(255, 107, 53, 0.3);
+  border: 1rpx solid rgba(255, 107, 53, 0.3);
+}
+
+.empty-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.create-btn {
+  margin-top: 20rpx;
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
+  color: #FFFFFF;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 53, 0.4);
+  transition: all 0.3s ease;
+  border: none;
+
+  &:active {
+    transform: scale(0.96);
+    opacity: 0.9;
+  }
+
+  &::after {
+    display: none;
+  }
+}
 </style>

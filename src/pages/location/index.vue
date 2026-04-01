@@ -112,27 +112,148 @@ function formatTime(dateStr: string) {
 </script>
 
 <style lang="scss" scoped>
-.location-page { min-height: 100vh; background: #f5f5f5; }
-.section { background: #fff; margin-bottom: 20rpx; padding: 30rpx; }
-.section-title { font-size: 32rpx; font-weight: bold; display: block; margin-bottom: 20rpx; }
-.share-list { margin-bottom: 20rpx; }
-.share-item { display: flex; align-items: center; padding: 20rpx; border-bottom: 1rpx solid #eee; }
-.share-item:last-child { border-bottom: none; }
-.viewer-avatar, .owner-avatar { width: 80rpx; height: 80rpx; border-radius: 50%; margin-right: 20rpx; }
-.share-info { flex: 1; }
-.viewer-name, .owner-name { font-size: 28rpx; font-weight: bold; display: block; }
-.share-status, .location-info, .update-time { font-size: 24rpx; color: #666; display: block; margin-top: 8rpx; }
-.share-actions { display: flex; gap: 10rpx; }
-.action-btn { font-size: 24rpx; color: #007AFF; padding: 10rpx 20rpx; }
-.action-btn.stop { color: #FF9500; }
-.action-btn.delete { color: #FF3B30; }
-.empty { text-align: center; padding: 40rpx; color: #999; }
-.add-btn { background: #007AFF; color: #fff; border-radius: 8rpx; }
-.modal-mask { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
-.modal { background: #fff; border-radius: 16rpx; padding: 40rpx; width: 600rpx; }
-.modal-title { font-size: 32rpx; font-weight: bold; display: block; text-align: center; margin-bottom: 30rpx; }
-.modal-input { border: 1rpx solid #ddd; padding: 20rpx; border-radius: 8rpx; margin-bottom: 30rpx; }
-.modal-actions { display: flex; gap: 20rpx; }
-.modal-actions button { flex: 1; }
-.modal-actions .primary { background: #007AFF; color: #fff; }
+.location-page {
+  min-height: 100vh;
+  background: #0A0A1A;
+}
+.section {
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  margin-bottom: 20rpx;
+  padding: 30rpx;
+}
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 20rpx;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
+}
+.share-list {
+  margin-bottom: 20rpx;
+}
+.share-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.4);
+  transition: all 0.3s ease;
+}
+.share-item:last-child {
+  border-bottom: none;
+}
+.viewer-avatar, .owner-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.share-info {
+  flex: 1;
+}
+.viewer-name, .owner-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+  color: #FFFFFF;
+}
+.share-status, .location-info, .update-time {
+  font-size: 24rpx;
+  color: #8888AA;
+  display: block;
+  margin-top: 8rpx;
+}
+.share-actions {
+  display: flex;
+  gap: 10rpx;
+}
+.action-btn {
+  font-size: 24rpx;
+  color: #00D4FF;
+  padding: 10rpx 20rpx;
+  transition: all 0.3s ease;
+}
+.action-btn.stop {
+  color: #FF6B35;
+}
+.action-btn.delete {
+  color: #FF2D78;
+}
+.empty {
+  text-align: center;
+  padding: 40rpx;
+  color: #555577;
+}
+.add-btn {
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+  color: #FFFFFF;
+  border-radius: 8rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 212, 255, 0.3);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: rgba(28, 28, 54, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 16rpx;
+  padding: 40rpx;
+  width: 600rpx;
+}
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  margin-bottom: 30rpx;
+  color: #FFFFFF;
+  letter-spacing: 1rpx;
+}
+.modal-input {
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
+  padding: 20rpx;
+  border-radius: 8rpx;
+  margin-bottom: 30rpx;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: #555577;
+  }
+}
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+}
+.modal-actions button {
+  flex: 1;
+  color: #8888AA;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+}
+.modal-actions .primary {
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 4rpx 16rpx rgba(0, 212, 255, 0.3);
+}
 </style>

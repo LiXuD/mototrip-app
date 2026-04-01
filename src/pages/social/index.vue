@@ -136,12 +136,14 @@ function formatTime(dateStr: string) {
 <style lang="scss" scoped>
 .social-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #0A0A1A;
 }
 
 .tabs {
   display: flex;
-  background: #fff;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
   padding: 20rpx;
 }
 
@@ -150,11 +152,14 @@ function formatTime(dateStr: string) {
   text-align: center;
   padding: 16rpx 0;
   font-size: 28rpx;
-  color: #666;
+  color: #8888AA;
   border-bottom: 4rpx solid transparent;
+  transition: all 0.3s ease;
+
   &.active {
-    color: #007AFF;
-    border-bottom-color: #007AFF;
+    color: #00D4FF;
+    border-bottom-color: #00D4FF;
+    text-shadow: 0 0 12rpx rgba(0, 212, 255, 0.5);
   }
 }
 
@@ -164,10 +169,13 @@ function formatTime(dateStr: string) {
 }
 
 .post-card {
-  background: #fff;
-  border-radius: 16rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  border-radius: 24rpx;
   padding: 24rpx;
   margin-bottom: 20rpx;
+  transition: all 0.3s ease;
 }
 
 .post-header {
@@ -181,6 +189,7 @@ function formatTime(dateStr: string) {
   height: 72rpx;
   border-radius: 50%;
   margin-right: 16rpx;
+  border: 2rpx solid rgba(0, 212, 255, 0.3);
 }
 
 .user-info {
@@ -189,18 +198,21 @@ function formatTime(dateStr: string) {
 
 .user-name {
   font-size: 28rpx;
-  font-weight: bold;
+  font-weight: 700;
+  color: #FFFFFF;
   display: block;
+  letter-spacing: 1rpx;
 }
 
 .post-time {
   font-size: 22rpx;
-  color: #999;
+  color: #8888AA;
 }
 
 .post-content {
   font-size: 28rpx;
   line-height: 1.6;
+  color: #FFFFFF;
   display: block;
   margin-bottom: 16rpx;
 }
@@ -215,7 +227,7 @@ function formatTime(dateStr: string) {
 .post-img {
   width: calc(33.33% - 6rpx);
   height: 200rpx;
-  border-radius: 8rpx;
+  border-radius: 12rpx;
   &.single-img {
     width: 100%;
     height: 400rpx;
@@ -224,7 +236,7 @@ function formatTime(dateStr: string) {
 
 .post-location {
   font-size: 24rpx;
-  color: #999;
+  color: #8888AA;
   margin-bottom: 16rpx;
 }
 
@@ -232,7 +244,7 @@ function formatTime(dateStr: string) {
   display: flex;
   gap: 60rpx;
   padding-top: 16rpx;
-  border-top: 1rpx solid #f0f0f0;
+  border-top: 1rpx solid rgba(42, 42, 74, 0.4);
 }
 
 .action-item {
@@ -240,13 +252,14 @@ function formatTime(dateStr: string) {
   align-items: center;
   gap: 8rpx;
   font-size: 26rpx;
-  color: #999;
+  color: #8888AA;
+  transition: all 0.3s ease;
 }
 
 .loading, .no-more {
   text-align: center;
   padding: 40rpx;
-  color: #999;
+  color: #8888AA;
 }
 
 .fab {
@@ -255,13 +268,18 @@ function formatTime(dateStr: string) {
   bottom: 40rpx;
   width: 100rpx;
   height: 100rpx;
-  background: #007AFF;
+  background: linear-gradient(135deg, #00D4FF, #7B2FFF);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 60rpx;
   color: #fff;
-  box-shadow: 0 8rpx 20rpx rgba(0, 122, 255, 0.4);
+  box-shadow: 0 8rpx 24rpx rgba(0, 212, 255, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
 </style>

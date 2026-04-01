@@ -224,7 +224,7 @@ function goModeSelection() {
 <style lang="scss" scoped>
 .settings-page {
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #0A0A1A;
   padding-bottom: 40rpx;
 }
 
@@ -233,8 +233,8 @@ function goModeSelection() {
   flex-direction: column;
   align-items: center;
   padding: 60rpx 30rpx;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
+  background: linear-gradient(135deg, #7B2FFF 0%, #00D4FF 50%, #00FF88 100%);
+  color: #FFFFFF;
 }
 
 .mode-icon {
@@ -245,6 +245,7 @@ function goModeSelection() {
 .mode-title {
   font-size: 40rpx;
   font-weight: bold;
+  letter-spacing: 2rpx;
   margin-bottom: 12rpx;
 }
 
@@ -255,7 +256,9 @@ function goModeSelection() {
 }
 
 .settings-section {
-  background: #fff;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   margin: 30rpx;
   border-radius: 16rpx;
   padding: 20rpx 0;
@@ -264,9 +267,10 @@ function goModeSelection() {
 .section-title {
   font-size: 28rpx;
   font-weight: bold;
-  color: #333;
+  color: #FFFFFF;
   padding: 20rpx 30rpx;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.6);
+  letter-spacing: 1rpx;
 }
 
 .setting-item {
@@ -274,8 +278,9 @@ function goModeSelection() {
   align-items: center;
   justify-content: space-between;
   padding: 30rpx;
-  border-bottom: 1rpx solid #f5f5f5;
-  
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.4);
+  transition: all 0.3s ease;
+
   &:last-child {
     border-bottom: none;
   }
@@ -288,14 +293,14 @@ function goModeSelection() {
 .setting-label {
   display: block;
   font-size: 30rpx;
-  color: #333;
+  color: #FFFFFF;
   margin-bottom: 8rpx;
 }
 
 .setting-hint {
   display: block;
   font-size: 24rpx;
-  color: #999;
+  color: #8888AA;
 }
 
 .setting-right {
@@ -306,16 +311,19 @@ function goModeSelection() {
 .setting-input {
   width: 120rpx;
   height: 60rpx;
-  background: #f5f5f5;
+  background: rgba(28, 28, 54, 0.8);
+  border: 1rpx solid rgba(42, 42, 74, 0.8);
   border-radius: 8rpx;
   text-align: center;
   font-size: 28rpx;
+  color: #FFFFFF;
   margin-right: 10rpx;
+  transition: all 0.3s ease;
 }
 
 .unit {
   font-size: 26rpx;
-  color: #666;
+  color: #8888AA;
 }
 
 .action-section {
@@ -324,11 +332,18 @@ function goModeSelection() {
 
 .switch-btn {
   width: 100%;
-  background: #fff;
-  color: #007AFF;
-  border: 1rpx solid #007AFF;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(16px);
+  color: #00D4FF;
+  border: 1rpx solid #00D4FF;
   padding: 24rpx;
   border-radius: 12rpx;
   font-size: 32rpx;
+  letter-spacing: 1rpx;
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
 </style>

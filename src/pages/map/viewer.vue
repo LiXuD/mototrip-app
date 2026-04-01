@@ -140,6 +140,7 @@ function centerMap() {
   position: relative;
   width: 100vw;
   height: 100vh;
+  background: #0A0A1A;
 }
 
 .map-container {
@@ -159,14 +160,21 @@ function centerMap() {
 .control-btn {
   width: 80rpx;
   height: 80rpx;
-  background: #fff;
+  background: rgba(28, 28, 54, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(0, 212, 255, 0.4);
   border-radius: 12rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 40rpx;
-  color: #333;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  color: #00D4FF;
+  box-shadow: 0 4rpx 16rpx rgba(0, 212, 255, 0.2);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
 
 .info-bar {
@@ -177,13 +185,15 @@ function centerMap() {
   display: flex;
   justify-content: space-between;
   padding: 12rpx 20rpx;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(28, 28, 54, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   border-radius: 8rpx;
 }
 
 .info-text {
   font-size: 24rpx;
-  color: #666;
+  color: #8888AA;
 }
 
 .offline-tip {
@@ -192,9 +202,12 @@ function centerMap() {
   left: 50%;
   transform: translateX(-50%);
   padding: 12rpx 24rpx;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(28, 28, 54, 0.9);
+  backdrop-filter: blur(16px);
+  border: 1rpx solid rgba(255, 214, 0, 0.5);
   border-radius: 30rpx;
-  color: #fff;
+  color: #FFD600;
   font-size: 24rpx;
+  box-shadow: 0 0 16rpx rgba(255, 214, 0, 0.2);
 }
 </style>

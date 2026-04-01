@@ -174,14 +174,15 @@ function handleLogout() {
 </script>
 
 <style lang="scss" scoped>
+/* 潮流运动风 · 暗黑主题 */
 .profile-page {
   min-height: 100vh;
-  background: #F2F2F7;
+  background: #0A0A1A;
 }
 
 .profile-header {
   position: relative;
-  height: 480rpx;
+  height: 520rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -196,7 +197,7 @@ function handleLogout() {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 50%, #FF9500 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 50%, #7B2FFF 100%);
 }
 
 .user-info {
@@ -216,7 +217,9 @@ function handleLogout() {
   width: 160rpx;
   height: 160rpx;
   border-radius: 50%;
-  border: 6rpx solid rgba(255, 255, 255, 0.4);
+  border: 4rpx solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 30rpx rgba(255, 107, 53, 0.4), 0 0 60rpx rgba(123, 47, 255, 0.2);
+  transition: box-shadow 0.3s ease;
 }
 
 .avatar-edit {
@@ -225,13 +228,15 @@ function handleLogout() {
   right: 0;
   width: 48rpx;
   height: 48rpx;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.8);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
-  
+  box-shadow: 0 0 12rpx rgba(0, 255, 255, 0.4);
+  border: 1rpx solid rgba(0, 255, 255, 0.5);
+  transition: all 0.3s ease;
+
   text {
     font-size: 24rpx;
   }
@@ -239,25 +244,28 @@ function handleLogout() {
 
 .nickname {
   font-size: 40rpx;
-  font-weight: 700;
+  font-weight: 800;
   color: #FFFFFF;
   margin-bottom: 8rpx;
-  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  letter-spacing: 2rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
 }
 
 .bio {
   font-size: 26rpx;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 16rpx;
   text-align: center;
   max-width: 400rpx;
 }
 
 .motorcycle-tag {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.2);
   padding: 8rpx 24rpx;
   border-radius: 24rpx;
-  
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+
   text {
     font-size: 24rpx;
     color: #FFFFFF;
@@ -276,13 +284,14 @@ function handleLogout() {
 .login-avatar {
   width: 160rpx;
   height: 160rpx;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 24rpx;
-  
+  border: 1rpx solid rgba(255, 255, 255, 0.3);
+
   text {
     font-size: 80rpx;
   }
@@ -297,20 +306,23 @@ function handleLogout() {
 
 .prompt-text {
   font-size: 26rpx;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 32rpx;
 }
 
 .login-btn {
   background: #FFFFFF;
-  color: #FF6B35;
+  color: transparent;
   border: none;
   padding: 20rpx 80rpx;
   border-radius: 40rpx;
   font-size: 30rpx;
   font-weight: 600;
-  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
-  
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.4);
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: all 0.3s ease;
+
   &::after {
     display: none;
   }
@@ -319,13 +331,16 @@ function handleLogout() {
 /* 统计 */
 .stats-section {
   display: flex;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 32rpx 0;
   margin: -40rpx 32rpx 0;
   border-radius: 24rpx;
-  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.08);
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
   position: relative;
   z-index: 10;
+  transition: all 0.3s ease;
 }
 
 .stat-item {
@@ -337,20 +352,23 @@ function handleLogout() {
 
 .stat-num {
   font-size: 40rpx;
-  font-weight: 700;
-  color: #1A1A2E;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FF6B35, #FF2D78);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
   margin-bottom: 8rpx;
 }
 
 .stat-label {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 .stat-divider {
   width: 1rpx;
   height: 60rpx;
-  background: #F2F2F7;
+  background: rgba(42, 42, 74, 0.6);
 }
 
 /* 菜单区块 */
@@ -366,15 +384,19 @@ function handleLogout() {
 .menu-header-text {
   font-size: 28rpx;
   font-weight: 600;
-  color: #8E8E93;
+  color: #8888AA;
 }
 
 .menu-grid {
   display: flex;
   flex-wrap: wrap;
-  background: #FFFFFF;
-  border-radius: 24rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28rpx;
   padding: 16rpx;
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  transition: all 0.3s ease;
 }
 
 .menu-item {
@@ -393,13 +415,32 @@ function handleLogout() {
   align-items: center;
   justify-content: center;
   margin-bottom: 12rpx;
-  
-  &.primary { background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%); }
-  &.warning { background: linear-gradient(135deg, #FF9500 0%, #FFB340 100%); }
-  &.success { background: linear-gradient(135deg, #34C759 0%, #5DD97E 100%); }
-  &.info { background: linear-gradient(135deg, #5AC8FA 0%, #8ED6FF 100%); }
-  &.purple { background: linear-gradient(135deg, #AF52DE 0%, #C77DFF 100%); }
-  &.error { background: linear-gradient(135deg, #FF3B30 0%, #FF6961 100%); }
+  transition: all 0.3s ease;
+
+  &.primary {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF2D78 100%);
+    box-shadow: 0 4rpx 20rpx rgba(255, 107, 53, 0.4);
+  }
+  &.warning {
+    background: linear-gradient(135deg, #FFD60A 0%, #FF9500 100%);
+    box-shadow: 0 4rpx 20rpx rgba(255, 214, 10, 0.4);
+  }
+  &.success {
+    background: linear-gradient(135deg, #30D158 0%, #00C7BE 100%);
+    box-shadow: 0 4rpx 20rpx rgba(48, 209, 88, 0.4);
+  }
+  &.info {
+    background: linear-gradient(135deg, #00C7BE 0%, #7B2FFF 100%);
+    box-shadow: 0 4rpx 20rpx rgba(0, 199, 190, 0.4);
+  }
+  &.purple {
+    background: linear-gradient(135deg, #7B2FFF 0%, #FF2D78 100%);
+    box-shadow: 0 4rpx 20rpx rgba(123, 47, 255, 0.4);
+  }
+  &.error {
+    background: linear-gradient(135deg, #FF3B30 0%, #FF6B35 100%);
+    box-shadow: 0 4rpx 20rpx rgba(255, 59, 48, 0.4);
+  }
 }
 
 .menu-icon {
@@ -408,15 +449,19 @@ function handleLogout() {
 
 .menu-text {
   font-size: 24rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
   font-weight: 500;
 }
 
 /* 列表菜单 */
 .menu-list {
-  background: #FFFFFF;
-  border-radius: 24rpx;
+  background: rgba(28, 28, 54, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28rpx;
   overflow: hidden;
+  border: 1rpx solid rgba(42, 42, 74, 0.6);
+  transition: all 0.3s ease;
 }
 
 .menu-item-row {
@@ -424,14 +469,15 @@ function handleLogout() {
   align-items: center;
   justify-content: space-between;
   padding: 28rpx 24rpx;
-  border-bottom: 1rpx solid #F2F2F7;
-  
+  border-bottom: 1rpx solid rgba(42, 42, 74, 0.4);
+  transition: all 0.3s ease;
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &:active {
-    background: #F8F8F8;
+    background: rgba(28, 28, 54, 0.8);
   }
 }
 
@@ -447,11 +493,11 @@ function handleLogout() {
 
 .menu-item-text {
   font-size: 30rpx;
-  color: #1A1A2E;
+  color: #FFFFFF;
 }
 
 .menu-arrow {
-  color: #C7C7CC;
+  color: #555577;
   font-size: 36rpx;
 }
 
@@ -462,16 +508,23 @@ function handleLogout() {
 
 .logout-btn {
   width: 100%;
-  background: #FFFFFF;
+  background: rgba(28, 28, 54, 0.7);
   color: #FF3B30;
-  border: none;
+  border: 1rpx solid rgba(255, 59, 48, 0.3);
   padding: 28rpx;
-  border-radius: 24rpx;
+  border-radius: 28rpx;
   font-size: 32rpx;
   font-weight: 500;
-  
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+
   &::after {
     display: none;
+  }
+
+  &:active {
+    background: rgba(255, 59, 48, 0.15);
   }
 }
 
