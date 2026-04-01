@@ -22,7 +22,8 @@
       
       <!-- 显示危险区域按钮 -->
       <view class="show-dangers-btn" @click="showDangerZones = !showDangerZones">
-        <text class="btn-icon">{{ showDangerZones ? '🗺️' : '⚠️' }}</text>
+        <IconSvg v-if="showDangerZones" name="map" :size="28" color="#1A1A2E" />
+        <IconSvg v-else name="warning" :size="28" color="#1A1A2E" />
         <text class="btn-text">{{ showDangerZones ? '查看路线' : '危险区域' }}</text>
         <view class="badge" v-if="dangerWarnings.length > 0">
           <text>{{ dangerWarnings.length }}</text>
@@ -34,7 +35,7 @@
     <scroll-view class="danger-zones-panel" scroll-y v-if="showDangerZones">
       <view class="panel-header">
         <view class="panel-title-wrapper">
-          <text class="panel-icon">⚠️</text>
+          <IconSvg name="warning" :size="32" color="#1A1A2E" />
           <text class="panel-title">沿途危险区域</text>
         </view>
         <text class="panel-subtitle">共 {{ dangerWarnings.length }} 处</text>
@@ -62,15 +63,15 @@
           <text class="route-name">{{ route?.name }}</text>
           <view class="route-tags">
             <view class="tag-item">
-              <text class="tag-icon">📏</text>
+              <IconSvg name="ruler" :size="26" color="#8E8E93" />
               <text class="tag-text">{{ route?.distance }}km</text>
             </view>
             <view class="tag-item">
-              <text class="tag-icon">⏱️</text>
+              <IconSvg name="clock" :size="26" color="#8E8E93" />
               <text class="tag-text">{{ route?.duration }}h</text>
             </view>
             <view class="tag-item" v-if="route?.elevation">
-              <text class="tag-icon">🏔️</text>
+              <IconSvg name="mountain" :size="26" color="#8E8E93" />
               <text class="tag-text">{{ route?.elevation }}m</text>
             </view>
           </view>
@@ -79,7 +80,7 @@
 
       <view class="content-section">
         <view class="section-header">
-          <text class="section-icon">📝</text>
+          <IconSvg name="empty_note" :size="30" color="#1A1A2E" />
           <text class="section-title">路线描述</text>
         </view>
         <text class="description">{{ route?.description || '暂无描述' }}</text>
@@ -87,7 +88,7 @@
 
       <view class="content-section" v-if="route?.waypoints?.length">
         <view class="section-header">
-          <text class="section-icon">🗺️</text>
+          <IconSvg name="map" :size="30" color="#1A1A2E" />
           <text class="section-title">途经景点</text>
           <text class="section-count">{{ route.waypoints.length }}个</text>
         </view>
@@ -105,7 +106,7 @@
 
       <view class="content-section">
         <view class="section-header">
-          <text class="section-icon">ℹ️</text>
+          <IconSvg name="info" :size="30" color="#1A1A2E" />
           <text class="section-title">路线信息</text>
         </view>
         <view class="info-grid">
@@ -126,8 +127,8 @@
           <view class="info-item">
             <text class="info-label">热度</text>
             <text class="info-value">
-              <text>❤️ {{ route?.likes || 0 }}</text>
-              <text style="margin-left: 16rpx;">👁️ {{ route?.views || 0 }}</text>
+              <IconSvg name="heart" :size="28" color="#8E8E93" /> <text>{{ route?.likes || 0 }}</text>
+              <IconSvg name="eye" :size="28" color="#8E8E93" style="margin-left: 16rpx" /> <text>{{ route?.views || 0 }}</text>
             </text>
           </view>
         </view>
@@ -136,11 +137,11 @@
       <!-- 底部操作栏 -->
       <view class="action-bar">
         <button class="btn-primary" @click="startNavigation">
-          <text class="btn-icon">🧭</text>
+          <IconSvg name="compass" :size="32" color="#FFFFFF" />
           <text>开始导航</text>
         </button>
         <button class="btn-secondary" @click="reportDanger">
-          <text class="btn-icon">⚠️</text>
+          <IconSvg name="warning" :size="32" color="#FF6B35" />
           <text>上报危险</text>
         </button>
       </view>

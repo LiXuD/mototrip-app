@@ -4,9 +4,9 @@
       <text class="title">发布动态</text>
       <textarea v-model="content" class="textarea" placeholder="分享今日路况、照片或组队信息" maxlength="300" />
       <view class="toolbar">
-        <text class="tool">📷 图片</text>
-        <text class="tool">📍 定位</text>
-        <text class="tool">🏷️ 话题</text>
+        <text class="tool"><IconSvg name="camera" :size="24" color="#ff6b35" /> 图片</text>
+        <text class="tool"><IconSvg name="location" :size="24" color="#ff6b35" /> 定位</text>
+        <text class="tool"><IconSvg name="tag" :size="24" color="#ff6b35" /> 话题</text>
       </view>
       <button class="submit-btn" :loading="submitting" @click="submit">发布</button>
     </view>

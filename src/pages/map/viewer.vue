@@ -34,7 +34,7 @@
 
     <!-- 离线提示 -->
     <view class="offline-tip" v-if="!isOnline">
-      <text>📴 无网络，使用离线地图</text>
+      <IconSvg name="offline" :size="24" color="#FFFFFF" /> <text>无网络，使用离线地图</text>
     </view>
   </view>
 </template>

@@ -49,15 +49,15 @@
           <text class="trip-desc ellipsis-2" v-if="trip.description">{{ trip.description }}</text>
           <view class="trip-meta">
             <view class="meta-item">
-              <text class="meta-icon">📅</text>
+              <IconSvg name="clock" :size="24" color="#8E8E93" style="margin-right: 6rpx" />
               <text class="meta-text">{{ formatDate(trip.startDate) }}</text>
             </view>
             <view class="meta-item">
-              <text class="meta-icon">📏</text>
+              <IconSvg name="ruler" :size="24" color="#8E8E93" style="margin-right: 6rpx" />
               <text class="meta-text">{{ trip.totalDistance || 0 }}km</text>
             </view>
             <view class="meta-item">
-              <text class="meta-icon">📍</text>
+              <IconSvg name="location" :size="24" color="#8E8E93" style="margin-right: 6rpx" />
               <text class="meta-text">{{ trip.waypoints?.length || 0 }}个途点</text>
             </view>
           </view>
@@ -80,7 +80,7 @@
         <text>— 已经到底了 —</text>
       </view>
       <view class="empty" v-if="hasFetched && !loading && trips.length === 0">
-        <text class="empty-icon">🏍️</text>
+        <IconSvg name="motorcycle" :size="96" color="#8E8E93" style="margin-bottom: 24rpx" />
         <text class="empty-text">暂无行程</text>
         <text class="empty-hint">开始规划你的第一次摩旅吧！</text>
         <button class="empty-btn" @click="goCreate">创建行程</button>

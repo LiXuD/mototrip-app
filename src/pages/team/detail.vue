@@ -6,8 +6,8 @@
     </view>
     <view class="info-section">
       <text class="team-name">{{ team.name }}</text>
-      <text class="team-dest">📍 {{ team.destination || '未设置目的地' }}</text>
-      <text class="team-time">🕐 出发：{{ formatDate(team.startTime) }}</text>
+      <text class="team-dest"><IconSvg name="location" :size="28" color="#666" /> {{ team.destination || '未设置目的地' }}</text>
+      <text class="team-time"><IconSvg name="clock" :size="28" color="#666" /> 出发：{{ formatDate(team.startTime) }}</text>
       <text class="team-desc" v-if="team.description">{{ team.description }}</text>
     </view>
     <view class="members-section">

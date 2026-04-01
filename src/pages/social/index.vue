@@ -43,21 +43,21 @@
 
         <!-- 位置 -->
         <view class="post-location" v-if="post.location">
-          <text>📍 {{ post.location }}</text>
+          <IconSvg name="location" :size="24" color="#999" /> <text>{{ post.location }}</text>
         </view>
 
         <!-- 互动 -->
         <view class="post-actions">
           <view class="action-item" @click="likePost(post.id)">
-            <text>{{ post.isLiked ? '❤️' : '🤍' }}</text>
+            <IconSvg :name="post.isLiked ? 'heart' : 'heart'" :size="32" :color="post.isLiked ? '#FF3B30' : '#999'" />
             <text>{{ post.likes }}</text>
           </view>
           <view class="action-item">
-            <text>💬</text>
+            <IconSvg name="chat" :size="32" color="#999" />
             <text>{{ post.comments }}</text>
           </view>
           <view class="action-item">
-            <text>📤</text>
+            <IconSvg name="share" :size="32" color="#999" />
             <text>{{ post.shares }}</text>
           </view>
         </view>
@@ -72,7 +72,9 @@
     </scroll-view>
 
     <!-- 发布按钮 -->
-    <view class="fab" @click="goPublish">+</view>
+    <view class="fab" @click="goPublish">
+      <IconSvg name="add" :size="60" color="#FFFFFF" />
+    </view>
   </view>
 </template>
 

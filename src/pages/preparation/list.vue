@@ -4,7 +4,7 @@
     <view class="progress-section">
       <view class="progress-header">
         <view class="progress-title-wrapper">
-          <text class="progress-icon">🎒</text>
+          <IconSvg name="backpack" :size="36" color="#1A1A2E" style="margin-right: 12rpx" />
           <text class="progress-title">打包进度</text>
         </view>
         <view class="progress-status">
@@ -22,7 +22,7 @@
       <view class="category" v-for="group in groupedItems" :key="group.category">
         <view class="category-header">
           <view class="category-title-wrapper">
-            <text class="category-icon">{{ getCategoryIcon(group.category) }}</text>
+            <IconSvg :name="({ '骑行装备': 'motorcycle', '个人物品': 'users', '电子设备': 'phone', '工具': 'settings', '药品': 'heart', '证件': 'empty_note', 'other': 'backpack' })[group.category] || 'backpack'" :size="32" color="#FFFFFF" style="margin-right: 12rpx" />
             <text class="category-name">{{ group.category }}</text>
           </view>
           <view class="category-progress">
@@ -51,7 +51,7 @@
 
       <!-- 空状态 -->
       <view class="empty" v-if="groupedItems.length === 0">
-        <text class="empty-icon">🎒</text>
+        <IconSvg name="backpack" :size="96" color="#8E8E93" style="margin-bottom: 24rpx" />
         <text class="empty-text">还没有清单</text>
         <text class="empty-hint">点击右下角添加你的摩旅装备</text>
       </view>
@@ -81,19 +81,6 @@ onMounted(() => {
 
 function togglePacked(id: number) {
   preparationStore.togglePacked(id)
-}
-
-function getCategoryIcon(category: string) {
-  const map: Record<string, string> = {
-    '骑行装备': '🏍️',
-    '个人物品': '👕',
-    '电子设备': '📱',
-    '工具': '🔧',
-    '药品': '💊',
-    '证件': '📄',
-    'other': '📦',
-  }
-  return map[category] || '📦'
 }
 
 function showAddModal() {

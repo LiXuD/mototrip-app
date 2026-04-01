@@ -27,7 +27,7 @@
             :class="{ active: form.reason === r.value }"
             @click="form.reason = r.value"
           >
-            <text class="reason-icon">{{ r.icon }}</text>
+            <IconSvg :name="r.icon" :size="36" color="#1A1A2E" />
             <text class="reason-text">{{ r.label }}</text>
           </view>
         </view>
@@ -104,12 +104,12 @@ const showStartTimePicker = ref(false)
 const showEndTimePicker = ref(false)
 
 const reasonOptions = [
-  { value: 'no_parking', label: '禁止停车', icon: '🚫' },
-  { value: 'temporary_ban', label: '临时禁停', icon: '⛔' },
-  { value: 'emergency', label: '应急通道', icon: '🚨' },
-  { value: 'road_work', label: '施工禁停', icon: '🚧' },
-  { value: 'event', label: '活动禁停', icon: '🎉' },
-  { value: 'other', label: '其他', icon: '⚠️' },
+  { value: 'no_parking', label: '禁止停车', icon: 'close' },
+  { value: 'temporary_ban', label: '临时禁停', icon: 'close' },
+  { value: 'emergency', label: '应急通道', icon: 'warning' },
+  { value: 'road_work', label: '施工禁停', icon: 'construction' },
+  { value: 'event', label: '活动禁停', icon: 'fire' },
+  { value: 'other', label: '其他', icon: 'warning' },
 ] as const
 
 const canSubmit = computed(() => {

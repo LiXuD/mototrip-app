@@ -7,18 +7,18 @@
         <view class="avatar-wrapper">
           <image class="avatar" :src="userStore.userInfo?.avatar || '/static/avatar.png'" />
           <view class="avatar-edit" @click="editProfile">
-            <text>✏️</text>
+            <IconSvg name="edit" :size="24" color="#1A1A2E" />
           </view>
         </view>
         <text class="nickname">{{ userStore.userInfo?.nickname || '骑士' }}</text>
         <text class="bio">{{ userStore.userInfo?.bio || '添加简介让大家认识你' }}</text>
         <view class="motorcycle-tag" v-if="userStore.userInfo?.motorcycle">
-          <text>🏍️ {{ userStore.userInfo.motorcycle }}</text>
+          <IconSvg name="motorcycle" :size="24" color="#FFFFFF" style="margin-right: 4rpx" /> <text>{{ userStore.userInfo.motorcycle }}</text>
         </view>
       </view>
       <view class="login-prompt" v-else>
         <view class="login-avatar">
-          <text>🏍️</text>
+          <IconSvg name="motorcycle" :size="80" color="#FFFFFF" />
         </view>
         <text class="prompt-title">欢迎来到摩旅助手</text>
         <text class="prompt-text">登录后享受更多功能</text>
@@ -57,37 +57,37 @@
       <view class="menu-grid">
         <view class="menu-item" @click="goPage('/pages/profile/mode-settings')">
           <view class="menu-icon-wrapper primary">
-            <text class="menu-icon">🎯</text>
+            <IconSvg name="target" :size="40" color="#FFFFFF" />
           </view>
           <text class="menu-text">骑行模式</text>
         </view>
         <view class="menu-item" @click="goPage('/pages/trip/list')">
           <view class="menu-icon-wrapper warning">
-            <text class="menu-icon">🏍️</text>
+            <IconSvg name="motorcycle" :size="40" color="#FFFFFF" />
           </view>
           <text class="menu-text">我的行程</text>
         </view>
         <view class="menu-item" @click="goPage('/pages/diary/list')">
           <view class="menu-icon-wrapper info">
-            <text class="menu-icon">📔</text>
+            <IconSvg name="notebook" :size="40" color="#FFFFFF" />
           </view>
           <text class="menu-text">我的日记</text>
         </view>
         <view class="menu-item" @click="goPage('/pages/route/my')">
           <view class="menu-icon-wrapper success">
-            <text class="menu-icon">🗺️</text>
+            <IconSvg name="map" :size="40" color="#FFFFFF" />
           </view>
           <text class="menu-text">我的路线</text>
         </view>
         <view class="menu-item" @click="goPage('/pages/preparation/list')">
           <view class="menu-icon-wrapper purple">
-            <text class="menu-icon">🎒</text>
+            <IconSvg name="backpack" :size="40" color="#FFFFFF" />
           </view>
           <text class="menu-text">装备清单</text>
         </view>
         <view class="menu-item" @click="goPage('/pages/favorites/index')">
           <view class="menu-icon-wrapper error">
-            <text class="menu-icon">❤️</text>
+            <IconSvg name="heart" :size="40" color="#FFFFFF" />
           </view>
           <text class="menu-text">我的收藏</text>
         </view>
@@ -102,21 +102,21 @@
       <view class="menu-list">
         <view class="menu-item-row" @click="goPage('/pages/settings/index')">
           <view class="menu-item-left">
-            <text class="menu-item-icon">⚙️</text>
+            <IconSvg name="settings" :size="36" color="#1A1A2E" />
             <text class="menu-item-text">设置</text>
           </view>
           <text class="menu-arrow">›</text>
         </view>
         <view class="menu-item-row" @click="goPage('/pages/about/index')">
           <view class="menu-item-left">
-            <text class="menu-item-icon">ℹ️</text>
+            <IconSvg name="info" :size="36" color="#1A1A2E" />
             <text class="menu-item-text">关于</text>
           </view>
           <text class="menu-arrow">›</text>
         </view>
         <view class="menu-item-row" @click="goPage('/pages/help/index')">
           <view class="menu-item-left">
-            <text class="menu-item-icon">❓</text>
+            <IconSvg name="help" :size="36" color="#1A1A2E" />
             <text class="menu-item-text">帮助与反馈</text>
           </view>
           <text class="menu-arrow">›</text>

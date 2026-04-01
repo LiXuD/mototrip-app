@@ -1,12 +1,12 @@
 <template>
   <view class="night-warning" v-if="visible && isNight">
-    <view class="warning-icon">🌙</view>
+    <view class="warning-icon"><IconSvg name="warning" :size="48" color="#FFC107" /></view>
     <view class="warning-content">
       <text class="warning-title">夜间骑行警告</text>
       <text class="warning-message">{{ message }}</text>
       <text class="warning-time">日落时间: {{ sunset }} | 日出时间: {{ sunrise }}</text>
     </view>
-    <view class="close-btn" @click="handleClose">×</view>
+    <view class="close-btn" @click="handleClose"><IconSvg name="close" :size="40" color="#666" /></view>
   </view>
 </template>
 

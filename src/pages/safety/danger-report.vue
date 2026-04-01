@@ -27,7 +27,7 @@
             :class="{ active: form.type === t.value }"
             @click="form.type = t.value"
           >
-            <text class="type-icon">{{ t.icon }}</text>
+            <IconSvg :name="t.icon" :size="36" color="#1A1A2E" />
             <text class="type-text">{{ t.label }}</text>
           </view>
         </view>
@@ -90,16 +90,16 @@ const form = ref({
 })
 
 const dangerTypes = [
-  { value: 'landslide', label: '滑坡', icon: '⛰️' },
-  { value: 'falling_rocks', label: '落石', icon: '🪨' },
-  { value: 'steep_slope', label: '陡坡', icon: '📐' },
-  { value: 'sharp_turn', label: '急弯', icon: '↩️' },
-  { value: 'water_side', label: '临水', icon: '🌊' },
-  { value: 'cliff_side', label: '临崖', icon: '🏔️' },
-  { value: 'ice_snow', label: '结冰', icon: '❄️' },
-  { value: 'flood', label: '积水', icon: '🌧️' },
-  { value: 'construction', label: '施工', icon: '🚧' },
-  { value: 'other', label: '其他', icon: '⚠️' },
+  { value: 'landslide', label: '滑坡', icon: 'mountain' },
+  { value: 'falling_rocks', label: '落石', icon: 'mountain' },
+  { value: 'steep_slope', label: '陡坡', icon: 'ruler' },
+  { value: 'sharp_turn', label: '急弯', icon: 'refresh' },
+  { value: 'water_side', label: '临水', icon: 'water' },
+  { value: 'cliff_side', label: '临崖', icon: 'mountain' },
+  { value: 'ice_snow', label: '结冰', icon: 'ice' },
+  { value: 'flood', label: '积水', icon: 'rain' },
+  { value: 'construction', label: '施工', icon: 'construction' },
+  { value: 'other', label: '其他', icon: 'warning' },
 ] as const
 
 const severityOptions = [

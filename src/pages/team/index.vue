@@ -43,22 +43,22 @@
             {{ getStatusText(team.status) }}
           </view>
           <view class="team-members-count">
-            <text>👥 {{ team.memberCount || 0 }}/{{ team.maxMembers }}</text>
+            <IconSvg name="users" :size="22" color="#FFFFFF" /> <text>{{ team.memberCount || 0 }}/{{ team.maxMembers }}</text>
           </view>
         </view>
         <view class="team-body">
           <text class="team-name ellipsis">{{ team.name }}</text>
           <view class="team-route">
-            <text class="route-icon">🛣️</text>
+            <IconSvg name="empty_road" :size="26" color="#8E8E93" />
             <text class="route-text">{{ team.destination || '未设置目的地' }}</text>
           </view>
           <view class="team-info">
             <view class="info-item">
-              <text class="info-icon">🕐</text>
+              <IconSvg name="clock" :size="24" color="#8E8E93" />
               <text class="info-text">{{ formatTime(team.startTime) }}</text>
             </view>
             <view class="info-item">
-              <text class="info-icon">👤</text>
+              <IconSvg name="users" :size="24" color="#8E8E93" />
               <text class="info-text">领队: {{ team.creator?.nickname || '未知' }}</text>
             </view>
           </view>
@@ -74,7 +74,7 @@
         <text>— 已经到底了 —</text>
       </view>
       <view class="empty" v-if="teams.length === 0 && !loading">
-        <text class="empty-icon">👥</text>
+        <IconSvg name="users" :size="80" color="#C7C7CC" />
         <text class="empty-text">暂无组队信息</text>
         <text class="empty-hint">快发起第一个组队吧</text>
         <button class="empty-btn" @click="goCreate">创建组队</button>
@@ -83,7 +83,7 @@
 
     <!-- 创建按钮 -->
     <view class="fab" @click="goCreate">
-      <text class="fab-icon">+</text>
+      <IconSvg name="add" :size="56" color="#FFFFFF" />
     </view>
   </view>
 </template>

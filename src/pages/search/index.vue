@@ -1,7 +1,7 @@
 <template>
   <view class="search-page">
     <view class="search-box">
-      <text class="search-icon">🔍</text>
+      <IconSvg name="search" :size="30" color="#1A1A2E" />
       <input v-model="keyword" class="search-input" placeholder="搜索路线、途点、日记关键字" />
     </view>
 

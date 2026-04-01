@@ -2,7 +2,7 @@
   <view class="offline-map-page">
     <!-- 顶部提示 -->
     <view class="tip-box" v-if="maps.length === 0 && !loading">
-      <text class="tip-icon">📍</text>
+      <IconSvg name="location" :size="80" color="#999" />
       <text class="tip-text">暂无离线地图</text>
       <text class="tip-sub">点击下方按钮下载离线地图，无网也能用</text>
     </view>
@@ -14,9 +14,9 @@
           <text class="map-name">{{ item.name }}</text>
           <text class="map-desc" v-if="item.description">{{ item.description }}</text>
           <view class="map-meta">
-            <text class="meta-item">📐 {{ item.minLat.toFixed(2) }}~{{ item.maxLat.toFixed(2) }}°</text>
-            <text class="meta-item">📐 {{ item.minLng.toFixed(2) }}~{{ item.maxLng.toFixed(2) }}°</text>
-            <text class="meta-item">🔍 {{ item.minZoom }}~{{ item.maxZoom }}级</text>
+            <text class="meta-item"><IconSvg name="ruler" :size="24" color="#999" /> {{ item.minLat.toFixed(2) }}~{{ item.maxLat.toFixed(2) }}°</text>
+            <text class="meta-item"><IconSvg name="ruler" :size="24" color="#999" /> {{ item.minLng.toFixed(2) }}~{{ item.maxLng.toFixed(2) }}°</text>
+            <text class="meta-item"><IconSvg name="search" :size="24" color="#999" /> {{ item.minZoom }}~{{ item.maxZoom }}级</text>
           </view>
           <view class="map-stats">
             <text class="stat-item">{{ item.fileSize || '未知大小' }}</text>
@@ -68,14 +68,16 @@
     </view>
 
     <!-- 创建按钮 -->
-    <view class="fab" @click="showCreateModal = true">+</view>
+    <view class="fab" @click="showCreateModal = true">
+      <IconSvg name="add" :size="60" color="#FFFFFF" />
+    </view>
 
     <!-- 创建弹窗 -->
     <view class="modal-mask" v-if="showCreateModal" @click="showCreateModal = false">
       <view class="modal-content" @click.stop>
         <view class="modal-header">
           <text class="modal-title">创建离线地图</text>
-          <text class="modal-close" @click="showCreateModal = false">✕</text>
+          <text class="modal-close" @click="showCreateModal = false"><IconSvg name="close" :size="32" color="#999" /></text>
         </view>
 
         <view class="modal-body">

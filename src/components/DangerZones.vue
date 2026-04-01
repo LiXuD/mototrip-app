@@ -10,7 +10,7 @@
         @click="handleClick(zone)"
       >
         <view class="danger-icon">
-          {{ getTypeIcon(zone.type) }}
+          <IconSvg :name="getTypeIcon(zone.type)" :size="40" color="#1A1A2E" />
         </view>
         <view class="danger-info">
           <text class="danger-name">{{ zone.name }}</text>
@@ -33,7 +33,7 @@
         :key="'np-' + zone.id"
         @click="handleNoParkingClick(zone)"
       >
-        <view class="no-parking-icon">🚫</view>
+        <view class="no-parking-icon"><IconSvg name="close" :size="40" color="#1A1A2E" /></view>
         <view class="no-parking-info">
           <text class="no-parking-name">{{ zone.name }}</text>
           <text class="no-parking-reason" v-if="zone.reason">{{ zone.reason }}</text>
@@ -63,18 +63,18 @@ const emit = defineEmits<{
 
 function getTypeIcon(type: string): string {
   const iconMap: Record<string, string> = {
-    landslide: '⛰️',
-    falling_rocks: '🪨',
-    steep_slope: '📐',
-    sharp_turn: '↩️',
-    water_side: '🌊',
-    cliff_side: '🏔️',
-    ice_snow: '❄️',
-    flood: '🌧️',
-    construction: '🚧',
-    other: '⚠️',
+    landslide: 'mountain',
+    falling_rocks: 'mountain',
+    steep_slope: 'ruler',
+    sharp_turn: 'refresh',
+    water_side: 'water',
+    cliff_side: 'mountain',
+    ice_snow: 'ice',
+    flood: 'rain',
+    construction: 'construction',
+    other: 'warning',
   }
-  return iconMap[type] || '⚠️'
+  return iconMap[type] || 'warning'
 }
 
 function getTypeText(type: string): string {

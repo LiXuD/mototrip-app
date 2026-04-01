@@ -27,12 +27,23 @@
           <view class="type-badge">{{ waypoint.typeLabel }}</view>
         </view>
         <view class="meta-row">
-          <text>📍 {{ waypoint.location }}</text>
-          <text>⭐ {{ waypoint.rating }}</text>
+          <view style="display: flex; align-items: center">
+            <IconSvg name="location" :size="24" color="#8E8E93" style="margin-right: 4rpx" />
+            <text>{{ waypoint.location }}</text>
+          </view>
+          <view style="display: flex; align-items: center">
+            <text>⭐ {{ waypoint.rating }}</text>
+          </view>
         </view>
         <view class="meta-row">
-          <text>🕒 {{ waypoint.hours }}</text>
-          <text>☎️ {{ waypoint.phone }}</text>
+          <view style="display: flex; align-items: center">
+            <IconSvg name="clock" :size="24" color="#8E8E93" style="margin-right: 4rpx" />
+            <text>{{ waypoint.hours }}</text>
+          </view>
+          <view style="display: flex; align-items: center">
+            <IconSvg name="phone" :size="24" color="#8E8E93" style="margin-right: 4rpx" />
+            <text>{{ waypoint.phone }}</text>
+          </view>
         </view>
       </view>
     </view>

@@ -1,7 +1,7 @@
 <template>
   <view class="about-page">
     <view class="hero">
-      <text class="logo">🏍️</text>
+      <IconSvg name="motorcycle" :size="80" color="#FFFFFF" />
       <text class="title">摩旅助手</text>
       <text class="subtitle">为路线规划、风险提醒、组队和旅途记录提供一站式支持。</text>
     </view>

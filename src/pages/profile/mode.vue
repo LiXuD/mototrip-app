@@ -15,7 +15,7 @@
         :class="{ active: selectedMode === mode.mode }"
         @click="selectMode(mode.mode)"
       >
-        <view class="mode-icon">{{ mode.icon }}</view>
+        <IconSvg :name="mode.icon" :size="60" color="#1A1A2E" />
         <view class="mode-content">
           <text class="mode-title">{{ mode.title }}</text>
           <text class="mode-description">{{ mode.description }}</text>
@@ -26,7 +26,7 @@
           </view>
         </view>
         <view class="mode-check" v-if="selectedMode === mode.mode">
-          <text class="check-icon">✓</text>
+          <IconSvg name="check" :size="28" color="#FFFFFF" />
         </view>
       </view>
     </view>
@@ -61,21 +61,21 @@ const modeList: UserModeInfo[] = [
     mode: 'newbie',
     title: '新手模式',
     description: '适合骑行新手，更多保护提醒，建议简单路线',
-    icon: '🌱',
+    icon: 'seedling',
     features: ['距离限制提醒', '简化界面', '推荐简单路线', '新手教程'],
   },
   {
     mode: 'experienced',
     title: '老手模式',
     description: '适合经验丰富的骑手，解锁全部专业功能',
-    icon: '🏍️',
+    icon: 'motorcycle',
     features: ['无距离限制', '专业功能', '危险路段详报', '高级路线规划'],
   },
   {
     mode: 'passenger',
     title: '带人模式',
     description: '适合休闲骑行，舒适度优先，较低速度提醒',
-    icon: '👥',
+    icon: 'users',
     features: ['速度限制提醒', '舒适路线', '休闲景点推荐', '低速提醒'],
   },
 ]

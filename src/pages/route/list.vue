@@ -3,7 +3,7 @@
     <!-- 搜索栏 -->
     <view class="search-bar">
       <view class="search-box">
-        <text class="search-icon">🔍</text>
+        <IconSvg name="search" :size="32" color="#8E8E93" />
         <input 
           class="search-input" 
           placeholder="搜索路线名称" 
@@ -11,7 +11,7 @@
           v-model="searchKeyword"
           @confirm="doSearch"
         />
-        <text class="search-clear" v-if="searchKeyword" @click="clearSearch">✕</text>
+        <IconSvg name="close" :size="28" color="#C7C7CC" v-if="searchKeyword" @click="clearSearch" />
       </view>
     </view>
 
@@ -72,7 +72,7 @@
             </view>
           </view>
           <view class="route-stats-badge">
-            <text>❤️ {{ route.likes || 0 }}</text>
+            <IconSvg name="heart" :size="22" color="#FFFFFF" /> <text>{{ route.likes || 0 }}</text>
           </view>
         </view>
         <view class="route-content">
@@ -82,15 +82,15 @@
           </view>
           <view class="route-meta">
             <view class="meta-item">
-              <text class="meta-icon">📏</text>
+              <IconSvg name="ruler" :size="24" color="#8E8E93" />
               <text class="meta-text">{{ route.distance || 0 }}km</text>
             </view>
             <view class="meta-item">
-              <text class="meta-icon">⏱️</text>
+              <IconSvg name="clock" :size="24" color="#8E8E93" />
               <text class="meta-text">{{ route.duration || 0 }}h</text>
             </view>
             <view class="meta-item" v-if="route.elevation">
-              <text class="meta-icon">🏔️</text>
+              <IconSvg name="mountain" :size="24" color="#8E8E93" />
               <text class="meta-text">{{ route.elevation }}m</text>
             </view>
           </view>
@@ -100,7 +100,7 @@
               <text class="creator-name">{{ route.creator?.nickname || '匿名' }}</text>
             </view>
             <view class="views">
-              <text>👁️ {{ route.views || 0 }}</text>
+              <IconSvg name="eye" :size="24" color="#8E8E93" /> <text>{{ route.views || 0 }}</text>
             </view>
           </view>
         </view>
@@ -115,7 +115,7 @@
         <text>— 已经到底了 —</text>
       </view>
       <view class="empty" v-if="hasFetched && !loading && routes.length === 0">
-        <text class="empty-icon">🛣️</text>
+        <IconSvg name="empty_road" :size="96" color="#8E8E93" />
         <text class="empty-text">暂无路线</text>
         <text class="empty-hint">快来创建第一条路线吧</text>
       </view>

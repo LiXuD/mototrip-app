@@ -26,7 +26,7 @@
           <image class="owner-avatar" :src="share.owner?.avatar || '/static/avatar.png'" />
           <view class="share-info">
             <text class="owner-name">{{ share.owner?.nickname || '朋友' }}</text>
-            <text class="location-info" v-if="share.currentLatitude">📍 {{ share.currentLatitude?.toFixed(4) }}, {{ share.currentLongitude?.toFixed(4) }}</text>
+            <text class="location-info" v-if="share.currentLatitude"><IconSvg name="location" :size="24" color="#666" /> {{ share.currentLatitude?.toFixed(4) }}, {{ share.currentLongitude?.toFixed(4) }}</text>
             <text class="update-time" v-if="share.lastUpdatedAt">更新于 {{ formatTime(share.lastUpdatedAt) }}</text>
           </view>
           <view class="share-actions" v-if="share.isActive">

@@ -77,22 +77,23 @@
 
         <!-- 位置和天气 -->
         <view class="diary-meta" v-if="diary.locationName || diary.weather">
-          <text class="meta-icon" v-if="diary.locationName">📍 {{ diary.locationName }}</text>
+          <IconSvg name="location" :size="24" color="#8E8E93" style="margin-right: 4rpx" />
+          <text v-if="diary.locationName">{{ diary.locationName }}</text>
           <text class="meta-icon" v-if="diary.weather">🌤️ {{ diary.weather }} {{ diary.temperature }}°C</text>
         </view>
 
         <!-- 统计 -->
         <view class="diary-footer">
           <view class="stat-item" @click.stop="likeDiary(diary.id)">
-            <text class="stat-icon">{{ diary.isLiked ? '❤️' : '🤍' }}</text>
+            <IconSvg :name="diary.isLiked ? 'heart' : 'heart'" :size="28" color="#8E8E93" style="margin-right: 8rpx" />
             <text class="stat-text">{{ diary.likes || 0 }}</text>
           </view>
           <view class="stat-item">
-            <text class="stat-icon">💬</text>
+            <IconSvg name="chat" :size="28" color="#8E8E93" style="margin-right: 8rpx" />
             <text class="stat-text">{{ diary.comments || 0 }}</text>
           </view>
           <view class="stat-item">
-            <text class="stat-icon">🔖</text>
+            <IconSvg name="tag" :size="28" color="#8E8E93" style="margin-right: 8rpx" />
             <text class="stat-text" v-if="diary.trip">{{ diary.trip.name }}</text>
             <text class="stat-text" v-else>日常</text>
           </view>
@@ -108,7 +109,7 @@
         <text>— 已经到底了 —</text>
       </view>
       <view class="empty" v-if="hasFetched && !loading && diaries.length === 0">
-        <text class="empty-icon">📖</text>
+        <IconSvg name="book" :size="96" color="#8E8E93" style="margin-bottom: 24rpx" />
         <text class="empty-text">还没有日记</text>
         <text class="empty-hint">记录你的摩旅故事</text>
       </view>

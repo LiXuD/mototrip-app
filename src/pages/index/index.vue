@@ -3,7 +3,7 @@
     <!-- 搜索栏 -->
     <view class="search-bar">
       <view class="search-box">
-        <text class="search-icon">🔍</text>
+        <IconSvg name="search" :size="32" color="#8E8E93" />
         <input 
           class="search-input" 
           placeholder="搜索路线、目的地" 
@@ -45,25 +45,25 @@
       <view class="nav-grid">
         <view class="nav-item" @click="goPage('/pages/route/list')">
           <view class="nav-icon-wrapper primary">
-            <text class="nav-icon">🗺️</text>
+            <IconSvg name="map" :size="48" color="#FFFFFF" />
           </view>
           <text class="nav-text">路线</text>
         </view>
         <view class="nav-item" @click="goPage('/pages/trip/list')">
           <view class="nav-icon-wrapper warning">
-            <text class="nav-icon">🏍️</text>
+            <IconSvg name="motorcycle" :size="48" color="#FFFFFF" />
           </view>
           <text class="nav-text">行程</text>
         </view>
         <view class="nav-item" @click="goPage('/pages/waypoint/list')">
           <view class="nav-icon-wrapper success">
-            <text class="nav-icon">📍</text>
+            <IconSvg name="location" :size="48" color="#FFFFFF" />
           </view>
           <text class="nav-text">途点</text>
         </view>
         <view class="nav-item" @click="goPage('/pages/preparation/list')">
           <view class="nav-icon-wrapper info">
-            <text class="nav-icon">🎒</text>
+            <IconSvg name="backpack" :size="48" color="#FFFFFF" />
           </view>
           <text class="nav-text">整备</text>
         </view>
@@ -72,19 +72,19 @@
       <!-- 快捷入口 -->
       <view class="quick-actions">
         <view class="quick-item" @click="goPage('/pages/map/offline')">
-          <text class="quick-icon">📥</text>
+          <IconSvg name="download" :size="40" color="#1A1A2E" />
           <text class="quick-text">离线地图</text>
         </view>
         <view class="quick-item" @click="goPage('/pages/safety/danger-report')">
-          <text class="quick-icon">⚠️</text>
+          <IconSvg name="warning" :size="40" color="#1A1A2E" />
           <text class="quick-text">上报危险</text>
         </view>
         <view class="quick-item" @click="goPage('/pages/team/index')">
-          <text class="quick-icon">👥</text>
+          <IconSvg name="users" :size="40" color="#1A1A2E" />
           <text class="quick-text">组队出行</text>
         </view>
         <view class="quick-item" @click="goPage('/pages/footprint/index')">
-          <text class="quick-icon">👣</text>
+          <IconSvg name="footprints" :size="40" color="#1A1A2E" />
           <text class="quick-text">足迹</text>
         </view>
       </view>
@@ -94,7 +94,7 @@
     <view class="section">
       <view class="section-header">
         <view class="section-title-wrapper">
-          <text class="section-icon">🔥</text>
+          <IconSvg name="fire" :size="32" color="#1A1A2E" />
           <text class="section-title">热门路线</text>
         </view>
         <view class="section-more" @click="goPage('/pages/route/list')">
@@ -113,13 +113,13 @@
           <view class="route-info">
             <text class="route-name ellipsis">{{ route.name }}</text>
             <view class="route-meta">
-              <text class="route-location" v-if="route.startPoint">📍 {{ route.startPoint }}</text>
+              <IconSvg name="location" :size="22" color="#8E8E93" style="margin-right: 4rpx" /> <text>{{ route.startPoint }}</text>
             </view>
           </view>
         </view>
         <!-- 空状态 -->
         <view class="route-empty" v-if="hotRoutes.length === 0">
-          <text class="empty-icon">🛣️</text>
+          <IconSvg name="empty_road" :size="48" color="#8E8E93" />
           <text class="empty-text">暂无热门路线</text>
         </view>
       </scroll-view>
@@ -129,7 +129,7 @@
     <view class="section">
       <view class="section-header">
         <view class="section-title-wrapper">
-          <text class="section-icon">📖</text>
+          <IconSvg name="book" :size="32" color="#1A1A2E" />
           <text class="section-title">最新日记</text>
         </view>
         <view class="section-more" @click="goPage('/pages/diary/list')">
@@ -152,15 +152,15 @@
           </view>
           <view class="diary-footer">
             <view class="diary-stats">
-              <text class="stat-item">❤️ {{ diary.likes || 0 }}</text>
-              <text class="stat-item">💬 {{ diary.comments || 0 }}</text>
+              <IconSvg name="heart" :size="24" color="#8E8E93" /> <text class="stat-item">{{ diary.likes || 0 }}</text>
+              <IconSvg name="chat" :size="24" color="#8E8E93" /> <text class="stat-item">{{ diary.comments || 0 }}</text>
             </view>
             <text class="diary-tag tag tag-primary" v-if="diary.tag">{{ diary.tag }}</text>
           </view>
         </view>
         <!-- 空状态 -->
         <view class="diary-empty" v-if="latestDiaries.length === 0">
-          <text class="empty-icon">📝</text>
+          <IconSvg name="empty_note" :size="48" color="#8E8E93" />
           <text class="empty-text">暂无日记，快去发布吧</text>
         </view>
       </view>

@@ -14,7 +14,7 @@
         <text class="stat-label">城市</text>
       </view>
       <view class="stat-item" @click="goAchievements">
-        <text class="stat-num">🏆</text>
+        <IconSvg name="target" :size="36" color="#007AFF" />
         <text class="stat-label">成就</text>
       </view>
     </view>
@@ -28,7 +28,9 @@
         </view>
       </scroll-view>
     </view>
-    <view class="fab" @click="addFootprint">+</view>
+    <view class="fab" @click="addFootprint">
+      <IconSvg name="add" :size="60" color="#FFFFFF" />
+    </view>
   </view>
 </template>
 
