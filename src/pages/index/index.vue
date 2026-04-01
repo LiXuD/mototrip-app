@@ -249,11 +249,18 @@ async function fetchData() {
     const routeRes = await routeApi.list({ pageSize: 5 })
     hotRoutes.value = (routeRes.list || []) as HotRoute[]
     
-    // 获取最新日记
-    const diaryRes = await diaryApi.list({ pageSize: 5 })
-    latestDiaries.value = (diaryRes as unknown as { list: LatestDiary[] }).list || []
+    // 获取最新日记（处理 401 错误，允许未登录时显示空列表）
+    try {
+      const diaryRes = await diaryApi.list({ pageSize: 5 })
+      latestDiaries.value = (diaryRes as unknown as { list: LatestDiary[] }).list || []
+    } catch (diaryError) {
+      console.warn('获取日记数据失败（可能未登录）:', diaryError)
+      // 未登录时显示空列表，不影响页面加载
+      latestDiaries.value = []
+    }
   } catch (error) {
     console.error('获取首页数据失败:', error)
+    // 只在获取路线失败时显示错误提示
     uni.showToast({
       title: '加载失败',
       icon: 'none',
@@ -262,7 +269,13 @@ async function fetchData() {
 }
 
 function goPage(url: string) {
-  uni.navigateTo({ url })
+  // 检查是否是 tabbar 页面
+  const tabbarPages = ['/pages/index/index', '/pages/route/list', '/pages/diary/list', '/pages/profile/index']
+  if (tabbarPages.includes(url)) {
+    uni.switchTab({ url })
+  } else {
+    uni.navigateTo({ url })
+  }
 }
 
 function goRouteDetail(id: number) {

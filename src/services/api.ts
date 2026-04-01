@@ -40,6 +40,7 @@ async function request<T>(options: RequestOptions): Promise<T> {
           if (result.code === 200 || result.code === 0) {
             resolve(result.data)
           } else {
+            // 业务错误，显示错误信息
             uni.showToast({
               title: result.message || '请求失败',
               icon: 'none',
@@ -47,23 +48,43 @@ async function request<T>(options: RequestOptions): Promise<T> {
             reject(new Error(result.message))
           }
         } else if (res.statusCode === 401) {
-          // 防止重复跳转：检查是否已经在登录页
-          const pages = uni.getCurrentPages()
-          const currentPage = pages[pages.length - 1]
-          const isLoginPage = currentPage?.route?.includes('login')
-          
-          if (!isLoginPage) {
-            uni.removeStorageSync('token')
+          // 检查响应数据是否包含业务错误信息
+          const result = res.data as RequestResult<T>
+          if (result?.message) {
+            // 业务错误（如用户名密码错误），显示错误信息
             uni.showToast({
-              title: '登录已过期，请重新登录',
+              title: result.message,
               icon: 'none',
             })
-            // 延迟跳转，避免连续触发
-            setTimeout(() => {
-              uni.reLaunch({ url: '/pages/login/index' })
-            }, 1500)
+            reject(new Error(result.message))
+          } else {
+            // 认证错误（如 token 过期）
+            // 防止重复跳转：检查是否已经在登录页
+            let isLoginPage = false
+            try {
+              // 检查 uni.getCurrentPages 是否存在
+              if (typeof uni.getCurrentPages === 'function') {
+                const pages = uni.getCurrentPages()
+                const currentPage = pages[pages.length - 1]
+                isLoginPage = currentPage?.route?.includes('login')
+              }
+            } catch (error) {
+              console.warn('获取当前页面失败:', error)
+            }
+            
+            if (!isLoginPage) {
+              uni.removeStorageSync('token')
+              uni.showToast({
+                title: '登录已过期，请重新登录',
+                icon: 'none',
+              })
+              // 延迟跳转，避免连续触发
+              setTimeout(() => {
+                uni.reLaunch({ url: '/pages/login/index' })
+              }, 1500)
+            }
+            reject(new Error('未授权'))
           }
-          reject(new Error('未授权'))
         } else {
           reject(new Error('请求失败'))
         }
