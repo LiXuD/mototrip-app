@@ -45,25 +45,25 @@
       <view class="nav-grid">
         <view class="nav-item" @click="goPage('/pages/route/list')">
           <view class="nav-icon-wrapper primary">
-            <IconSvg name="map" :size="48" color="#FFFFFF" />
+            <IconSvg name="map" :size="40" color="#FFFFFF" />
           </view>
           <text class="nav-text">路线</text>
         </view>
         <view class="nav-item" @click="goPage('/pages/trip/list')">
           <view class="nav-icon-wrapper warning">
-            <IconSvg name="motorcycle" :size="48" color="#FFFFFF" />
+            <IconSvg name="motorcycle" :size="40" color="#FFFFFF" />
           </view>
           <text class="nav-text">行程</text>
         </view>
         <view class="nav-item" @click="goPage('/pages/waypoint/list')">
           <view class="nav-icon-wrapper success">
-            <IconSvg name="location" :size="48" color="#FFFFFF" />
+            <IconSvg name="location" :size="40" color="#FFFFFF" />
           </view>
           <text class="nav-text">途点</text>
         </view>
         <view class="nav-item" @click="goPage('/pages/preparation/list')">
           <view class="nav-icon-wrapper info">
-            <IconSvg name="backpack" :size="48" color="#FFFFFF" />
+            <IconSvg name="backpack" :size="40" color="#FFFFFF" />
           </view>
           <text class="nav-text">整备</text>
         </view>
@@ -72,19 +72,27 @@
       <!-- 快捷入口 -->
       <view class="quick-actions">
         <view class="quick-item" @click="goPage('/pages/map/offline')">
-          <IconSvg name="download" :size="40" color="#1A1A2E" />
+          <view class="quick-icon-wrapper info">
+            <IconSvg name="download" :size="40" color="#FFFFFF" />
+          </view>
           <text class="quick-text">离线地图</text>
         </view>
         <view class="quick-item" @click="goPage('/pages/safety/danger-report')">
-          <IconSvg name="warning" :size="40" color="#1A1A2E" />
+          <view class="quick-icon-wrapper warning">
+            <IconSvg name="warning" :size="40" color="#FFFFFF" />
+          </view>
           <text class="quick-text">上报危险</text>
         </view>
         <view class="quick-item" @click="goPage('/pages/team/index')">
-          <IconSvg name="users" :size="40" color="#1A1A2E" />
+          <view class="quick-icon-wrapper success">
+            <IconSvg name="users" :size="40" color="#FFFFFF" />
+          </view>
           <text class="quick-text">组队出行</text>
         </view>
         <view class="quick-item" @click="goPage('/pages/footprint/index')">
-          <IconSvg name="footprints" :size="40" color="#1A1A2E" />
+          <view class="quick-icon-wrapper primary">
+            <IconSvg name="footprints" :size="40" color="#FFFFFF" />
+          </view>
           <text class="quick-text">足迹</text>
         </view>
       </view>
@@ -291,15 +299,17 @@ function onBannerChange(e: { detail: { current: number } }) {
 .index-page {
   min-height: 100vh;
   background: #F2F2F7;
+  position: relative;
 }
 
-/* 搜索栏 */
+/* 搜索栏 - 阳光明媚风格 */
 .search-bar {
   padding: 24rpx 32rpx;
   background: #FFFFFF;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
 }
 
 .search-box {
@@ -309,11 +319,11 @@ function onBannerChange(e: { detail: { current: number } }) {
   border-radius: 28rpx;
   padding: 16rpx 24rpx;
   height: 88rpx;
-}
-
-.search-icon {
-  font-size: 32rpx;
-  margin-right: 16rpx;
+  transition: all 0.3s ease;
+  
+  &:active {
+    background: #E8E8ED;
+  }
 }
 
 .search-input {
@@ -327,15 +337,17 @@ function onBannerChange(e: { detail: { current: number } }) {
   font-size: 28rpx;
 }
 
-/* 轮播图 */
+/* 轮播图 - 工业冒险风格 */
 .banner-wrapper {
   padding: 0 20rpx;
+  position: relative;
 }
 
 .banner {
   height: 380rpx;
   border-radius: 24rpx;
   overflow: hidden;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.12);
 }
 
 .banner-item {
@@ -364,9 +376,9 @@ function onBannerChange(e: { detail: { current: number } }) {
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.2) 30%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(13, 13, 13, 0.2) 0%,
+    rgba(13, 13, 13, 0.4) 40%,
+    rgba(13, 13, 13, 0.9) 100%
   );
 }
 
@@ -380,37 +392,43 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .banner-tag {
   display: inline-block;
-  background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  background: linear-gradient(135deg, #FF6B35 0%, #FF9500 100%);
   color: #FFFFFF;
   font-size: 22rpx;
-  font-weight: 600;
-  padding: 6rpx 16rpx;
-  border-radius: 20rpx;
-  margin-bottom: 12rpx;
+  font-weight: 700;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+  text-transform: uppercase;
+  letter-spacing: 1rpx;
 }
 
 .banner-title {
   display: block;
-  font-size: 36rpx;
-  font-weight: 700;
+  font-size: 40rpx;
+  font-weight: 800;
   color: #FFFFFF;
-  line-height: 1.3;
-  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.3);
-  margin-bottom: 8rpx;
+  line-height: 1.2;
+  text-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.6);
+  margin-bottom: 12rpx;
+  letter-spacing: 0.5rpx;
 }
 
 .banner-subtitle {
   display: block;
-  font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 1rpx 4rpx rgba(0, 0, 0, 0.2);
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.4);
+  font-weight: 500;
 }
 
-/* 功能导航 */
+/* 功能导航 - 工业冒险风格 */
 .nav-section {
   background: #FFFFFF;
   margin: 24rpx 0;
   padding: 32rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
 }
 
 .nav-grid {
@@ -433,6 +451,12 @@ function onBannerChange(e: { detail: { current: number } }) {
   align-items: center;
   justify-content: center;
   margin-bottom: 12rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  
+  &:active {
+    transform: scale(0.95);
+  }
   
   &.primary {
     background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
@@ -441,7 +465,7 @@ function onBannerChange(e: { detail: { current: number } }) {
     background: linear-gradient(135deg, #FF9500 0%, #FFB340 100%);
   }
   &.success {
-    background: linear-gradient(135deg, #34C759 0%, #5DD97E 100%);
+    background: linear-gradient(135deg, #4CD964 0%, #7EE787 100%);
   }
   &.info {
     background: linear-gradient(135deg, #5AC8FA 0%, #8ED6FF 100%);
@@ -458,7 +482,7 @@ function onBannerChange(e: { detail: { current: number } }) {
   font-weight: 500;
 }
 
-/* 快捷入口 */
+/* 快捷入口 - 工业冒险风格 */
 .quick-actions {
   display: flex;
   justify-content: space-around;
@@ -470,6 +494,11 @@ function onBannerChange(e: { detail: { current: number } }) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.2s ease;
+  
+  &:active {
+    transform: scale(0.95);
+  }
 }
 
 .quick-icon {
@@ -477,16 +506,47 @@ function onBannerChange(e: { detail: { current: number } }) {
   margin-bottom: 8rpx;
 }
 
+.quick-icon-wrapper {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  &.primary {
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
+  }
+  &.warning {
+    background: linear-gradient(135deg, #FF9500 0%, #FFB340 100%);
+  }
+  &.success {
+    background: linear-gradient(135deg, #4CD964 0%, #7EE787 100%);
+  }
+  &.info {
+    background: linear-gradient(135deg, #5AC8FA 0%, #8ED6FF 100%);
+  }
+}
+
 .quick-text {
   font-size: 24rpx;
   color: #8E8E93;
 }
 
-/* 区块 */
+/* 区块 - 工业冒险风格 */
 .section {
   background: #FFFFFF;
   margin-bottom: 24rpx;
   padding: 32rpx;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
 }
 
 .section-header {
@@ -524,7 +584,7 @@ function onBannerChange(e: { detail: { current: number } }) {
   }
 }
 
-/* 路线卡片 */
+/* 路线卡片 - 工业冒险风格 */
 .route-scroll {
   white-space: nowrap;
   margin: 0 -32rpx;
@@ -538,8 +598,13 @@ function onBannerChange(e: { detail: { current: number } }) {
   vertical-align: top;
   border-radius: 20rpx;
   overflow: hidden;
-  background: #F2F2F7;
+  background: #F8F8FF;
   box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+  
+  &:active {
+    transform: scale(0.96);
+  }
   
   &:last-child {
     margin-right: 0;
@@ -602,17 +667,12 @@ function onBannerChange(e: { detail: { current: number } }) {
   vertical-align: top;
 }
 
-.empty-icon {
-  font-size: 48rpx;
-  margin-bottom: 12rpx;
-}
-
 .empty-text {
   font-size: 24rpx;
   color: #8E8E93;
 }
 
-/* 日记卡片 */
+/* 日记卡片 - 工业冒险风格 */
 .diary-list {
   display: flex;
   flex-direction: column;
@@ -624,6 +684,12 @@ function onBannerChange(e: { detail: { current: number } }) {
   border-radius: 20rpx;
   padding: 24rpx;
   border: 1rpx solid #F2F2F7;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
+  
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
 .diary-header {

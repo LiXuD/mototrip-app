@@ -244,33 +244,41 @@ function getDifficultyText(difficulty: string) {
 <style lang="scss" scoped>
 .route-list-page {
   min-height: 100vh;
-  background: #F2F2F7;
+  background: #0D0D0D;
 }
 
 /* 搜索栏 */
 .search-bar {
   padding: 24rpx 32rpx;
-  background: #FFFFFF;
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(20rpx);
+  border-bottom: 1rpx solid #262626;
 }
 
 .search-box {
   display: flex;
   align-items: center;
-  background: #F2F2F7;
-  border-radius: 28rpx;
+  background: #1A1A1A;
+  border: 1rpx solid #333333;
+  border-radius: 12rpx;
   padding: 16rpx 24rpx;
   height: 80rpx;
-}
-
-.search-icon {
-  font-size: 32rpx;
-  margin-right: 16rpx;
+  transition: all 0.3s ease;
+  
+  &:active {
+    border-color: #FF6B35;
+    box-shadow: 0 0 0 2rpx rgba(255, 107, 53, 0.2);
+  }
 }
 
 .search-input {
   flex: 1;
   font-size: 28rpx;
-  color: #1A1A2E;
+  color: #F5F5F5;
+}
+
+.search-placeholder {
+  color: #666666;
 }
 
 .search-placeholder {
@@ -344,11 +352,12 @@ function getDifficultyText(difficulty: string) {
 }
 
 .route-card {
-  background: #FFFFFF;
-  border-radius: 24rpx;
+  background: #1A1A1A;
+  border-radius: 12rpx;
   overflow: hidden;
   margin-bottom: 24rpx;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.5);
+  border: 1rpx solid #262626;
 }
 
 .route-cover-wrapper {
@@ -406,7 +415,7 @@ function getDifficultyText(difficulty: string) {
 .route-name {
   font-size: 32rpx;
   font-weight: 700;
-  color: #1A1A2E;
+  color: #F5F5F5;
   display: block;
   margin-bottom: 8rpx;
   line-height: 1.4;
@@ -418,7 +427,7 @@ function getDifficultyText(difficulty: string) {
 
 .route-desc {
   font-size: 26rpx;
-  color: #8E8E93;
+  color: #A0A0A0;
   display: block;
   line-height: 1.5;
 }
@@ -441,7 +450,7 @@ function getDifficultyText(difficulty: string) {
 
 .meta-text {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #A0A0A0;
 }
 
 .route-footer {
@@ -449,7 +458,7 @@ function getDifficultyText(difficulty: string) {
   justify-content: space-between;
   align-items: center;
   padding-top: 16rpx;
-  border-top: 1rpx solid #F2F2F7;
+  border-top: 1rpx solid #262626;
 }
 
 .creator {
@@ -466,12 +475,12 @@ function getDifficultyText(difficulty: string) {
 
 .creator-name {
   font-size: 26rpx;
-  color: #666666;
+  color: #A0A0A0;
 }
 
 .views {
   font-size: 24rpx;
-  color: #8E8E93;
+  color: #A0A0A0;
 }
 
 /* 加载状态 */

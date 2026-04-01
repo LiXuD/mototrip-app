@@ -4,7 +4,7 @@
 
 // 开发环境
 const DEV = {
-  API_URL: 'http://localhost:3000/api',
+  API_URL: '/api',
 }
 
 // 生产环境

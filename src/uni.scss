@@ -1,24 +1,31 @@
 /* ===================================
-   摩旅助手 - 全局样式系统 v2.0
+   摩旅助手 - 阳光明媚风格 v4.0
    统一配色、间距、圆角、字体
    =================================== */
 
-/* ---------- 主题色系 ---------- */
+/* ---------- 主题色系 - 阳光明媚风格 ---------- */
 $uni-color-primary: #FF6B35;        /* 活力橙 - 主色 */
 $uni-color-primary-dark: #E55A2B;    /* 深橙色 */
 $uni-color-primary-light: #FF8A5C;  /* 浅橙色 */
-$uni-color-success: #4CD964;
+$uni-color-success: #4CD964;        /* 清新绿 */
 $uni-color-warning: #FF9500;        /* 警告橙 */
 $uni-color-error: #FF3B30;          /* 错误红 */
-$uni-color-info: #5AC8FA;          /* 信息蓝 */
+$uni-color-info: #5AC8FA;          /* 天空蓝 */
 
-/* 渐变色 */
+/* 明亮色系 */
+$uni-color-light: #FFFFFF;
+$uni-color-light-2: #F8F8FF;
+$uni-color-light-3: #F2F2F7;
+
+/* 渐变色 - 阳光风格 */
 $gradient-primary: linear-gradient(135deg, #FF6B35 0%, #FF8A5C 100%);
 $gradient-sunset: linear-gradient(135deg, #FF6B35 0%, #FF9500 100%);
-$gradient-night: linear-gradient(180deg, #1A1A2E 0%, #16213E 100%);
+$gradient-sky: linear-gradient(135deg, #5AC8FA 0%, #8ED6FF 100%);
+$gradient-green: linear-gradient(135deg, #4CD964 0%, #7EE787 100%);
+$gradient-light: linear-gradient(135deg, #FFFFFF 0%, #F8F8FF 100%);
 
 /* ---------- 文字颜色 ---------- */
-$uni-text-color: #1A1A2E;           /* 深色主文字 */
+$uni-text-color: #1A1A2E;           /* 深色主文字 - 浅色背景 */
 $uni-text-color-inverse: #FFFFFF;
 $uni-text-color-grey: #8E8E93;      /* 灰色辅助文字 */
 $uni-text-color-placeholder: #C7C7CC;
@@ -43,7 +50,7 @@ $uni-spacing-lg: 32rpx;
 $uni-spacing-xl: 48rpx;
 $uni-spacing-xxl: 64rpx;
 
-/* ---------- 圆角系统 ---------- */
+/* ---------- 圆角系统 - 阳光风格圆角 ---------- */
 $uni-border-radius-sm: 8rpx;
 $uni-border-radius-base: 12rpx;
 $uni-border-radius-lg: 16rpx;
@@ -60,7 +67,7 @@ $uni-font-size-xl: 36rpx;
 $uni-font-size-xxl: 40rpx;
 $uni-font-size-display: 48rpx;
 
-/* ---------- 阴影系统 ---------- */
+/* ---------- 阴影系统 - 阳光风格柔和阴影 ---------- */
 $uni-shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
 $uni-shadow-base: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
 $uni-shadow-lg: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
@@ -76,18 +83,41 @@ $uni-icon-xl: 56rpx;
    通用样式类 (可在全局使用)
    =================================== */
 
-/* 页面容器 */
+/* 页面容器 - 阳光明媚风格 */
 .page-container {
   min-height: 100vh;
   background: $uni-bg-color-grey;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(ellipse at 20% 20%, rgba(255, 107, 53, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(90, 200, 250, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
-/* 卡片 */
+/* 卡片 - 阳光风格 */
 .card {
   background: $uni-bg-color-card;
   border-radius: $uni-border-radius-lg;
   box-shadow: $uni-shadow-base;
   padding: $uni-spacing-base;
+  border: 1rpx solid $uni-border-color-light;
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: $uni-shadow-sm;
+  }
 }
 
 .card-hover {
@@ -140,7 +170,7 @@ $uni-icon-xl: 56rpx;
   color: $uni-text-color-placeholder;
 }
 
-/* 按钮 - 主按钮 */
+/* 按钮 - 主按钮 - 阳光明媚风格 */
 .btn-primary {
   background: $gradient-primary;
   color: #FFFFFF;
@@ -150,6 +180,7 @@ $uni-icon-xl: 56rpx;
   font-weight: 600;
   text-align: center;
   box-shadow: $uni-shadow-primary;
+  transition: all 0.3s ease;
   
   &:active {
     opacity: 0.9;
@@ -162,7 +193,7 @@ $uni-icon-xl: 56rpx;
   }
 }
 
-/* 按钮 - 次按钮 */
+/* 按钮 - 次按钮 - 阳光明媚风格 */
 .btn-secondary {
   background: $uni-bg-color-card;
   color: $uni-color-primary;
@@ -171,6 +202,7 @@ $uni-icon-xl: 56rpx;
   padding: $uni-spacing-sm $uni-spacing-lg;
   font-size: $uni-font-size-base;
   font-weight: 600;
+  transition: all 0.3s ease;
   
   &:active {
     background: rgba(255, 107, 53, 0.1);
