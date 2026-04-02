@@ -83,7 +83,12 @@ function getMoodText(mood?: Diary['mood']) {
 </script>
 
 <style lang="scss" scoped>
-.diary-detail-page { min-height: 100vh; background: #f2f2f7; }
+.diary-detail-page { 
+  height: 100vh; 
+  background: #f2f2f7; 
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .cover { background: linear-gradient(180deg, rgba(26,26,46,0.85), rgba(255,107,53,0.9)), url('/static/poster-bg.png'); padding: 120rpx 32rpx 40rpx; color: #fff; }
 .cover-tag { display: inline-flex; background: rgba(255,255,255,0.16); padding: 8rpx 20rpx; border-radius: 999rpx; font-size: 24rpx; margin-bottom: 24rpx; }
 .cover-title { display: block; font-size: 48rpx; font-weight: 700; margin-bottom: 12rpx; }
