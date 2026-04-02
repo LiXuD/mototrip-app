@@ -101,26 +101,28 @@ async function request<T>(options: RequestOptions): Promise<T> {
 }
 
 // API 方法
+import type { LoginResponse, UserResponse } from '@/types'
+
 export const authApi = {
   login: (data: { username: string; password: string }) =>
-    request<{ token: string; user: unknown }>({
-      url: '/auth/login',
+    request<LoginResponse>({
+      url: '/api/auth/login',
       method: 'POST',
       data,
     }),
   register: (data: { username: string; password: string; nickname: string }) =>
-    request<{ token: string; user: unknown }>({
-      url: '/auth/register',
+    request<LoginResponse>({
+      url: '/api/auth/register',
       method: 'POST',
       data,
     }),
   getCurrentUser: () =>
-    request<unknown>({
-      url: '/auth/current',
+    request<UserResponse>({
+      url: '/api/auth/current',
     }),
   logout: () =>
     request<unknown>({
-      url: '/auth/logout',
+      url: '/api/auth/logout',
       method: 'POST',
     }),
 }
@@ -128,11 +130,11 @@ export const authApi = {
 export const userApi = {
   getProfile: (id: number) =>
     request<unknown>({
-      url: `/users/${id}`,
+      url: `/api/users/${id}`,
     }),
   updateProfile: (data: unknown) =>
     request<unknown>({
-      url: '/users/profile',
+      url: '/api/users/profile',
       method: 'PUT',
       data,
     }),
@@ -141,29 +143,29 @@ export const userApi = {
 export const routeApi = {
   list: (params?: { page?: number; pageSize?: number; keyword?: string; difficulty?: string; sort?: 'desc' | 'asc' }) =>
     request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
-      url: '/routes',
+      url: '/api/routes',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
     request<unknown>({
-      url: `/routes/${id}`,
+      url: `/api/routes/${id}`,
     }),
   create: (data: unknown) =>
     request<unknown>({
-      url: '/routes',
+      url: '/api/routes',
       method: 'POST',
       data,
     }),
   update: (id: number, data: unknown) =>
     request<unknown>({
-      url: `/routes/${id}`,
+      url: `/api/routes/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/routes/${id}`,
+      url: `/api/routes/${id}`,
       method: 'DELETE',
     }),
 }
@@ -171,29 +173,29 @@ export const routeApi = {
 export const waypointApi = {
   list: (params?: { routeId?: number; tripId?: number; type?: string }) =>
     request<unknown>({
-      url: '/waypoints',
+      url: '/api/waypoints',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
     request<unknown>({
-      url: `/waypoints/${id}`,
+      url: `/api/waypoints/${id}`,
     }),
   create: (data: unknown) =>
     request<unknown>({
-      url: '/waypoints',
+      url: '/api/waypoints',
       method: 'POST',
       data,
     }),
   update: (id: number, data: unknown) =>
     request<unknown>({
-      url: `/waypoints/${id}`,
+      url: `/api/waypoints/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/waypoints/${id}`,
+      url: `/api/waypoints/${id}`,
       method: 'DELETE',
     }),
 }
@@ -201,29 +203,29 @@ export const waypointApi = {
 export const tripApi = {
   list: (params?: { page?: number; pageSize?: number; status?: string }) =>
     request<unknown>({
-      url: '/trips',
+      url: '/api/trips',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
     request<unknown>({
-      url: `/trips/${id}`,
+      url: `/api/trips/${id}`,
     }),
   create: (data: unknown) =>
     request<unknown>({
-      url: '/trips',
+      url: '/api/trips',
       method: 'POST',
       data,
     }),
   update: (id: number, data: unknown) =>
     request<unknown>({
-      url: `/trips/${id}`,
+      url: `/api/trips/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/trips/${id}`,
+      url: `/api/trips/${id}`,
       method: 'DELETE',
     }),
 }
@@ -231,34 +233,34 @@ export const tripApi = {
 export const diaryApi = {
   list: (params?: { page?: number; pageSize?: number; tripId?: number; userId?: number; tag?: string }) =>
     request<unknown>({
-      url: '/diaries',
+      url: '/api/diaries',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
     request<unknown>({
-      url: `/diaries/${id}`,
+      url: `/api/diaries/${id}`,
     }),
   create: (data: unknown) =>
     request<unknown>({
-      url: '/diaries',
+      url: '/api/diaries',
       method: 'POST',
       data,
     }),
   update: (id: number, data: unknown) =>
     request<unknown>({
-      url: `/diaries/${id}`,
+      url: `/api/diaries/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/diaries/${id}`,
+      url: `/api/diaries/${id}`,
       method: 'DELETE',
     }),
   like: (id: number) =>
     request<unknown>({
-      url: `/diaries/${id}/like`,
+      url: `/api/diaries/${id}/like`,
       method: 'POST',
     }),
 }
@@ -266,24 +268,24 @@ export const diaryApi = {
 export const postApi = {
   list: (params?: { page?: number; pageSize?: number }) =>
     request<unknown>({
-      url: '/posts',
+      url: '/api/posts',
       method: 'GET',
       data: params,
     }),
   create: (data: unknown) =>
     request<unknown>({
-      url: '/posts',
+      url: '/api/posts',
       method: 'POST',
       data,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/posts/${id}`,
+      url: `/api/posts/${id}`,
       method: 'DELETE',
     }),
   like: (id: number) =>
     request<unknown>({
-      url: `/posts/${id}/like`,
+      url: `/api/posts/${id}/like`,
       method: 'POST',
     }),
 }
@@ -291,28 +293,28 @@ export const postApi = {
 export const preparationApi = {
   list: () =>
     request<unknown>({
-      url: '/preparations',
+      url: '/api/preparations',
     }),
   create: (data: unknown) =>
     request<unknown>({
-      url: '/preparations',
+      url: '/api/preparations',
       method: 'POST',
       data,
     }),
   update: (id: number, data: unknown) =>
     request<unknown>({
-      url: `/preparations/${id}`,
+      url: `/api/preparations/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/preparations/${id}`,
+      url: `/api/preparations/${id}`,
       method: 'DELETE',
     }),
   togglePacked: (id: number) =>
     request<unknown>({
-      url: `/preparations/${id}/toggle`,
+      url: `/api/preparations/${id}/toggle`,
       method: 'POST',
     }),
 }
@@ -320,7 +322,7 @@ export const preparationApi = {
 export const weatherApi = {
   getCurrent: (location: string) =>
     request<unknown>({
-      url: `/weather/current`,
+      url: `/api/weather/current`,
       method: 'GET',
       data: { location },
     }),
@@ -329,29 +331,29 @@ export const weatherApi = {
 export const reviewApi = {
   create: (data: { routeId: number; rating: number; content?: string }) =>
     request<unknown>({
-      url: '/reviews',
+      url: '/api/reviews',
       method: 'POST',
       data,
     }),
   listByRoute: (routeId: number, params?: { page?: number; pageSize?: number }) =>
     request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
-      url: `/reviews/route/${routeId}`,
+      url: `/api/reviews/route/${routeId}`,
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
     request<unknown>({
-      url: `/reviews/${id}`,
+      url: `/api/reviews/${id}`,
     }),
   update: (id: number, data: { rating?: number; content?: string }) =>
     request<unknown>({
-      url: `/reviews/${id}`,
+      url: `/api/reviews/${id}`,
       method: 'PUT',
       data,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/reviews/${id}`,
+      url: `/api/reviews/${id}`,
       method: 'DELETE',
     }),
 }
@@ -359,12 +361,12 @@ export const reviewApi = {
 export const mapApi = {
   list: () =>
     request<unknown[]>({
-      url: '/maps',
+      url: '/api/maps',
       method: 'GET',
     }),
   getDetail: (id: number) =>
     request<unknown>({
-      url: `/maps/${id}`,
+      url: `/api/maps/${id}`,
     }),
   create: (data: {
     name: string;
@@ -378,23 +380,23 @@ export const mapApi = {
     mapProvider?: string;
   }) =>
     request<unknown>({
-      url: '/maps',
+      url: '/api/maps',
       method: 'POST',
       data,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/maps/${id}`,
+      url: `/api/maps/${id}`,
       method: 'DELETE',
     }),
   getTiles: (id: number) =>
     request<{ x: number; y: number; z: number; url: string }[]>({
-      url: `/maps/${id}/tiles`,
+      url: `/api/maps/${id}/tiles`,
       method: 'GET',
     }),
   startDownload: (id: number) =>
     request<{ message: string; mapId: number }>({
-      url: `/maps/${id}/download`,
+      url: `/api/maps/${id}/download`,
       method: 'POST',
     }),
 }
@@ -403,49 +405,49 @@ export const mapApi = {
 export const dangerZoneApi = {
   list: (params?: { page?: number; pageSize?: number; type?: string; severity?: string }) =>
     request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
-      url: '/danger-zones',
+      url: '/api/danger-zones',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
     request<unknown>({
-      url: `/danger-zones/${id}`,
+      url: `/api/danger-zones/${id}`,
     }),
   getNearby: (lat: number, lng: number, radius?: number) =>
     request<unknown[]>({
-      url: '/danger-zones/nearby',
+      url: '/api/danger-zones/nearby',
       method: 'GET',
       data: { lat, lng, radius },
     }),
   getStatistics: () =>
     request<unknown>({
-      url: '/danger-zones/statistics',
+      url: '/api/danger-zones/statistics',
     }),
   create: (data: unknown) =>
     request<unknown>({
-      url: '/danger-zones',
+      url: '/api/danger-zones',
       method: 'POST',
       data,
     }),
   update: (id: number, data: unknown) =>
     request<unknown>({
-      url: `/danger-zones/${id}`,
+      url: `/api/danger-zones/${id}`,
       method: 'PUT',
       data,
     }),
   resolve: (id: number) =>
     request<unknown>({
-      url: `/danger-zones/${id}/resolve`,
+      url: `/api/danger-zones/${id}/resolve`,
       method: 'POST',
     }),
   ignore: (id: number) =>
     request<unknown>({
-      url: `/danger-zones/${id}/ignore`,
+      url: `/api/danger-zones/${id}/ignore`,
       method: 'POST',
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/danger-zones/${id}`,
+      url: `/api/danger-zones/${id}`,
       method: 'DELETE',
     }),
 }
@@ -454,35 +456,35 @@ export const dangerZoneApi = {
 export const noParkingZoneApi = {
   list: (params?: { page?: number; pageSize?: number }) =>
     request<{ list: unknown[]; total: number; page: number; pageSize: number; hasMore: boolean }>({
-      url: '/no-parking-zones',
+      url: '/api/no-parking-zones',
       method: 'GET',
       data: params,
     }),
   getDetail: (id: number) =>
     request<unknown>({
-      url: `/no-parking-zones/${id}`,
+      url: `/api/no-parking-zones/${id}`,
     }),
   getNearby: (lat: number, lng: number, radius?: number) =>
     request<unknown[]>({
-      url: '/no-parking-zones/nearby',
+      url: '/api/no-parking-zones/nearby',
       method: 'GET',
       data: { lat, lng, radius },
     }),
   create: (data: import('@/types').NoParkingZoneReport) =>
     request<unknown>({
-      url: '/no-parking-zones',
+      url: '/api/no-parking-zones',
       method: 'POST',
       data: data as unknown as Record<string, unknown>,
     }),
   update: (id: number, data: import('@/types').NoParkingZoneReport) =>
     request<unknown>({
-      url: `/no-parking-zones/${id}`,
+      url: `/api/no-parking-zones/${id}`,
       method: 'PUT',
       data: data as unknown as Record<string, unknown>,
     }),
   delete: (id: number) =>
     request<unknown>({
-      url: `/no-parking-zones/${id}`,
+      url: `/api/no-parking-zones/${id}`,
       method: 'DELETE',
     }),
 }
@@ -491,13 +493,13 @@ export const noParkingZoneApi = {
 export const warningApi = {
   checkNightRiding: (lat: number, lng: number) =>
     request<unknown>({
-      url: '/warnings/night-check',
+      url: '/api/warnings/night-check',
       method: 'GET',
       data: { lat, lng },
     }),
   getWarnings: (lat: number, lng: number, radius?: number) =>
     request<unknown>({
-      url: '/warnings',
+      url: '/api/warnings',
       method: 'GET',
       data: { lat, lng, radius },
     }),
@@ -507,22 +509,22 @@ export const warningApi = {
 export const userModeApi = {
   get: () =>
     request<import('@/types').UserModeSettings>({
-      url: '/user-mode',
+      url: '/api/user-mode',
     }),
   update: (data: Partial<import('@/types').UserModeSettings>) =>
     request<import('@/types').UserModeSettings>({
-      url: '/user-mode',
+      url: '/api/user-mode',
       method: 'PUT',
       data,
     }),
   switchMode: (mode: import('@/types').UserMode) =>
     request<import('@/types').UserModeSettings>({
-      url: '/user-mode/switch',
+      url: '/api/user-mode/switch',
       method: 'PUT',
       data: { mode },
     }),
   getCurrentMode: () =>
     request<{ mode: import('@/types').UserMode }>({
-      url: '/user-mode/current',
+      url: '/api/user-mode/current',
     }),
 }

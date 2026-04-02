@@ -29,6 +29,28 @@ export interface AuthResponse {
   user: User
 }
 
+// 登录响应类型（与后端返回一致）
+export interface LoginResponse {
+  accessToken: string
+  tokenType: string
+  expiresIn: number
+}
+
+// 用户响应类型
+export interface UserResponse {
+  id: number
+  username: string
+  nickname: string
+  avatar?: string
+  bio?: string
+  motorcycle?: string
+  ridingExperience?: string
+  motorcycleType?: string
+  followersCount?: number
+  followingCount?: number
+  createdAt: string
+}
+
 // 路线相关类型
 export interface Route {
   id: number
