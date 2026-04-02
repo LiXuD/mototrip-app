@@ -369,6 +369,8 @@ function getDifficultyText(difficulty: string) {
 .route-list {
   height: calc(100vh - 240rpx);
   padding: 24rpx;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .route-card {

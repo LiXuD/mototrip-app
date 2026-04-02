@@ -266,6 +266,8 @@ function getMoodEmoji(mood: string) {
 .diary-list {
   height: calc(100vh - 120rpx);
   padding: 24rpx;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .diary-card {
@@ -344,6 +346,9 @@ function getMoodEmoji(mood: string) {
 .diary-images {
   white-space: nowrap;
   margin-bottom: 16rpx;
+  height: 200rpx;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .diary-img {
