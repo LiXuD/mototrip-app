@@ -391,6 +391,8 @@ function getWaypointTypeText(type: string): string {
 .danger-zones-panel, .route-info {
   flex: 1;
   background: #F2F2F7;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .panel-header {
