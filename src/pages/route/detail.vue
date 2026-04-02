@@ -254,6 +254,10 @@ onLoad((options) => {
 async function loadRouteDetail(id: number) {
   try {
     const data = await routeApi.getDetail(id) as Route
+    // 清理图片URL，移除可能的反引号
+    if (data.coverImage) {
+      data.coverImage = data.coverImage.replace(/^`|`$/g, '')
+    }
     route.value = data
   } catch (e) {
     uni.showToast({ title: '加载失败', icon: 'none' })

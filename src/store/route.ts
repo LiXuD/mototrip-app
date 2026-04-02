@@ -19,6 +19,14 @@ export const useRouteStore = defineStore('route', () => {
   const hasMore = ref(true)
   const currentQuery = ref<RouteListParams>({ ...defaultRouteQuery })
 
+  function cleanImageUrl(route: Route): Route {
+    const cleanedRoute = { ...route }
+    if (cleanedRoute.coverImage) {
+      cleanedRoute.coverImage = cleanedRoute.coverImage.replace(/^`|`$/g, '')
+    }
+    return cleanedRoute
+  }
+
   async function fetchRoutes(params?: RouteListParams) {
     if (page.value === 1) {
       currentQuery.value = { ...defaultRouteQuery, ...params }
@@ -31,10 +39,11 @@ export const useRouteStore = defineStore('route', () => {
         pageSize: pageSize.value,
         ...currentQuery.value,
       }) as PaginatedResponse<Route>
+      const cleanedList = res.list.map(cleanImageUrl)
       if (page.value === 1) {
-        routes.value = res.list
+        routes.value = cleanedList
       } else {
-        routes.value = [...routes.value, ...res.list]
+        routes.value = [...routes.value, ...cleanedList]
       }
       total.value = res.total
       hasMore.value = res.hasMore
@@ -46,7 +55,8 @@ export const useRouteStore = defineStore('route', () => {
   async function fetchRouteDetail(id: number) {
     loading.value = true
     try {
-      currentRoute.value = await routeApi.getDetail(id) as Route
+      const route = await routeApi.getDetail(id) as Route
+      currentRoute.value = cleanImageUrl(route)
     } finally {
       loading.value = false
     }
