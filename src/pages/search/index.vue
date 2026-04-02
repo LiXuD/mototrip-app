@@ -45,7 +45,7 @@ function goPage(path: string) {
 .search-page { min-height: 100vh; background: #f2f2f7; padding: 24rpx; }
 .search-box { display: flex; align-items: center; background: #fff; border-radius: 24rpx; padding: 20rpx 24rpx; margin-bottom: 24rpx; }
 .search-icon { margin-right: 16rpx; font-size: 30rpx; }
-.search-input { flex: 1; font-size: 28rpx; }
+.search-input { flex: 1; font-size: 28rpx; height: 80rpx; box-sizing: border-box; }
 .section { background: #fff; border-radius: 24rpx; padding: 24rpx; margin-bottom: 20rpx; }
 .section-title { display: block; font-size: 30rpx; font-weight: 600; color: #1a1a2e; margin-bottom: 20rpx; }
 .chip-list { display: flex; flex-wrap: wrap; gap: 16rpx; }
