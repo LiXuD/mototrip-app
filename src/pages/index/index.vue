@@ -616,6 +616,9 @@ function onBannerChange(e: { detail: { current: number } }) {
   white-space: nowrap;
   margin: 0 -32rpx;
   padding: 0 32rpx;
+  height: 440rpx;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .route-card {
