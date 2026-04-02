@@ -534,9 +534,9 @@ function onBannerChange(e: { detail: { current: number } }) {
 }
 
 .quick-icon-wrapper {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 24rpx;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 28rpx;
   display: flex;
   align-items: center;
   justify-content: center;
