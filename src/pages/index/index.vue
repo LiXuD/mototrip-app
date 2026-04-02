@@ -120,7 +120,7 @@
           </view>
           <view class="route-info">
             <text class="route-name ellipsis">{{ route.name }}</text>
-            <text class="route-desc ellipsis" v-if="route.description">{{ route.description }}</text>
+            <text class="route-desc ellipsis-2" v-if="route.description">{{ route.description }}</text>
             <view class="route-meta" v-if="route.startPoint?.name">
               <IconSvg name="location" :size="22" color="#8E8E93" style="margin-right: 4rpx" /> <text>{{ route.startPoint.name }}</text>
             </view>
