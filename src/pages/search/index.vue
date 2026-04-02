@@ -37,7 +37,12 @@ const quickLinks = [
 ]
 
 function goPage(path: string) {
-  uni.navigateTo({ url: path })
+  const tabbarPages = ['/pages/index/index', '/pages/route/list', '/pages/diary/list', '/pages/profile/index']
+  if (tabbarPages.includes(path)) {
+    uni.switchTab({ url: path })
+  } else {
+    uni.navigateTo({ url: path })
+  }
 }
 </script>
 
