@@ -680,10 +680,13 @@ function onBannerChange(e: { detail: { current: number } }) {
 .route-desc {
   font-size: 22rpx;
   color: #666666;
-  display: block;
-  margin-bottom: 8rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   line-height: 1.4;
   flex: 1;
+  margin-bottom: 8rpx;
 }
 
 .route-meta {
