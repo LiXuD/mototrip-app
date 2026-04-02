@@ -120,8 +120,9 @@
           </view>
           <view class="route-info">
             <text class="route-name ellipsis">{{ route.name }}</text>
-            <view class="route-meta">
-              <IconSvg name="location" :size="22" color="#8E8E93" style="margin-right: 4rpx" /> <text>{{ route.startPoint }}</text>
+            <text class="route-desc ellipsis-2" v-if="route.description">{{ route.description }}</text>
+            <view class="route-meta" v-if="route.startPoint?.name">
+              <IconSvg name="location" :size="22" color="#8E8E93" style="margin-right: 4rpx" /> <text>{{ route.startPoint.name }}</text>
             </view>
           </view>
         </view>
@@ -194,9 +195,14 @@ interface Banner {
 interface HotRoute {
   id: number
   name: string
+  description?: string
   coverImage?: string
   distance: number
-  startPoint?: string
+  startPoint?: {
+    lat: number
+    lng: number
+    name: string
+  }
 }
 
 interface LatestDiary {
@@ -243,11 +249,19 @@ onMounted(() => {
   fetchData()
 })
 
+function cleanImageUrl(route: HotRoute): HotRoute {
+  const cleanedRoute = { ...route }
+  if (cleanedRoute.coverImage) {
+    cleanedRoute.coverImage = cleanedRoute.coverImage.replace(/^`|`$/g, '')
+  }
+  return cleanedRoute
+}
+
 async function fetchData() {
   try {
     // 获取热门路线
     const routeRes = await routeApi.list({ pageSize: 5 })
-    hotRoutes.value = (routeRes.list || []) as HotRoute[]
+    hotRoutes.value = (routeRes.list || []).map(cleanImageUrl) as HotRoute[]
     
     // 获取最新日记（处理 401 错误，允许未登录时显示空列表）
     try {
@@ -656,6 +670,14 @@ function onBannerChange(e: { detail: { current: number } }) {
   color: #1A1A2E;
   display: block;
   margin-bottom: 8rpx;
+}
+
+.route-desc {
+  font-size: 22rpx;
+  color: #666666;
+  display: block;
+  margin-bottom: 8rpx;
+  line-height: 1.4;
 }
 
 .route-meta {
