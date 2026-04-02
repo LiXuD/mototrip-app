@@ -621,7 +621,7 @@ function onBannerChange(e: { detail: { current: number } }) {
 .route-card {
   display: inline-block;
   width: 260rpx;
-  height: 360rpx;
+  height: 400rpx;
   margin-right: 20rpx;
   vertical-align: top;
   border-radius: 20rpx;
@@ -663,7 +663,7 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .route-info {
   padding: 16rpx;
-  height: 160rpx;
+  height: 200rpx;
   display: flex;
   flex-direction: column;
 }
