@@ -663,6 +663,9 @@ function onBannerChange(e: { detail: { current: number } }) {
 
 .route-info {
   padding: 16rpx;
+  height: 160rpx;
+  display: flex;
+  flex-direction: column;
 }
 
 .route-name {
@@ -671,6 +674,7 @@ function onBannerChange(e: { detail: { current: number } }) {
   color: #1A1A2E;
   display: block;
   margin-bottom: 8rpx;
+  flex-shrink: 0;
 }
 
 .route-desc {
@@ -679,11 +683,14 @@ function onBannerChange(e: { detail: { current: number } }) {
   display: block;
   margin-bottom: 8rpx;
   line-height: 1.4;
+  flex: 1;
 }
 
 .route-meta {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  margin-top: auto;
 }
 
 .route-location {
