@@ -4,12 +4,12 @@
 
 // 开发环境
 const DEV = {
-  API_URL: '/api',
+  API_URL: '',
 }
 
 // 生产环境
 const PROD = {
-  API_URL: 'https://api.mototrip.com/api',
+  API_URL: 'https://api.mototrip.com',
 }
 
 // 根据环境变量获取配置
